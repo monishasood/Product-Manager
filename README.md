@@ -1,4 +1,7 @@
-<!DOCTYPE html>
+
+
+
+<!DOCTYPE html> 
 <html lang="en">
 <head>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
@@ -229,7 +232,6 @@
         <p>Played a key role in managing financial transactions by approving expenditures, ensuring timely vendor payments, and maintaining accurate records. Supported client engagement through business presentations and coordinated meetings, conferences, and events to strengthen vendor and client relationships.</p>
       </div>
     </div>
-  </div>
 
   <div class="skills">
     <h2>Tools & Skills</h2>
@@ -249,10 +251,5 @@
   <footer>
     © 2025 Monisha Sood • monisha.sood@wisc.edu
   </footer>
-
-  <a href="#top" style="position: fixed; bottom: 25px; right: 25px; background: #6200aa; color: white; border-radius: 50%; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 22px; box-shadow: 0 2px 8px rgba(0,0,0,0.2);">
-    ↑
-  </a>
-
 </body>
 </html>
