@@ -1,40 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-<head> <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-<style>
-  html {
-    scroll-behavior: smooth;
-  }
-
-  body {
-    font-family: 'Inter', sans-serif;
-  }
-
-  .btn {
-    transition: background-color 0.3s ease, transform 0.2s ease;
-  }
-
-  .btn:hover {
-    background-color: #4e008a;
-    transform: translateY(-2px);
-  }
-
-  .job, .about-me, .skills {
-    transition: box-shadow 0.3s ease;
-  }
-
-  .job:hover, .about-me:hover, .skills:hover {
-    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
-  }
-</style>
-
+<head>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Monisha Sood – Product Manager</title>
   <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       margin: 0;
-      font-family: 'Segoe UI', sans-serif;
+      font-family: 'Inter', 'Segoe UI', sans-serif;
       background-color: #f9f9f9;
       color: #333;
     }
@@ -46,13 +24,13 @@
       text-align: center;
     }
 
-  img.profile-pic {
-  width: 240px;       /* Increased from 180px */
-  height: 240px;      /* Increased from 180px */
-  object-fit: cover;
-  border-radius: 50%;
-  border: 5px solid #6200aa; /* Slightly thicker border */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Optional glow */
+    img.profile-pic {
+      width: 240px;
+      height: 240px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 5px solid #6200aa;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     }
 
     h1 {
@@ -76,10 +54,12 @@
       margin: 10px;
       display: inline-block;
       font-weight: bold;
+      transition: background-color 0.3s ease, transform 0.2s ease;
     }
 
     .btn:hover {
       background-color: #4e008a;
+      transform: translateY(-2px);
     }
 
     section {
@@ -106,6 +86,11 @@
       margin-bottom: 20px;
       border-radius: 10px;
       box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      transition: box-shadow 0.3s ease;
+    }
+
+    .job:hover {
+      box-shadow: 0 4px 12px rgba(0,0,0,0.12);
     }
 
     .job img.logo {
@@ -126,9 +111,46 @@
       color: #555;
     }
 
+    .about-me {
+      background-color: #fff;
+      padding: 30px;
+      margin-top: 40px;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      transition: box-shadow 0.3s ease;
+    }
+
+    .about-me:hover {
+      box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+    }
+
+    .about-me h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 24px;
+      font-weight: 600;
+      color: #333;
+    }
+
+    .about-me p {
+      font-size: 16px;
+      line-height: 1.6;
+      text-align: justify;
+    }
+
     .skills {
       margin-top: 40px;
       text-align: center;
+      transition: box-shadow 0.3s ease;
+    }
+
+    .skills:hover {
+      box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+    }
+
+    .skills h2 {
+      font-size: 22px;
+      margin-bottom: 20px;
     }
 
     .skills img {
@@ -136,25 +158,6 @@
       height: 60px;
       object-fit: contain;
       margin: 10px;
-    }
-
-    .about-me {
-      background-color: #fff;
-      padding: 30px;
-      margin-top: 40px;
-      border-radius: 10px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    }
-
-    .about-me h2 {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-
-    .about-me p {
-      font-size: 16px;
-      line-height: 1.6;
-      text-align: justify;
     }
 
     footer {
@@ -178,80 +181,78 @@
     </div>
   </header>
 
-<section class="about-me">
-  <h2>About Me</h2>
-  <p>
-    I'm <strong>Monisha</strong>, a product manager with a strong foundation in strategy, execution, and user advocacy. With over 5 years of experience across high-growth companies like <strong>Flyhomes</strong>, <strong>NIIRT</strong>, and <strong>SecondWind Pro</strong>, I bring an operator’s eye and a builder’s mindset to every challenge. I’m currently pursuing my <strong>MBA at the Wisconsin School of Business</strong>, specializing in Technology Strategy and Product Management.
-  </p>
-  <p>
-    Whether I’m building MVPs from scratch, scaling internal processes, or translating stakeholder needs into clean and usable product experiences, I thrive at the intersection of business insight and execution. I believe in creating impact—not noise—and using data, empathy, and creativity to solve the right problems.
-  </p>
-</section>
+  <section class="about-me">
+    <h2>About Me</h2>
+    <p>
+      I'm <strong>Monisha</strong>, a product manager with a strong foundation in strategy, execution, and user advocacy. With over 5 years of experience across high-growth companies like <strong>Flyhomes</strong>, <strong>NIIRT</strong>, and <strong>SecondWind Pro</strong>, I bring an operator’s eye and a builder’s mindset to every challenge. I’m currently pursuing my <strong>MBA at the Wisconsin School of Business</strong>, specializing in Technology Strategy and Product Management.
+    </p>
+    <p>
+      Whether I’m building MVPs from scratch, scaling internal processes, or translating stakeholder needs into clean and usable product experiences, I thrive at the intersection of business insight and execution. I believe in creating impact—not noise—and using data, empathy, and creativity to solve the right problems.
+    </p>
+  </section>
 
   <div class="experience">
-      <h2 style="text-align:center;">Experience</h2>
+    <h2 style="text-align:center;">Experience</h2>
 
-      <div class="job">
-        <img class="logo" src="https://media.licdn.com/dms/image/v2/D4E22AQEsUlLAElc46Q/feedshare-shrink_800/B4EZbt4_DNHYAg-/0/1747747861251?e=2147483647&v=beta&t=ITHl23dg-kucObRKv6S6_06vMHqZgrYEBR-gMUkfqPw" alt="SecondWind Logo">
-        <div class="job-details">
-          <h3>Product Consultant, SecondWind Pro</h3>
-          <p><strong>2025 – Present</strong></p>
-          <p>As a PM Intern at SecondWind Pro, I launched the MVP of the NIL Valuation Platform, delivering verified valuations for 500+ athletes and increasing school adoption by 40%. I automated onboarding workflows to cut manual operations by 70%, led an 8-member data team in agile execution, and improved product delivery speed and data accuracy by 25%.</p>
-        </div>
-      </div>
-
-      <div class="job">
-        <img class="logo" src="https://brand.wisc.edu/content/uploads/2023/09/vert-w-crest-logo-web-digital-color.png" alt="Wisconsin Logo">
-        <div class="job-details">
-          <h3>MBA Candidate, UW–Madison School of Business</h3>
-          <p><strong>2024 – 2026</strong></p>
-          <p>Specializing in Technology Strategy and Product Management. Coursework includes applied innovation, marketing analytics, and agile product development.</p>
-        </div>
-      </div>
-
-      <div class="job">
-        <img class="logo" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQh-iCg1zWa-8WtkL7GbBDeZwT3R-NfheMFI3THnY8pCMVUJGGre670PBm6ekxpsGbLG4A&usqp=CAU" alt="Flyhomes Logo">
-        <div class="job-details">
-          <h3>Sr. Product Manager, Flyhomes</h3>
-          <p><strong>2019 – 2023</strong></p>
-          <p>As a Product Manager at Flyhomes, I led compensation product strategy impacting 200+ employees and $600K in monthly payouts, improving accuracy and compliance. I developed performance dashboards that enhanced promotion tracking, reduced downtime by 75% through process improvements, and aligned cross-functional efforts to accelerate product delivery and business impact.</p>
-        </div>
-      </div>
-    </div>
-    
-          <div class="job">
-        <img class="logo" src="https://pbs.twimg.com/profile_images/1404398989819072519/6O2R9taS_400x400.jpg" alt="NIIRT Logo">
-        <div class="job-details">
-          <h3>Program Coordinator, NIIRT </h3>
-          <p><strong>2019 – 2023</strong></p>
-          <p>Played a key role in managing financial transactions by approving expenditures, ensuring timely vendor payments, and maintaining accurate records. Supported client engagement through business presentations and coordinated meetings, conferences, and events to strengthen vendor and client relationships..</p>
-        </div>
+    <div class="job">
+      <img class="logo" src="https://media.licdn.com/dms/image/v2/D4E22AQEsUlLAElc46Q/feedshare-shrink_800/B4EZbt4_DNHYAg-/0/1747747861251?e=2147483647&v=beta&t=ITHl23dg-kucObRKv6S6_06vMHqZgrYEBR-gMUkfqPw" alt="SecondWind Logo">
+      <div class="job-details">
+        <h3>Product Consultant, SecondWind Pro</h3>
+        <p><strong>2025 – Present</strong></p>
+        <p>As a PM Intern at SecondWind Pro, I launched the MVP of the NIL Valuation Platform, delivering verified valuations for 500+ athletes and increasing school adoption by 40%. I automated onboarding workflows to cut manual operations by 70%, led an 8-member data team in agile execution, and improved product delivery speed and data accuracy by 25%.</p>
       </div>
     </div>
 
-    <!-- Inside the same file, replace your <div class="skills">...</div> section with this: -->
+    <div class="job">
+      <img class="logo" src="https://brand.wisc.edu/content/uploads/2023/09/vert-w-crest-logo-web-digital-color.png" alt="Wisconsin Logo">
+      <div class="job-details">
+        <h3>MBA Candidate, UW–Madison School of Business</h3>
+        <p><strong>2024 – 2026</strong></p>
+        <p>Specializing in Technology Strategy and Product Management. Coursework includes applied innovation, marketing analytics, and agile product development.</p>
+      </div>
+    </div>
 
-<div class="skills">
-  <h2>Tools & Skills</h2>
-  <img src="https://cdn.worldvectorlogo.com/logos/jira-1.svg" alt="JIRA">
-  <img src="https://seeklogo.com/images/A/airtable-logo-216B9AF035-seeklogo.com.png" alt="Airtable">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/4/45/Notion_app_logo.png" alt="Notion">
-  <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="GitHub">
-  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUSaE5ng-zDAnTHzqdlTciPELtABg0jD8oHw&s" alt="Zapier">
-  <img src="https://cdn.worldvectorlogo.com/logos/confluence-1.svg" alt="Confluence">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Salesforce.com_logo.svg/2560px-Salesforce.com_logo.svg.png" alt="Salesforce">
-  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAqvZ6h8nH8PlcVCP3iEjg51ZVVIPWGgfHkQ&s" alt="Wufoo">
-  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScD1nIKyMQn9x7WWbGxQqVk31VJ5Vb5YFnwg&s" alt="Asana">
-  <img src="https://avatars.slack-edge.com/2022-07-26/3865608556737_8f4ae4a98b36ab6912b3_512.png" alt="Lucidchart">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/3/33/Figma-logo.svg" alt="Figma">
-</div>
-  </section>
+    <div class="job">
+      <img class="logo" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQh-iCg1zWa-8WtkL7GbBDeZwT3R-NfheMFI3THnY8pCMVUJGGre670PBm6ekxpsGbLG4A&usqp=CAU" alt="Flyhomes Logo">
+      <div class="job-details">
+        <h3>Sr. Product Manager, Flyhomes</h3>
+        <p><strong>2019 – 2023</strong></p>
+        <p>As a Product Manager at Flyhomes, I led compensation product strategy impacting 200+ employees and $600K in monthly payouts, improving accuracy and compliance. I developed performance dashboards that enhanced promotion tracking, reduced downtime by 75% through process improvements, and aligned cross-functional efforts to accelerate product delivery and business impact.</p>
+      </div>
+    </div>
+
+    <div class="job">
+      <img class="logo" src="https://pbs.twimg.com/profile_images/1404398989819072519/6O2R9taS_400x400.jpg" alt="NIIRT Logo">
+      <div class="job-details">
+        <h3>Program Coordinator, NIIRT</h3>
+        <p><strong>2019 – 2023</strong></p>
+        <p>Played a key role in managing financial transactions by approving expenditures, ensuring timely vendor payments, and maintaining accurate records. Supported client engagement through business presentations and coordinated meetings, conferences, and events to strengthen vendor and client relationships.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="skills">
+    <h2>Tools & Skills</h2>
+    <img src="https://cdn.worldvectorlogo.com/logos/jira-1.svg" alt="JIRA">
+    <img src="https://seeklogo.com/images/A/airtable-logo-216B9AF035-seeklogo.com.png" alt="Airtable">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/4/45/Notion_app_logo.png" alt="Notion">
+    <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="GitHub">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUSaE5ng-zDAnTHzqdlTciPELtABg0jD8oHw&s" alt="Zapier">
+    <img src="https://cdn.worldvectorlogo.com/logos/confluence-1.svg" alt="Confluence">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Salesforce.com_logo.svg/2560px-Salesforce.com_logo.svg.png" alt="Salesforce">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAqvZ6h8nH8PlcVCP3iEjg51ZVVIPWGgfHkQ&s" alt="Wufoo">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScD1nIKyMQn9x7WWbGxQqVk31VJ5Vb5YFnwg&s" alt="Asana">
+    <img src="https://avatars.slack-edge.com/2022-07-26/3865608556737_8f4ae4a98b36ab6912b3_512.png" alt="Lucidchart">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/3/33/Figma-logo.svg" alt="Figma">
+  </div>
 
   <footer>
     © 2025 Monisha Sood • monisha.sood@wisc.edu
   </footer>
-<a href="#top" style="position: fixed; bottom: 25px; right: 25px; background: #6200aa; color: white; border-radius: 50%; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 22px; box-shadow: 0 2px 8px rgba(0,0,0,0.2);">
-  ↑
-</a>
+
+  <a href="#top" style="position: fixed; bottom: 25px; right: 25px; background: #6200aa; color: white; border-radius: 50%; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 22px; box-shadow: 0 2px 8px rgba(0,0,0,0.2);">
+    ↑
+  </a>
+
 </body>
 </html>
