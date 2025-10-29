@@ -13,11 +13,14 @@
     }
     
     :root {
-      --primary: #6366f1;
-      --secondary: #8b5cf6;
-      --accent: #ec4899;
+      --primary: #818cf8;
+      --secondary: #a78bfa;
+      --accent: #f472b6;
       --dark: #0f172a;
-      --light: #f8fafc;
+      --light: #f1f5f9;
+      --text-primary: #e2e8f0;
+      --text-secondary: #cbd5e1;
+      --text-muted: #94a3b8;
     }
     
     html {
@@ -183,7 +186,7 @@
     
     .hero-text .subtitle {
       font-size: 24px;
-      color: #94a3b8;
+      color: var(--text-secondary);
       margin-bottom: 30px;
       animation: slideInLeft 1s ease-out 0.2s backwards;
     }
@@ -191,7 +194,7 @@
     .hero-text p {
       font-size: 18px;
       line-height: 1.8;
-      color: #cbd5e1;
+      color: var(--text-primary);
       margin-bottom: 40px;
       animation: slideInLeft 1s ease-out 0.4s backwards;
     }
@@ -304,7 +307,7 @@
     /* Stats */
     .stats {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       gap: 30px;
       margin-top: 80px;
       animation: fadeInUp 1s ease-out 0.8s backwards;
@@ -322,9 +325,9 @@
     }
     
     .stat-card {
-      background: rgba(255, 255, 255, 0.05);
+      background: rgba(255, 255, 255, 0.06);
       backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.12);
       border-radius: 20px;
       padding: 30px;
       text-align: center;
@@ -332,7 +335,7 @@
     }
     
     .stat-card:hover {
-      background: rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.09);
       transform: translateY(-5px);
       border-color: var(--primary);
     }
@@ -348,9 +351,10 @@
     }
     
     .stat-label {
-      color: #94a3b8;
+      color: var(--text-secondary);
       font-size: 14px;
       margin-top: 10px;
+      font-weight: 500;
     }
     
     /* Section */
@@ -366,10 +370,10 @@
     .section-tag {
       display: inline-block;
       padding: 8px 20px;
-      background: rgba(99, 102, 241, 0.1);
-      border: 1px solid rgba(99, 102, 241, 0.3);
+      background: rgba(129, 140, 248, 0.15);
+      border: 1px solid rgba(129, 140, 248, 0.4);
       border-radius: 50px;
-      color: var(--primary);
+      color: #c7d2fe;
       font-size: 14px;
       font-weight: 600;
       margin-bottom: 20px;
@@ -384,9 +388,10 @@
     
     .section-description {
       font-size: 18px;
-      color: #94a3b8;
+      color: var(--text-secondary);
       max-width: 600px;
       margin: 0 auto;
+      line-height: 1.7;
     }
     
     /* Experience Cards */
@@ -396,9 +401,9 @@
     }
     
     .exp-card {
-      background: rgba(255, 255, 255, 0.03);
+      background: rgba(255, 255, 255, 0.04);
       backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.12);
       border-radius: 24px;
       padding: 40px;
       transition: all 0.4s;
@@ -419,7 +424,7 @@
     }
     
     .exp-card:hover {
-      background: rgba(255, 255, 255, 0.05);
+      background: rgba(255, 255, 255, 0.06);
       border-color: var(--primary);
       transform: translateX(10px);
     }
@@ -441,10 +446,10 @@
       width: 80px;
       height: 80px;
       border-radius: 16px;
-      background: rgba(255, 255, 255, 0.05);
+      background: rgba(255, 255, 255, 0.08);
       padding: 12px;
       object-fit: contain;
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.15);
     }
     
     .exp-title h3 {
@@ -456,8 +461,9 @@
     .exp-meta {
       display: flex;
       gap: 15px;
-      color: #94a3b8;
+      color: var(--text-secondary);
       font-size: 14px;
+      font-weight: 500;
     }
     
     .exp-content {
@@ -466,9 +472,10 @@
     }
     
     .exp-content p {
-      color: #cbd5e1;
+      color: var(--text-primary);
       line-height: 1.8;
       margin-bottom: 20px;
+      font-size: 16px;
     }
     
     .tags {
@@ -479,12 +486,12 @@
     
     .tag {
       padding: 6px 16px;
-      background: rgba(99, 102, 241, 0.1);
-      border: 1px solid rgba(99, 102, 241, 0.3);
+      background: rgba(129, 140, 248, 0.15);
+      border: 1px solid rgba(129, 140, 248, 0.4);
       border-radius: 50px;
-      color: var(--primary);
+      color: #c7d2fe;
       font-size: 12px;
-      font-weight: 500;
+      font-weight: 600;
     }
     
     /* Skills Section */
@@ -495,9 +502,9 @@
     }
     
     .skill-card {
-      background: rgba(255, 255, 255, 0.03);
+      background: rgba(255, 255, 255, 0.04);
       backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.12);
       border-radius: 16px;
       padding: 30px 20px;
       text-align: center;
@@ -506,7 +513,7 @@
     }
     
     .skill-card:hover {
-      background: rgba(255, 255, 255, 0.05);
+      background: rgba(255, 255, 255, 0.07);
       border-color: var(--primary);
       transform: translateY(-10px);
     }
@@ -527,7 +534,123 @@
     .skill-name {
       font-size: 14px;
       font-weight: 600;
-      color: #cbd5e1;
+      color: var(--text-primary);
+    }
+    
+    /* Awards Section */
+    .awards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+    
+    .award-card {
+      background: rgba(255, 255, 255, 0.04);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 20px;
+      padding: 40px 30px;
+      text-align: center;
+      transition: all 0.4s;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .award-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, var(--accent) 0%, transparent 70%);
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+    
+    .award-card:hover {
+      background: rgba(255, 255, 255, 0.07);
+      border-color: var(--accent);
+      transform: translateY(-10px);
+    }
+    
+    .award-card:hover::before {
+      opacity: 0.1;
+    }
+    
+    .award-icon {
+      font-size: 60px;
+      margin-bottom: 20px;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .award-card h3 {
+      font-size: 22px;
+      font-weight: 600;
+      margin-bottom: 15px;
+      color: var(--text-primary);
+      position: relative;
+      z-index: 1;
+    }
+    
+    .award-card p {
+      color: var(--text-secondary);
+      line-height: 1.6;
+      font-size: 15px;
+      position: relative;
+      z-index: 1;
+    }
+    
+    /* Certifications Section */
+    .cert-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    
+    .cert-item {
+      background: rgba(255, 255, 255, 0.04);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 16px;
+      padding: 25px 30px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      transition: all 0.3s;
+    }
+    
+    .cert-item:hover {
+      background: rgba(255, 255, 255, 0.07);
+      border-color: var(--primary);
+      transform: translateX(5px);
+    }
+    
+    .cert-check {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      font-weight: bold;
+      color: white;
+      flex-shrink: 0;
+    }
+    
+    .cert-name {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 5px;
+    }
+    
+    .cert-org {
+      font-size: 13px;
+      color: var(--text-secondary);
     }
     
     /* Footer */
@@ -557,13 +680,13 @@
     }
     
     .footer-brand p {
-      color: #94a3b8;
+      color: var(--text-secondary);
       line-height: 1.6;
     }
     
     .footer-links h4 {
       margin-bottom: 20px;
-      color: white;
+      color: var(--text-primary);
     }
     
     .footer-links ul {
@@ -571,7 +694,7 @@
     }
     
     .footer-links a {
-      color: #94a3b8;
+      color: var(--text-secondary);
       text-decoration: none;
       display: block;
       margin-bottom: 10px;
@@ -612,7 +735,7 @@
       text-align: center;
       padding-top: 30px;
       border-top: 1px solid rgba(255, 255, 255, 0.1);
-      color: #94a3b8;
+      color: var(--text-secondary);
       font-size: 14px;
     }
     
@@ -658,7 +781,7 @@
       }
       
       .stats {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
       }
       
       .footer-content {
@@ -667,6 +790,10 @@
       
       .nav-links {
         display: none;
+      }
+      
+      .cta-buttons {
+        flex-direction: column;
       }
     }
   </style>
@@ -687,6 +814,7 @@
         <li><a href="#home">Home</a></li>
         <li><a href="#about">About</a></li>
         <li><a href="#experience">Experience</a></li>
+        <li><a href="#awards">Awards</a></li>
         <li><a href="#skills">Skills</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
@@ -700,7 +828,7 @@
         <div class="hero-text">
           <h1>Monisha Sood</h1>
           <p class="subtitle">Product Manager & Innovation Strategist</p>
-          <p>Building data-driven solutions that transform user experiences. MBA '26 specializing in Technology Strategy, bringing 5+ years of product leadership across high-growth startups.</p>
+          <p>Product Manager with 6+ years of experience leading cross-functional teams, building scalable workflows, and delivering high-impact digital products. MBA '26 at Wisconsin School of Business, specializing in Technology Strategy and Product Management. Expert in MVP development, automation, and data-driven decision making.</p>
           <div class="cta-buttons">
             <a href="Monisha_Sood_Resume.pdf" class="btn btn-primary" download>
               📄 Download Resume
@@ -720,16 +848,20 @@
       
       <div class="stats">
         <div class="stat-card">
-          <div class="stat-number">5+</div>
+          <div class="stat-number">6+</div>
           <div class="stat-label">Years Experience</div>
         </div>
         <div class="stat-card">
-          <div class="stat-number">500+</div>
-          <div class="stat-label">Athletes Impacted</div>
+          <div class="stat-number">$50M+</div>
+          <div class="stat-label">Contracts Closed</div>
         </div>
         <div class="stat-card">
-          <div class="stat-number">40%</div>
-          <div class="stat-label">Adoption Increase</div>
+          <div class="stat-number">70%</div>
+          <div class="stat-label">Automation Efficiency</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">200+</div>
+          <div class="stat-label">Deals Managed</div>
         </div>
       </div>
     </div>
@@ -761,21 +893,24 @@
           <div class="exp-header">
             <img src="https://media.licdn.com/dms/image/v2/D4E22AQEsUlLAElc46Q/feedshare-shrink_800/B4EZbt4_DNHYAg-/0/1747747861251?e=2147483647&v=beta&t=ITHl23dg-kucObRKv6S6_06vMHqZgrYEBR-gMUkfqPw" alt="SecondWind" class="company-logo">
             <div class="exp-title">
-              <h3>Product Consultant</h3>
+              <h3>Product Manager – NIL Technology & Strategy</h3>
               <div class="exp-meta">
                 <span>SecondWind Pro</span>
                 <span>•</span>
-                <span>2025 – Present</span>
+                <span>Jun 2025 – Present</span>
               </div>
             </div>
           </div>
           <div class="exp-content">
-            <p>Launched the MVP of the NIL Valuation Platform, delivering verified valuations for 500+ athletes and increasing school adoption by 40%. Automated onboarding workflows to cut manual operations by 70%, led an 8-member data team in agile execution.</p>
+            <p>Led a cross-functional team of 8 members across data, engineering, and fundraising to launch MVP v1 of SecondWind's NIL Valuation Platform, enabling verified NIL profiles for 25+ Division 1 athletes in the first month. Developed and executed the product roadmap, prioritizing features through user research and feedback while supporting $500K+ in active fundraising by aligning platform value to donor strategy.</p>
+            <p>Designed and implemented Airtable and Zapier-based automations, reducing manual outreach tasks by 70% and ensuring scalable engagement with 100+ schools and collectives. Built core internal operations processes for the fundraising team and led weekly leadership standups, increasing team coordination and delivery speed by 40%.</p>
             <div class="tags">
               <span class="tag">MVP Launch</span>
-              <span class="tag">Data Analytics</span>
-              <span class="tag">Team Leadership</span>
+              <span class="tag">Cross-functional Leadership</span>
+              <span class="tag">Product Roadmap</span>
               <span class="tag">Process Automation</span>
+              <span class="tag">Fundraising Strategy</span>
+              <span class="tag">Airtable & Zapier</span>
             </div>
           </div>
         </div>
@@ -806,46 +941,181 @@
           <div class="exp-header">
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQh-iCg1zWa-8WtkL7GbBDeZwT3R-NfheMFI3THnY8pCMVUJGGre670PBm6ekxpsGbLG4A&usqp=CAU" alt="Flyhomes" class="company-logo">
             <div class="exp-title">
-              <h3>Sr. Product Manager</h3>
+              <h3>Product Strategy (Sales Ops & Leadership)</h3>
               <div class="exp-meta">
                 <span>Flyhomes</span>
                 <span>•</span>
-                <span>2019 – 2023</span>
+                <span>Jun 2023 – Jun 2024</span>
               </div>
             </div>
           </div>
           <div class="exp-content">
-            <p>Led compensation product strategy impacting 200+ employees and $600K in monthly payouts, improving accuracy and compliance. Developed performance dashboards, reduced downtime by 75%, and accelerated product delivery.</p>
+            <p>Migrated sales compensation plans with 100% accuracy to third-party vendor through effective cross-functional collaboration, successfully managing $600K for agents. Created marketing plans that improved agent and customer engagement, leading to a 17% boost in CSAT scores.</p>
+            <p>Saved $48MM by researching market trends and internal data to refine variable incentive compensation plans while maintaining high agent motivation and performance. Onboarded 50+ new sales associates in 3 days by designing impactful training sessions. Improved team effectiveness by 28% through performance assessment of 78 members by defining metrics and maintaining interactive dashboards on Airtable.</p>
             <div class="tags">
-              <span class="tag">Product Strategy</span>
-              <span class="tag">Dashboards</span>
-              <span class="tag">Compliance</span>
-              <span class="tag">Cross-functional</span>
+              <span class="tag">Sales Compensation</span>
+              <span class="tag">$48MM Cost Savings</span>
+              <span class="tag">Training & Onboarding</span>
+              <span class="tag">Performance Management</span>
+              <span class="tag">CSAT +17%</span>
             </div>
           </div>
         </div>
 
         <div class="exp-card">
           <div class="exp-header">
-            <img src="https://pbs.twimg.com/profile_images/1404398989819072519/6O2R9taS_400x400.jpg" alt="NIIRT" class="company-logo">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQh-iCg1zWa-8WtkL7GbBDeZwT3R-NfheMFI3THnY8pCMVUJGGre670PBm6ekxpsGbLG4A&usqp=CAU" alt="Flyhomes" class="company-logo">
             <div class="exp-title">
-              <h3>Program Coordinator</h3>
+              <h3>Associate Product Manager</h3>
               <div class="exp-meta">
-                <span>NIIRT</span>
+                <span>Flyhomes</span>
                 <span>•</span>
-                <span>2017 – 2019</span>
+                <span>Apr 2022 – Jun 2023</span>
               </div>
             </div>
           </div>
           <div class="exp-content">
-            <p>Managed financial operations, vendor payments, and client presentations. Coordinated meetings and events to improve stakeholder relationships and drive project delivery.</p>
+            <p>Led end-to-end product development from initial concept to execution, creating user stories and reducing SLA by 8%. Improved UX through client feedback, product inspections, and proactive maintenance, ensuring seamless project execution and client satisfaction.</p>
+            <p>Spearheaded cross-functional testing and strategic project execution that boosted team efficiency by 68% and customer satisfaction by 32%. Adapted to shifting business goals by implementing agile workflows, leading to 20% faster product delivery. Utilized SQL and interactive dashboards to track KPIs, derive insights, and refine strategies that improved team effectiveness by 28%.</p>
             <div class="tags">
-              <span class="tag">Operations</span>
-              <span class="tag">Stakeholder Management</span>
-              <span class="tag">Project Coordination</span>
+              <span class="tag">Product Development</span>
+              <span class="tag">Agile Workflows</span>
+              <span class="tag">SQL & Analytics</span>
+              <span class="tag">Team Efficiency +68%</span>
+              <span class="tag">CSAT +32%</span>
             </div>
           </div>
         </div>
+
+        <div class="exp-card">
+          <div class="exp-header">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQh-iCg1zWa-8WtkL7GbBDeZwT3R-NfheMFI3THnY8pCMVUJGGre670PBm6ekxpsGbLG4A&usqp=CAU" alt="Flyhomes" class="company-logo">
+            <div class="exp-title">
+              <h3>Senior Operations Associate</h3>
+              <div class="exp-meta">
+                <span>Flyhomes</span>
+                <span>•</span>
+                <span>Jan 2021 – Mar 2022</span>
+              </div>
+            </div>
+          </div>
+          <div class="exp-content">
+            <p>Saved $50,000 per transaction on average by developing home pricing strategies to analyze home prices and provide thorough reports to clients. Collaborated with multiple teams to ensure end-to-end operational excellence, overseeing 200+ closings while maintaining a strong focus on customer needs.</p>
+            <p>Improved team compliance and efficiency by 78% by training 7 operations team members and developing training videos and programs.</p>
+            <div class="tags">
+              <span class="tag">Pricing Strategy</span>
+              <span class="tag">$50K Savings/Transaction</span>
+              <span class="tag">200+ Closings</span>
+              <span class="tag">Team Training</span>
+              <span class="tag">Compliance +78%</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="exp-card">
+          <div class="exp-header">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQh-iCg1zWa-8WtkL7GbBDeZwT3R-NfheMFI3THnY8pCMVUJGGre670PBm6ekxpsGbLG4A&usqp=CAU" alt="Flyhomes" class="company-logo">
+            <div class="exp-title">
+              <h3>Operations Associate</h3>
+              <div class="exp-meta">
+                <span>Flyhomes</span>
+                <span>•</span>
+                <span>Jun 2019 – Dec 2020</span>
+              </div>
+            </div>
+          </div>
+          <div class="exp-content">
+            <p>Enhanced workstream efficiency by over 52% through streamlined processes and reduced dependency by implementing new SOPs, creating Basecamps, and automating workflows using Zapier. Audited 500+ transactions to identify discrepancies and enhance accuracy.</p>
+            <p>Coordinated BAU and ad-hoc tasks across WA, CA, OR, and TX, ensuring operational excellence by collaborating with stakeholders from different teams and managing teams across multiple time zones.</p>
+            <div class="tags">
+              <span class="tag">Process Optimization</span>
+              <span class="tag">Workflow Automation</span>
+              <span class="tag">500+ Audits</span>
+              <span class="tag">Multi-state Operations</span>
+              <span class="tag">Efficiency +52%</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Awards Section -->
+  <section id="awards">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">RECOGNITION</span>
+        <h2 class="section-title">Awards & Achievements</h2>
+      </div>
+      
+      <div class="awards-grid">
+        <div class="award-card">
+          <div class="award-icon">🏆</div>
+          <h3>Most Trusted Partner</h3>
+          <p>Honored for closing contracts worth $10 million and building strong client relationships at Flyhomes</p>
+        </div>
+        
+        <div class="award-card">
+          <div class="award-icon">⭐</div>
+          <h3>Superstar of the Month</h3>
+          <p>Awarded in January 2023 for improving productivity by 30% and surpassing targets through process improvement with Skedulo</p>
+        </div>
+        
+        <div class="award-card">
+          <div class="award-icon">🚀</div>
+          <h3>Product Impact Champion</h3>
+          <p>Recognized for launching the MVP and improving workflows to boost engagement and reduce manual work by 70%</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Certifications Section -->
+  <section id="certifications">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">CERTIFICATIONS</span>
+        <h2 class="section-title">Professional Development</h2>
+      </div>
+      
+      <div class="cert-grid">
+        <div class="cert-item">
+          <div class="cert-check">✓</div>
+          <div class="cert-name">Business Management</div>
+          <div class="cert-org">London Business School, UK</div>
+        </div>
+        <div class="cert-item">
+          <div class="cert-check">✓</div>
+          <div class="cert-name">SQL Certification</div>
+          <div class="cert-org">Udemy</div>
+        </div>
+        <div class="cert-item">
+          <div class="cert-check">✓</div>
+          <div class="cert-name">Product Management</div>
+          <div class="cert-org">Udemy</div>
+        </div>
+        <div class="cert-item">
+          <div class="cert-check">✓</div>
+          <div class="cert-name">MS Excel Advanced</div>
+          <div class="cert-org">Udemy</div>
+        </div>
+        <div class="cert-item">
+          <div class="cert-check">✓</div>
+          <div class="cert-name">Power BI</div>
+          <div class="cert-org">Microsoft</div>
+        </div>
+        <div class="cert-item">
+          <div class="cert-check">✓</div>
+          <div class="cert-name">Generative AI for PM</div>
+          <div class="cert-org">Professional Certification</div>
+        </div>
+        <div class="cert-item">
+          <div class="cert-check">✓</div>
+          <div class="cert-name">Six Sigma</div>
+          <div class="cert-org">Professional Certification</div>
+        </div>
+      </div>
       </div>
     </div>
   </section>
@@ -899,6 +1169,22 @@
           <img src="https://upload.wikimedia.org/wikipedia/commons/3/33/Figma-logo.svg" alt="Figma">
           <div class="skill-name">Figma</div>
         </div>
+        <div class="skill-card">
+          <img src="https://cdn.worldvectorlogo.com/logos/power-bi.svg" alt="Power BI">
+          <div class="skill-name">Power BI</div>
+        </div>
+        <div class="skill-card">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/Sql_data_base_with_logo.png" alt="SQL">
+          <div class="skill-name">SQL</div>
+        </div>
+        <div class="skill-card">
+          <img src="https://www.r-project.org/logo/Rlogo.svg" alt="R">
+          <div class="skill-name">R</div>
+        </div>
+        <div class="skill-card">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg" alt="HTML/CSS">
+          <div class="skill-name">HTML/CSS</div>
+        </div>
       </div>
     </div>
   </section>
@@ -922,6 +1208,7 @@
             <li><a href="#home">Home</a></li>
             <li><a href="#about">About</a></li>
             <li><a href="#experience">Experience</a></li>
+            <li><a href="#awards">Awards</a></li>
             <li><a href="#skills">Skills</a></li>
           </ul>
         </div>
