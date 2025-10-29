@@ -394,6 +394,152 @@
       line-height: 1.7;
     }
     
+    /* About Section Styles */
+    .about-content {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    
+    .about-main {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 50px;
+      margin-bottom: 60px;
+    }
+    
+    .about-text p {
+      color: var(--text-primary);
+      font-size: 17px;
+      line-height: 1.8;
+      margin-bottom: 25px;
+      text-align: left;
+    }
+    
+    .about-text strong {
+      color: var(--primary);
+      font-weight: 600;
+    }
+    
+    .about-highlights {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    
+    .highlight-card {
+      background: rgba(129, 140, 248, 0.08);
+      border: 1px solid rgba(129, 140, 248, 0.3);
+      border-radius: 16px;
+      padding: 25px;
+      transition: all 0.3s;
+    }
+    
+    .highlight-card:hover {
+      background: rgba(129, 140, 248, 0.12);
+      transform: translateX(5px);
+    }
+    
+    .highlight-icon {
+      width: 48px;
+      height: 48px;
+      margin-bottom: 12px;
+    }
+    
+    .highlight-icon svg {
+      width: 100%;
+      height: 100%;
+      filter: drop-shadow(0 4px 8px rgba(129, 140, 248, 0.3));
+    }
+    
+    .highlight-card h4 {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 10px;
+    }
+    
+    .highlight-card p {
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--text-secondary);
+      margin: 0;
+    }
+    
+    .pm-skills-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 25px;
+      margin-top: 40px;
+    }
+    
+    .pm-skill-category {
+      background: rgba(255, 255, 255, 0.04);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 20px;
+      padding: 30px 25px;
+      transition: all 0.3s;
+    }
+    
+    .pm-skill-category:hover {
+      background: rgba(255, 255, 255, 0.06);
+      border-color: var(--primary);
+      transform: translateY(-5px);
+    }
+    
+    .pm-skill-category h3 {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 20px;
+      padding-bottom: 15px;
+      border-bottom: 2px solid var(--primary);
+    }
+    
+    .pm-skill-category ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    .pm-skill-category li {
+      color: var(--text-secondary);
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 12px;
+      padding-left: 20px;
+      position: relative;
+    }
+    
+    .pm-skill-category li::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: var(--primary);
+      font-weight: bold;
+    }
+    
+    @media (max-width: 1024px) {
+      .about-main {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+      
+      .pm-skills-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .pm-skills-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .about-highlights {
+        margin-top: 30px;
+      }
+    }
+    
     /* Experience Cards */
     .experience-grid {
       display: grid;
@@ -579,10 +725,23 @@
     }
     
     .award-icon {
-      font-size: 60px;
-      margin-bottom: 20px;
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 20px;
       position: relative;
       z-index: 1;
+    }
+    
+    .award-icon svg {
+      width: 100%;
+      height: 100%;
+      filter: drop-shadow(0 8px 16px rgba(251, 191, 36, 0.3));
+      animation: floatIcon 3s ease-in-out infinite;
+    }
+    
+    @keyframes floatIcon {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
     }
     
     .award-card h3 {
@@ -874,8 +1033,129 @@
         <span class="section-tag">ABOUT ME</span>
         <h2 class="section-title">Operator. Builder. Strategist.</h2>
         <p class="section-description">
-          I thrive at the intersection of business insight and execution, creating impact through data, empathy, and creativity. Currently pursuing my MBA at Wisconsin School of Business, specializing in Technology Strategy and Product Management.
+          Transforming complex challenges into elegant solutions through data-driven strategy and user-centered design.
         </p>
+      </div>
+      
+      <div class="about-content">
+        <div class="about-main">
+          <div class="about-text">
+            <p>
+              I'm a <strong>Product Manager</strong> who thrives at the intersection of business insight and execution. With over 6 years of experience spanning operations, strategy, and product development, I've learned that great products aren't just about features—they're about solving real problems for real people.
+            </p>
+            <p>
+              My journey began in <strong>operations</strong>, where I developed a deep appreciation for process efficiency and the importance of getting details right. I led the operational excellence for 200+ real estate transactions, saving $50K per transaction through data-driven pricing strategies. This operational foundation taught me that sustainable product success requires understanding the entire value chain.
+            </p>
+            <p>
+              As I transitioned into <strong>product management</strong>, I brought that operator's mindset with me. At Flyhomes, I led end-to-end product development that boosted team efficiency by 68% and customer satisfaction by 32%. I learned to navigate ambiguity, balance competing stakeholder needs, and ship products that users actually wanted—not just what we thought they needed.
+            </p>
+            <p>
+              Currently, I'm driving product strategy at <strong>SecondWind Pro</strong>, where I led the MVP launch of an NIL Valuation Platform from 0 to 1. I built and managed a cross-functional team of 8 across data, engineering, and fundraising, enabling verified profiles for 25+ Division 1 athletes in the first month while supporting $500K+ in active fundraising. I designed automation systems that reduced manual work by 70%, proving that great product thinking scales impact exponentially.
+            </p>
+            <p>
+              I'm pursuing my <strong>MBA at the Wisconsin School of Business</strong>, specializing in Technology Strategy and Product Management. This experience has sharpened my strategic thinking and expanded my toolkit for building products that matter.
+            </p>
+          </div>
+          
+          <div class="about-highlights">
+            <div class="highlight-card">
+              <div class="highlight-icon">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" fill="url(#grad1)" stroke="url(#grad1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <defs>
+                    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" style="stop-color:#818cf8;stop-opacity:1" />
+                      <stop offset="100%" style="stop-color:#f472b6;stop-opacity:1" />
+                    </linearGradient>
+                  </defs>
+                </svg>
+              </div>
+              <h4>My Product Philosophy</h4>
+              <p>Build with empathy, execute with precision, iterate with humility. Great products emerge from understanding users deeply, shipping fast, and learning continuously.</p>
+            </div>
+            
+            <div class="highlight-card">
+              <div class="highlight-icon">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 17L7 12L8.41 10.59L12 14.17L15.59 10.59L17 12L12 17Z" fill="url(#grad2)"/>
+                  <circle cx="12" cy="8" r="2" fill="url(#grad2)"/>
+                  <defs>
+                    <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" style="stop-color:#a78bfa;stop-opacity:1" />
+                      <stop offset="100%" style="stop-color:#818cf8;stop-opacity:1" />
+                    </linearGradient>
+                  </defs>
+                </svg>
+              </div>
+              <h4>What Drives Me</h4>
+              <p>I love the challenge of taking ambiguous problems and transforming them into clear product strategies. Whether it's launching an MVP or optimizing complex workflows, I'm energized by impact.</p>
+            </div>
+            
+            <div class="highlight-card">
+              <div class="highlight-icon">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 2L2 7L12 12L22 7L12 2Z" fill="url(#grad3)" stroke="url(#grad3)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M2 17L12 22L22 17" stroke="url(#grad3)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M2 12L12 17L22 12" stroke="url(#grad3)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <defs>
+                    <linearGradient id="grad3" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" style="stop-color:#f472b6;stop-opacity:1" />
+                      <stop offset="100%" style="stop-color:#a78bfa;stop-opacity:1" />
+                    </linearGradient>
+                  </defs>
+                </svg>
+              </div>
+              <h4>How I Work</h4>
+              <p>Cross-functional collaboration is my superpower. I build bridges between engineering, design, and business stakeholders, ensuring everyone moves in the same direction toward shared goals.</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="pm-skills-grid">
+          <div class="pm-skill-category">
+            <h3>Product Strategy</h3>
+            <ul>
+              <li>Roadmap Planning & Prioritization</li>
+              <li>Market Research & Competitive Analysis</li>
+              <li>0-to-1 MVP Development</li>
+              <li>Go-to-Market Strategy</li>
+              <li>KPI Definition & Tracking</li>
+            </ul>
+          </div>
+          
+          <div class="pm-skill-category">
+            <h3>Execution & Delivery</h3>
+            <ul>
+              <li>Agile/Scrum Methodologies</li>
+              <li>User Story Creation & Backlog Management</li>
+              <li>Sprint Planning & Retrospectives</li>
+              <li>Cross-functional Team Leadership</li>
+              <li>Stakeholder Management</li>
+            </ul>
+          </div>
+          
+          <div class="pm-skill-category">
+            <h3>Data & Analytics</h3>
+            <ul>
+              <li>SQL & Data Analysis</li>
+              <li>A/B Testing & Experimentation</li>
+              <li>Dashboard Development (Power BI, Airtable)</li>
+              <li>Metrics-Driven Decision Making</li>
+              <li>User Research & Insights</li>
+            </ul>
+          </div>
+          
+          <div class="pm-skill-category">
+            <h3>Technical Acumen</h3>
+            <ul>
+              <li>API & System Integration</li>
+              <li>Workflow Automation (Zapier)</li>
+              <li>HTML/CSS Fundamentals</li>
+              <li>Technical Documentation</li>
+              <li>Product Architecture Understanding</li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -1051,19 +1331,68 @@
       
       <div class="awards-grid">
         <div class="award-card">
-          <div class="award-icon">🏆</div>
+          <div class="award-icon">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M6 9C6 10.5913 6.63214 12.1174 7.75736 13.2426C8.88258 14.3679 10.4087 15 12 15C13.5913 15 15.1174 14.3679 16.2426 13.2426C17.3679 12.1174 18 10.5913 18 9" stroke="url(#trophy1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M6 9H2V11C2 11.7956 2.31607 12.5587 2.87868 13.1213C3.44129 13.6839 4.20435 14 5 14H6" stroke="url(#trophy1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M18 9H22V11C22 11.7956 21.6839 12.5587 21.1213 13.1213C20.5587 13.6839 19.7956 14 19 14H18" stroke="url(#trophy1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M12 15V19" stroke="url(#trophy1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M8 22H16" stroke="url(#trophy1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M12 3L14 7L18 7.5L15 10.5L16 14.5L12 12.5L8 14.5L9 10.5L6 7.5L10 7L12 3Z" fill="url(#trophy1)"/>
+              <defs>
+                <linearGradient id="trophy1" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" style="stop-color:#fbbf24;stop-opacity:1" />
+                  <stop offset="100%" style="stop-color:#f59e0b;stop-opacity:1" />
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
           <h3>Most Trusted Partner</h3>
           <p>Honored for closing contracts worth $10 million and building strong client relationships at Flyhomes</p>
         </div>
         
         <div class="award-card">
-          <div class="award-icon">⭐</div>
+          <div class="award-icon">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" fill="url(#star1)" stroke="url(#star1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M12 2L14 6L12 8L10 6L12 2Z" fill="url(#star2)" opacity="0.7"/>
+              <defs>
+                <linearGradient id="star1" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" style="stop-color:#fbbf24;stop-opacity:1" />
+                  <stop offset="100%" style="stop-color:#f59e0b;stop-opacity:1" />
+                </linearGradient>
+                <linearGradient id="star2" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" style="stop-color:#fef3c7;stop-opacity:1" />
+                  <stop offset="100%" style="stop-color:#fbbf24;stop-opacity:1" />
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
           <h3>Superstar of the Month</h3>
           <p>Awarded in January 2023 for improving productivity by 30% and surpassing targets through process improvement with Skedulo</p>
         </div>
         
         <div class="award-card">
-          <div class="award-icon">🚀</div>
+          <div class="award-icon">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M9 11L12 14L22 4C22 4 21 2 19 2C17 2 9 11 9 11Z" fill="url(#rocket1)" stroke="url(#rocket1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M9 11V17L12 20L15 17V11" stroke="url(#rocket1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M3 21L9 17" stroke="url(#rocket1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M15 17L21 21" stroke="url(#rocket1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="16" cy="8" r="2" fill="url(#rocket2)"/>
+              <path d="M2 12C2 12 4 11 6 13C8 15 7 17 7 17" stroke="url(#rocket1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <defs>
+                <linearGradient id="rocket1" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" style="stop-color:#818cf8;stop-opacity:1" />
+                  <stop offset="100%" style="stop-color:#f472b6;stop-opacity:1" />
+                </linearGradient>
+                <linearGradient id="rocket2" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" style="stop-color:#fbbf24;stop-opacity:1" />
+                  <stop offset="100%" style="stop-color:#f59e0b;stop-opacity:1" />
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
           <h3>Product Impact Champion</h3>
           <p>Recognized for launching the MVP and improving workflows to boost engagement and reduce manual work by 70%</p>
         </div>
