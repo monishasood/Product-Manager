@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Monisha Sood – Product Innovator</title>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <title>Monisha Sood – Product Manager</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     * {
       margin: 0;
@@ -13,14 +13,18 @@
     }
     
     :root {
-      --primary: #818cf8;
-      --secondary: #a78bfa;
-      --accent: #f472b6;
+      --primary: #6366f1;
+      --primary-light: #818cf8;
+      --secondary: #8b5cf6;
+      --accent: #ec4899;
+      --success: #10b981;
       --dark: #0f172a;
+      --dark-surface: #1e293b;
       --light: #f1f5f9;
       --text-primary: #e2e8f0;
       --text-secondary: #cbd5e1;
       --text-muted: #94a3b8;
+      --border: rgba(255, 255, 255, 0.1);
     }
     
     html {
@@ -32,6 +36,7 @@
       background: var(--dark);
       color: var(--light);
       overflow-x: hidden;
+      line-height: 1.6;
     }
     
     /* Animated Background */
@@ -43,13 +48,30 @@
       height: 100%;
       z-index: 0;
       overflow: hidden;
+      opacity: 0.6;
+    }
+    
+    .grid-bg {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        linear-gradient(rgba(99, 102, 241, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(99, 102, 241, 0.03) 1px, transparent 1px);
+      background-size: 50px 50px;
+      animation: gridMove 20s linear infinite;
+    }
+    
+    @keyframes gridMove {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(50px, 50px); }
     }
     
     .orb {
       position: absolute;
       border-radius: 50%;
-      filter: blur(60px);
-      opacity: 0.5;
+      filter: blur(80px);
+      opacity: 0.3;
       animation: float 20s infinite ease-in-out;
     }
     
@@ -59,7 +81,6 @@
       background: var(--primary);
       top: -200px;
       left: -200px;
-      animation-delay: 0s;
     }
     
     .orb2 {
@@ -71,20 +92,9 @@
       animation-delay: 5s;
     }
     
-    .orb3 {
-      width: 350px;
-      height: 350px;
-      background: var(--accent);
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      animation-delay: 10s;
-    }
-    
     @keyframes float {
       0%, 100% { transform: translate(0, 0) scale(1); }
-      33% { transform: translate(50px, -50px) scale(1.1); }
-      66% { transform: translate(-50px, 50px) scale(0.9); }
+      50% { transform: translate(30px, -30px) scale(1.05); }
     }
     
     /* Navigation */
@@ -92,15 +102,15 @@
       position: fixed;
       top: 0;
       width: 100%;
-      padding: 20px 0;
-      background: rgba(15, 23, 42, 0.8);
-      backdrop-filter: blur(10px);
+      padding: 16px 0;
+      background: rgba(15, 23, 42, 0.9);
+      backdrop-filter: blur(20px);
       z-index: 1000;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      border-bottom: 1px solid var(--border);
     }
     
     nav .container {
-      max-width: 1200px;
+      max-width: 1400px;
       margin: 0 auto;
       padding: 0 40px;
       display: flex;
@@ -112,7 +122,7 @@
       font-family: 'Space Grotesk', sans-serif;
       font-size: 24px;
       font-weight: 700;
-      background: linear-gradient(135deg, var(--primary), var(--accent));
+      background: linear-gradient(135deg, var(--primary-light), var(--accent));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -120,36 +130,41 @@
     
     .nav-links {
       display: flex;
-      gap: 30px;
+      gap: 32px;
       list-style: none;
+      align-items: center;
     }
     
     .nav-links a {
-      color: var(--light);
+      color: var(--text-secondary);
       text-decoration: none;
       font-weight: 500;
+      font-size: 14px;
       transition: all 0.3s;
       position: relative;
     }
     
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      bottom: -5px;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background: linear-gradient(90deg, var(--primary), var(--accent));
-      transition: width 0.3s;
+    .nav-links a:hover {
+      color: var(--primary-light);
     }
     
-    .nav-links a:hover::after {
-      width: 100%;
+    .nav-cta {
+      padding: 10px 24px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      border-radius: 8px;
+      color: white !important;
+      font-weight: 600;
+      transition: all 0.3s;
+    }
+    
+    .nav-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(99, 102, 241, 0.4);
     }
     
     /* Container */
     .container {
-      max-width: 1200px;
+      max-width: 1400px;
       margin: 0 auto;
       padding: 0 40px;
       position: relative;
@@ -166,43 +181,76 @@
     
     .hero-content {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1.2fr 0.8fr;
       gap: 80px;
       align-items: center;
     }
     
-    .hero-text h1 {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 72px;
-      font-weight: 700;
-      line-height: 1.1;
-      margin-bottom: 20px;
-      background: linear-gradient(135deg, #fff 0%, var(--primary) 50%, var(--accent) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      background: rgba(99, 102, 241, 0.1);
+      border: 1px solid rgba(99, 102, 241, 0.3);
+      border-radius: 50px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--primary-light);
+      margin-bottom: 24px;
       animation: slideInLeft 1s ease-out;
     }
     
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--success);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+    
+    .hero-text h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 64px;
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 16px;
+      color: white;
+      animation: slideInLeft 1s ease-out 0.1s backwards;
+    }
+    
+    .hero-text h1 .gradient-text {
+      background: linear-gradient(135deg, var(--primary-light), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
     .hero-text .subtitle {
-      font-size: 24px;
+      font-size: 22px;
       color: var(--text-secondary);
-      margin-bottom: 30px;
+      margin-bottom: 24px;
+      font-weight: 500;
       animation: slideInLeft 1s ease-out 0.2s backwards;
     }
     
     .hero-text p {
-      font-size: 18px;
-      line-height: 1.8;
+      font-size: 17px;
+      line-height: 1.7;
       color: var(--text-primary);
-      margin-bottom: 40px;
-      animation: slideInLeft 1s ease-out 0.4s backwards;
+      margin-bottom: 32px;
+      animation: slideInLeft 1s ease-out 0.3s backwards;
     }
     
     @keyframes slideInLeft {
       from {
         opacity: 0;
-        transform: translateX(-50px);
+        transform: translateX(-30px);
       }
       to {
         opacity: 1;
@@ -212,56 +260,59 @@
     
     .cta-buttons {
       display: flex;
-      gap: 20px;
-      animation: slideInLeft 1s ease-out 0.6s backwards;
+      gap: 16px;
+      animation: slideInLeft 1s ease-out 0.4s backwards;
+      flex-wrap: wrap;
     }
     
     .btn {
-      padding: 16px 32px;
-      border-radius: 12px;
+      padding: 14px 28px;
+      border-radius: 10px;
       font-weight: 600;
+      font-size: 15px;
       text-decoration: none;
       display: inline-flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
       transition: all 0.3s;
-      position: relative;
-      overflow: hidden;
+      cursor: pointer;
     }
     
     .btn-primary {
       background: linear-gradient(135deg, var(--primary), var(--secondary));
       color: white;
-      box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);
+      box-shadow: 0 8px 24px rgba(99, 102, 241, 0.3);
     }
     
     .btn-primary:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 15px 40px rgba(99, 102, 241, 0.4);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(99, 102, 241, 0.4);
     }
     
     .btn-secondary {
-      background: rgba(255, 255, 255, 0.1);
+      background: var(--dark-surface);
       color: white;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      backdrop-filter: blur(10px);
+      border: 1px solid var(--border);
     }
     
     .btn-secondary:hover {
-      background: rgba(255, 255, 255, 0.15);
-      transform: translateY(-3px);
+      background: rgba(255, 255, 255, 0.08);
+      border-color: var(--primary);
+      transform: translateY(-2px);
     }
     
-    /* Hero Image */
-    .hero-image {
-      position: relative;
-      animation: slideInRight 1s ease-out;
+    /* Metrics Dashboard in Hero */
+    .hero-metrics {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      animation: slideInRight 1s ease-out 0.5s backwards;
     }
     
     @keyframes slideInRight {
       from {
         opacity: 0;
-        transform: translateX(50px);
+        transform: translateX(30px);
       }
       to {
         opacity: 1;
@@ -269,97 +320,199 @@
       }
     }
     
-    .profile-container {
-      position: relative;
-      width: 450px;
-      height: 450px;
-      margin: 0 auto;
-    }
-    
-    .profile-bg {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, var(--primary), var(--accent));
-      border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
-      animation: morph 8s ease-in-out infinite;
-      filter: blur(40px);
-      opacity: 0.6;
-    }
-    
-    @keyframes morph {
-      0%, 100% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
-      25% { border-radius: 58% 42% 75% 25% / 76% 46% 54% 24%; }
-      50% { border-radius: 50% 50% 33% 67% / 55% 27% 73% 45%; }
-      75% { border-radius: 33% 67% 58% 42% / 63% 68% 32% 37%; }
-    }
-    
-    .profile-pic {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
-      object-fit: cover;
-      animation: morph 8s ease-in-out infinite;
-      border: 3px solid rgba(255, 255, 255, 0.2);
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-    }
-    
-    /* Stats */
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 30px;
-      margin-top: 80px;
-      animation: fadeInUp 1s ease-out 0.8s backwards;
-    }
-    
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-    
-    .stat-card {
-      background: rgba(255, 255, 255, 0.06);
+    .metric-card {
+      background: rgba(255, 255, 255, 0.04);
       backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 20px;
-      padding: 30px;
-      text-align: center;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
       transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
     }
     
-    .stat-card:hover {
-      background: rgba(255, 255, 255, 0.09);
-      transform: translateY(-5px);
+    .metric-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.5s;
+    }
+    
+    .metric-card:hover::before {
+      transform: scaleX(1);
+    }
+    
+    .metric-card:hover {
+      background: rgba(255, 255, 255, 0.06);
       border-color: var(--primary);
+      transform: translateY(-4px);
     }
     
-    .stat-number {
+    .metric-value {
       font-family: 'Space Grotesk', sans-serif;
-      font-size: 48px;
+      font-size: 36px;
       font-weight: 700;
-      background: linear-gradient(135deg, var(--primary), var(--accent));
+      background: linear-gradient(135deg, var(--primary-light), var(--accent));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
+      margin-bottom: 8px;
     }
     
-    .stat-label {
+    .metric-label {
+      color: var(--text-secondary);
+      font-size: 13px;
+      font-weight: 500;
+    }
+    
+    .metric-change {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 8px;
+      padding: 4px 8px;
+      background: rgba(16, 185, 129, 0.1);
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--success);
+    }
+    
+    /* Profile Picture Section */
+    .hero-profile {
+      position: relative;
+      animation: slideInRight 1s ease-out 0.5s backwards;
+    }
+    
+    .profile-card {
+      background: rgba(255, 255, 255, 0.04);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 32px;
+      text-align: center;
+      transition: all 0.4s;
+    }
+    
+    .profile-card:hover {
+      border-color: var(--primary);
+      transform: translateY(-8px);
+      box-shadow: 0 20px 60px rgba(99, 102, 241, 0.3);
+    }
+    
+    .profile-image-container {
+      position: relative;
+      width: 280px;
+      height: 280px;
+      margin: 0 auto 24px;
+    }
+    
+    .profile-image-bg {
+      position: absolute;
+      inset: -8px;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      border-radius: 50%;
+      animation: rotate 8s linear infinite;
+      opacity: 0.5;
+    }
+    
+    @keyframes rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    
+    .profile-image {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid var(--dark);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    }
+    
+    .profile-name {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 24px;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 8px;
+    }
+    
+    .profile-title {
       color: var(--text-secondary);
       font-size: 14px;
-      margin-top: 10px;
       font-weight: 500;
+      margin-bottom: 24px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .profile-links {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    
+    .profile-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 12px 20px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: var(--text-primary);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      transition: all 0.3s;
+    }
+    
+    .profile-link:hover {
+      background: rgba(99, 102, 241, 0.15);
+      border-color: var(--primary);
+      transform: translateX(4px);
+    }
+    
+    .profile-link.primary {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      border-color: transparent;
+      color: white;
+    }
+    
+    .profile-link.primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(99, 102, 241, 0.4);
+    }
+    
+    .link-icon {
+      font-size: 18px;
+    }
+    
+    /* LinkedIn Icon SVG */
+    .linkedin-icon {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
+    }
+    
+    .social-link .linkedin-icon {
+      width: 20px;
+      height: 20px;
     }
     
     /* Section */
     section {
-      padding: 100px 0;
+      padding: 120px 0;
+      position: relative;
     }
     
     .section-header {
@@ -369,340 +522,342 @@
     
     .section-tag {
       display: inline-block;
-      padding: 8px 20px;
-      background: rgba(129, 140, 248, 0.15);
-      border: 1px solid rgba(129, 140, 248, 0.4);
+      padding: 6px 16px;
+      background: rgba(99, 102, 241, 0.1);
+      border: 1px solid rgba(99, 102, 241, 0.3);
       border-radius: 50px;
-      color: #c7d2fe;
-      font-size: 14px;
-      font-weight: 600;
-      margin-bottom: 20px;
+      color: var(--primary-light);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
     }
     
     .section-title {
       font-family: 'Space Grotesk', sans-serif;
       font-size: 48px;
       font-weight: 700;
-      margin-bottom: 20px;
+      margin-bottom: 16px;
+      color: white;
     }
     
     .section-description {
       font-size: 18px;
       color: var(--text-secondary);
-      max-width: 600px;
+      max-width: 700px;
       margin: 0 auto;
       line-height: 1.7;
     }
     
-    /* About Section Styles */
-    .about-content {
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-    
-    .about-main {
+    /* Product Case Studies - NEW */
+    .case-studies {
       display: grid;
-      grid-template-columns: 2fr 1fr;
-      gap: 50px;
-      margin-bottom: 60px;
+      gap: 40px;
     }
     
-    .about-text p {
-      color: var(--text-primary);
-      font-size: 17px;
-      line-height: 1.8;
-      margin-bottom: 25px;
-      text-align: left;
-    }
-    
-    .about-text strong {
-      color: var(--primary);
-      font-weight: 600;
-    }
-    
-    .about-highlights {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-    
-    .highlight-card {
-      background: rgba(129, 140, 248, 0.08);
-      border: 1px solid rgba(129, 140, 248, 0.3);
-      border-radius: 16px;
-      padding: 25px;
-      transition: all 0.3s;
-    }
-    
-    .highlight-card:hover {
-      background: rgba(129, 140, 248, 0.12);
-      transform: translateX(5px);
-    }
-    
-    .highlight-icon {
-      width: 48px;
-      height: 48px;
-      margin-bottom: 12px;
-    }
-    
-    .highlight-icon svg {
-      width: 100%;
-      height: 100%;
-      filter: drop-shadow(0 4px 8px rgba(129, 140, 248, 0.3));
-    }
-    
-    .highlight-card h4 {
-      font-size: 18px;
-      font-weight: 600;
-      color: var(--text-primary);
-      margin-bottom: 10px;
-    }
-    
-    .highlight-card p {
-      font-size: 14px;
-      line-height: 1.6;
-      color: var(--text-secondary);
-      margin: 0;
-    }
-    
-    .pm-skills-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 25px;
-      margin-top: 40px;
-    }
-    
-    .pm-skill-category {
-      background: rgba(255, 255, 255, 0.04);
+    .case-study {
+      background: rgba(255, 255, 255, 0.03);
       backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 20px;
-      padding: 30px 25px;
-      transition: all 0.3s;
-    }
-    
-    .pm-skill-category:hover {
-      background: rgba(255, 255, 255, 0.06);
-      border-color: var(--primary);
-      transform: translateY(-5px);
-    }
-    
-    .pm-skill-category h3 {
-      font-size: 18px;
-      font-weight: 600;
-      color: var(--text-primary);
-      margin-bottom: 20px;
-      padding-bottom: 15px;
-      border-bottom: 2px solid var(--primary);
-    }
-    
-    .pm-skill-category ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-    
-    .pm-skill-category li {
-      color: var(--text-secondary);
-      font-size: 14px;
-      line-height: 1.6;
-      margin-bottom: 12px;
-      padding-left: 20px;
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      overflow: hidden;
+      transition: all 0.4s;
       position: relative;
     }
     
-    .pm-skill-category li::before {
-      content: '▸';
+    .case-study:hover {
+      border-color: var(--primary);
+      transform: translateY(-8px);
+      box-shadow: 0 20px 60px rgba(99, 102, 241, 0.2);
+    }
+    
+    .case-study-header {
+      padding: 40px 40px 0;
+    }
+    
+    .case-study-meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    
+    .company-tag {
+      padding: 6px 14px;
+      background: rgba(99, 102, 241, 0.15);
+      border: 1px solid rgba(99, 102, 241, 0.3);
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--primary-light);
+    }
+    
+    .timeline {
+      color: var(--text-muted);
+      font-size: 13px;
+      font-weight: 500;
+    }
+    
+    .case-study h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 32px;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 16px;
+      line-height: 1.3;
+    }
+    
+    .case-study-intro {
+      color: var(--text-secondary);
+      font-size: 16px;
+      line-height: 1.7;
+      margin-bottom: 32px;
+    }
+    
+    .case-study-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      padding: 0 40px 40px;
+    }
+    
+    .case-section h4 {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--primary-light);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 16px;
+    }
+    
+    .problem-statement {
+      background: rgba(236, 72, 153, 0.08);
+      border-left: 3px solid var(--accent);
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 24px;
+    }
+    
+    .problem-statement p {
+      color: var(--text-primary);
+      font-size: 15px;
+      line-height: 1.6;
+      margin: 0;
+    }
+    
+    .solution-list {
+      list-style: none;
+      padding: 0;
+    }
+    
+    .solution-list li {
+      color: var(--text-primary);
+      font-size: 15px;
+      line-height: 1.6;
+      margin-bottom: 12px;
+      padding-left: 24px;
+      position: relative;
+    }
+    
+    .solution-list li::before {
+      content: '→';
       position: absolute;
       left: 0;
-      color: var(--primary);
+      color: var(--primary-light);
       font-weight: bold;
     }
     
-    @media (max-width: 1024px) {
-      .about-main {
-        grid-template-columns: 1fr;
-        gap: 30px;
-      }
-      
-      .pm-skills-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-    
-    @media (max-width: 768px) {
-      .pm-skills-grid {
-        grid-template-columns: 1fr;
-      }
-      
-      .about-highlights {
-        margin-top: 30px;
-      }
-    }
-    
-    /* Experience Cards */
-    .experience-grid {
+    .impact-metrics {
       display: grid;
-      gap: 30px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-top: 24px;
     }
     
-    .exp-card {
-      background: rgba(255, 255, 255, 0.04);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 24px;
-      padding: 40px;
-      transition: all 0.4s;
+    .impact-card {
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.2);
+      border-radius: 12px;
+      padding: 16px;
+      text-align: center;
+    }
+    
+    .impact-number {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--success);
+      margin-bottom: 4px;
+    }
+    
+    .impact-label {
+      font-size: 12px;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+    
+    .tools-used {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+    }
+    
+    .tool-badge {
+      padding: 6px 12px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-secondary);
+    }
+    
+    /* PM Principles - NEW */
+    .principles-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 60px;
+    }
+    
+    .principle-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 32px;
+      transition: all 0.3s;
       position: relative;
       overflow: hidden;
     }
     
-    .exp-card::before {
+    .principle-card::before {
       content: '';
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: linear-gradient(135deg, var(--primary) 0%, transparent 50%);
+      background: linear-gradient(135deg, var(--primary) 0%, transparent 70%);
       opacity: 0;
-      transition: opacity 0.4s;
+      transition: opacity 0.3s;
     }
     
-    .exp-card:hover {
-      background: rgba(255, 255, 255, 0.06);
+    .principle-card:hover {
       border-color: var(--primary);
-      transform: translateX(10px);
+      transform: translateY(-4px);
     }
     
-    .exp-card:hover::before {
-      opacity: 0.1;
+    .principle-card:hover::before {
+      opacity: 0.08;
     }
     
-    .exp-header {
-      display: flex;
-      align-items: center;
-      gap: 20px;
+    .principle-icon {
+      font-size: 40px;
       margin-bottom: 20px;
       position: relative;
       z-index: 1;
     }
     
-    .company-logo {
-      width: 80px;
-      height: 80px;
-      border-radius: 16px;
-      background: rgba(255, 255, 255, 0.08);
-      padding: 12px;
-      object-fit: contain;
-      border: 1px solid rgba(255, 255, 255, 0.15);
-    }
-    
-    .exp-title h3 {
-      font-size: 24px;
-      margin-bottom: 5px;
+    .principle-card h3 {
+      font-size: 20px;
+      font-weight: 600;
       color: white;
+      margin-bottom: 12px;
+      position: relative;
+      z-index: 1;
     }
     
-    .exp-meta {
-      display: flex;
-      gap: 15px;
+    .principle-card p {
       color: var(--text-secondary);
       font-size: 14px;
-      font-weight: 500;
-    }
-    
-    .exp-content {
+      line-height: 1.6;
       position: relative;
       z-index: 1;
     }
     
-    .exp-content p {
-      color: var(--text-primary);
-      line-height: 1.8;
-      margin-bottom: 20px;
-      font-size: 16px;
+    /* Skills Section - Modernized */
+    .skills-categories {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
     }
     
-    .tags {
+    .skill-category {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 32px;
+      transition: all 0.3s;
+    }
+    
+    .skill-category:hover {
+      border-color: var(--primary);
+      background: rgba(255, 255, 255, 0.05);
+    }
+    
+    .skill-category h3 {
+      font-size: 20px;
+      font-weight: 600;
+      color: white;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .skill-category h3::before {
+      content: '';
+      width: 4px;
+      height: 24px;
+      background: linear-gradient(180deg, var(--primary), var(--accent));
+      border-radius: 2px;
+    }
+    
+    .skill-items {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
     }
     
-    .tag {
-      padding: 6px 16px;
-      background: rgba(129, 140, 248, 0.15);
-      border: 1px solid rgba(129, 140, 248, 0.4);
-      border-radius: 50px;
-      color: #c7d2fe;
-      font-size: 12px;
-      font-weight: 600;
-    }
-    
-    /* Skills Section */
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      gap: 20px;
-    }
-    
-    .skill-card {
-      background: rgba(255, 255, 255, 0.04);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 16px;
-      padding: 30px 20px;
-      text-align: center;
+    .skill-item {
+      padding: 8px 16px;
+      background: rgba(99, 102, 241, 0.1);
+      border: 1px solid rgba(99, 102, 241, 0.2);
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-primary);
       transition: all 0.3s;
       cursor: pointer;
     }
     
-    .skill-card:hover {
-      background: rgba(255, 255, 255, 0.07);
+    .skill-item:hover {
+      background: rgba(99, 102, 241, 0.2);
       border-color: var(--primary);
-      transform: translateY(-10px);
+      transform: translateY(-2px);
     }
     
-    .skill-card img {
-      width: 60px;
-      height: 60px;
-      object-fit: contain;
-      margin-bottom: 15px;
-      filter: grayscale(100%) brightness(2);
-      transition: filter 0.3s;
-    }
-    
-    .skill-card:hover img {
-      filter: grayscale(0%) brightness(1);
-    }
-    
-    .skill-name {
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--text-primary);
-    }
-    
-    /* Awards Section */
-    .awards-grid {
+    /* Awards - Redesigned */
+    .awards-showcase {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 30px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
     }
     
-    .award-card {
-      background: rgba(255, 255, 255, 0.04);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.12);
+    .award-card-modern {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border);
       border-radius: 20px;
-      padding: 40px 30px;
+      padding: 32px;
       text-align: center;
-      transition: all 0.4s;
+      transition: all 0.3s;
       position: relative;
       overflow: hidden;
     }
     
-    .award-card::before {
+    .award-card-modern::before {
       content: '';
       position: absolute;
       top: 0;
@@ -711,119 +866,54 @@
       height: 100%;
       background: linear-gradient(135deg, var(--accent) 0%, transparent 70%);
       opacity: 0;
-      transition: opacity 0.4s;
+      transition: opacity 0.3s;
     }
     
-    .award-card:hover {
-      background: rgba(255, 255, 255, 0.07);
+    .award-card-modern:hover {
       border-color: var(--accent);
-      transform: translateY(-10px);
+      transform: translateY(-6px);
     }
     
-    .award-card:hover::before {
+    .award-card-modern:hover::before {
       opacity: 0.1;
     }
     
-    .award-icon {
-      width: 80px;
-      height: 80px;
-      margin: 0 auto 20px;
+    .award-icon-modern {
+      font-size: 48px;
+      margin-bottom: 16px;
       position: relative;
       z-index: 1;
     }
     
-    .award-icon svg {
-      width: 100%;
-      height: 100%;
-      filter: drop-shadow(0 8px 16px rgba(251, 191, 36, 0.3));
-      animation: floatIcon 3s ease-in-out infinite;
-    }
-    
-    @keyframes floatIcon {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-10px); }
-    }
-    
-    .award-card h3 {
-      font-size: 22px;
+    .award-card-modern h3 {
+      font-size: 18px;
       font-weight: 600;
-      margin-bottom: 15px;
-      color: var(--text-primary);
-      position: relative;
-      z-index: 1;
-    }
-    
-    .award-card p {
-      color: var(--text-secondary);
-      line-height: 1.6;
-      font-size: 15px;
-      position: relative;
-      z-index: 1;
-    }
-    
-    /* Certifications Section */
-    .cert-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 20px;
-    }
-    
-    .cert-item {
-      background: rgba(255, 255, 255, 0.04);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 16px;
-      padding: 25px 30px;
-      display: flex;
-      align-items: center;
-      gap: 20px;
-      transition: all 0.3s;
-    }
-    
-    .cert-item:hover {
-      background: rgba(255, 255, 255, 0.07);
-      border-color: var(--primary);
-      transform: translateX(5px);
-    }
-    
-    .cert-check {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 20px;
-      font-weight: bold;
       color: white;
-      flex-shrink: 0;
+      margin-bottom: 12px;
+      position: relative;
+      z-index: 1;
     }
     
-    .cert-name {
-      font-size: 16px;
-      font-weight: 600;
-      color: var(--text-primary);
-      margin-bottom: 5px;
-    }
-    
-    .cert-org {
-      font-size: 13px;
+    .award-card-modern p {
       color: var(--text-secondary);
+      font-size: 14px;
+      line-height: 1.6;
+      position: relative;
+      z-index: 1;
     }
     
     /* Footer */
     footer {
-      background: rgba(15, 23, 42, 0.8);
-      backdrop-filter: blur(10px);
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(15, 23, 42, 0.95);
+      backdrop-filter: blur(20px);
+      border-top: 1px solid var(--border);
       padding: 60px 0 30px;
-      margin-top: 100px;
+      margin-top: 120px;
     }
     
     .footer-content {
       display: grid;
-      grid-template-columns: 2fr 1fr 1fr;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
       gap: 60px;
       margin-bottom: 40px;
     }
@@ -831,8 +921,8 @@
     .footer-brand h3 {
       font-family: 'Space Grotesk', sans-serif;
       font-size: 24px;
-      margin-bottom: 15px;
-      background: linear-gradient(135deg, var(--primary), var(--accent));
+      margin-bottom: 12px;
+      background: linear-gradient(135deg, var(--primary-light), var(--accent));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -841,46 +931,26 @@
     .footer-brand p {
       color: var(--text-secondary);
       line-height: 1.6;
-    }
-    
-    .footer-links h4 {
+      font-size: 14px;
       margin-bottom: 20px;
-      color: var(--text-primary);
-    }
-    
-    .footer-links ul {
-      list-style: none;
-    }
-    
-    .footer-links a {
-      color: var(--text-secondary);
-      text-decoration: none;
-      display: block;
-      margin-bottom: 10px;
-      transition: color 0.3s;
-    }
-    
-    .footer-links a:hover {
-      color: var(--primary);
     }
     
     .social-links {
       display: flex;
-      gap: 15px;
-      margin-top: 20px;
+      gap: 12px;
     }
     
     .social-link {
       width: 40px;
       height: 40px;
-      border-radius: 50%;
+      border-radius: 10px;
       background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      border: 1px solid var(--border);
       display: flex;
       align-items: center;
       justify-content: center;
-      color: white;
       text-decoration: none;
+      font-size: 18px;
       transition: all 0.3s;
     }
     
@@ -890,12 +960,38 @@
       transform: translateY(-3px);
     }
     
+    .footer-section h4 {
+      font-size: 14px;
+      font-weight: 600;
+      color: white;
+      margin-bottom: 16px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .footer-section ul {
+      list-style: none;
+    }
+    
+    .footer-section a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      display: block;
+      margin-bottom: 10px;
+      font-size: 14px;
+      transition: color 0.3s;
+    }
+    
+    .footer-section a:hover {
+      color: var(--primary-light);
+    }
+    
     .footer-bottom {
       text-align: center;
       padding-top: 30px;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-      color: var(--text-secondary);
-      font-size: 14px;
+      border-top: 1px solid var(--border);
+      color: var(--text-muted);
+      font-size: 13px;
     }
     
     /* Scroll to top */
@@ -905,7 +1001,7 @@
       right: 30px;
       width: 50px;
       height: 50px;
-      border-radius: 50%;
+      border-radius: 12px;
       background: linear-gradient(135deg, var(--primary), var(--secondary));
       color: white;
       display: flex;
@@ -913,46 +1009,97 @@
       justify-content: center;
       text-decoration: none;
       font-size: 24px;
-      box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4);
+      box-shadow: 0 8px 24px rgba(99, 102, 241, 0.4);
       transition: all 0.3s;
       z-index: 999;
+      opacity: 0;
+      pointer-events: none;
+    }
+    
+    .scroll-top.visible {
+      opacity: 1;
+      pointer-events: all;
     }
     
     .scroll-top:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 15px 40px rgba(99, 102, 241, 0.6);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(99, 102, 241, 0.5);
     }
     
     /* Responsive */
-    @media (max-width: 768px) {
+    @media (max-width: 1024px) {
       .hero-content {
         grid-template-columns: 1fr;
-        gap: 40px;
+        gap: 60px;
       }
       
-      .hero-text h1 {
-        font-size: 48px;
+      .profile-image-container {
+        width: 220px;
+        height: 220px;
       }
       
-      .profile-container {
-        width: 300px;
-        height: 300px;
-      }
-      
-      .stats {
+      .hero-metrics {
         grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .case-study-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .principles-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .skills-categories {
+        grid-template-columns: 1fr;
+      }
+      
+      .awards-showcase {
+        grid-template-columns: 1fr;
       }
       
       .footer-content {
         grid-template-columns: 1fr;
+        gap: 40px;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 20px;
+      }
+      
+      section {
+        padding: 80px 0;
+      }
+      
+      .hero-text h1 {
+        font-size: 42px;
+      }
+      
+      .section-title {
+        font-size: 36px;
       }
       
       .nav-links {
         display: none;
       }
       
-      .cta-buttons {
-        flex-direction: column;
+      .hero-metrics {
+        grid-template-columns: 1fr;
+      }
+      
+      .metric-card {
+        padding: 20px;
+      }
+      
+      .case-study h3 {
+        font-size: 24px;
+      }
+      
+      .case-study-header,
+      .case-study-grid {
+        padding: 24px;
       }
     }
   </style>
@@ -960,9 +1107,9 @@
 <body>
   <!-- Animated Background -->
   <div class="bg-animation">
+    <div class="grid-bg"></div>
     <div class="orb orb1"></div>
     <div class="orb orb2"></div>
-    <div class="orb orb3"></div>
   </div>
 
   <!-- Navigation -->
@@ -971,11 +1118,11 @@
       <div class="logo">MS</div>
       <ul class="nav-links">
         <li><a href="#home">Home</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#experience">Experience</a></li>
-        <li><a href="#awards">Awards</a></li>
+        <li><a href="#case-studies">Case Studies</a></li>
+        <li><a href="#principles">Approach</a></li>
         <li><a href="#skills">Skills</a></li>
-        <li><a href="#contact">Contact</a></li>
+        <li><a href="#awards">Recognition</a></li>
+        <li><a href="#contact" class="nav-cta">Get in Touch</a></li>
       </ul>
     </div>
   </nav>
@@ -985,338 +1132,424 @@
     <div class="container">
       <div class="hero-content">
         <div class="hero-text">
-          <h1>Monisha Sood</h1>
-          <p class="subtitle">Product Manager & Innovation Strategist</p>
-          <p>Product Manager with 6+ years of experience leading cross-functional teams, building scalable workflows, and delivering high-impact digital products. MBA '26 at Wisconsin School of Business, specializing in Technology Strategy and Product Management. Expert in MVP development, automation, and data-driven decision making.</p>
+          <div class="hero-badge">
+            <span class="status-dot"></span>
+            Open to PM Opportunities
+          </div>
+          <h1>Building products that <span class="gradient-text">drive impact</span></h1>
+          <p class="subtitle">Product Manager | MBA '26 | Data-Driven Strategist</p>
+          <p>I transform complex challenges into elegant solutions through user-centered design, data-driven strategy, and cross-functional collaboration. With 6+ years leading product initiatives from 0→1, I've driven $50M+ in business value and built systems that scale.</p>
           <div class="cta-buttons">
-            <a href="Monisha_Sood_Resume.pdf" class="btn btn-primary" download>
-              📄 Download Resume
+            <a href="#case-studies" class="btn btn-primary">
+              View Case Studies →
+            </a>
+            <a href="Monisha_Sood_Resume.pdf" class="btn btn-secondary" download>
+              Download Resume
             </a>
             <a href="https://www.linkedin.com/in/monishasood07/" class="btn btn-secondary" target="_blank">
-              💼 LinkedIn
+              <svg class="linkedin-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+              </svg>
+              LinkedIn
             </a>
-          </div>
-        </div>
-        <div class="hero-image">
-          <div class="profile-container">
-            <div class="profile-bg"></div>
-            <img src="monisha-profile.png" alt="Monisha Sood" class="profile-pic">
-          </div>
-        </div>
-      </div>
-      
-      <div class="stats">
-        <div class="stat-card">
-          <div class="stat-number">6+</div>
-          <div class="stat-label">Years Experience</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number">$50M+</div>
-          <div class="stat-label">Contracts Closed</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number">70%</div>
-          <div class="stat-label">Automation Efficiency</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number">200+</div>
-          <div class="stat-label">Deals Managed</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- About Section -->
-  <section id="about">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-tag">ABOUT ME</span>
-        <h2 class="section-title">Operator. Builder. Strategist.</h2>
-        <p class="section-description">
-          Transforming complex challenges into elegant solutions through data-driven strategy and user-centered design.
-        </p>
-      </div>
-      
-      <div class="about-content">
-        <div class="about-main">
-          <div class="about-text">
-            <p>
-              I'm a <strong>Product Manager</strong> who thrives at the intersection of business insight and execution. With over 6 years of experience spanning operations, strategy, and product development, I've learned that great products aren't just about features—they're about solving real problems for real people.
-            </p>
-            <p>
-              My journey began in <strong>operations</strong>, where I developed a deep appreciation for process efficiency and the importance of getting details right. I led the operational excellence for 200+ real estate transactions, saving $50K per transaction through data-driven pricing strategies. This operational foundation taught me that sustainable product success requires understanding the entire value chain.
-            </p>
-            <p>
-              As I transitioned into <strong>product management</strong>, I brought that operator's mindset with me. At Flyhomes, I led end-to-end product development that boosted team efficiency by 68% and customer satisfaction by 32%. I learned to navigate ambiguity, balance competing stakeholder needs, and ship products that users actually wanted—not just what we thought they needed.
-            </p>
-            <p>
-              Currently, I'm driving product strategy at <strong>SecondWind Pro</strong>, where I led the MVP launch of an NIL Valuation Platform from 0 to 1. I built and managed a cross-functional team of 8 across data, engineering, and fundraising, enabling verified profiles for 25+ Division 1 athletes in the first month while supporting $500K+ in active fundraising. I designed automation systems that reduced manual work by 70%, proving that great product thinking scales impact exponentially.
-            </p>
-            <p>
-              I'm pursuing my <strong>MBA at the Wisconsin School of Business</strong>, specializing in Technology Strategy and Product Management. This experience has sharpened my strategic thinking and expanded my toolkit for building products that matter.
-            </p>
-          </div>
-          
-          <div class="about-highlights">
-            <div class="highlight-card">
-              <div class="highlight-icon">
-                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" fill="url(#grad1)" stroke="url(#grad1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  <defs>
-                    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" style="stop-color:#818cf8;stop-opacity:1" />
-                      <stop offset="100%" style="stop-color:#f472b6;stop-opacity:1" />
-                    </linearGradient>
-                  </defs>
-                </svg>
-              </div>
-              <h4>My Product Philosophy</h4>
-              <p>Build with empathy, execute with precision, iterate with humility. Great products emerge from understanding users deeply, shipping fast, and learning continuously.</p>
-            </div>
-            
-            <div class="highlight-card">
-              <div class="highlight-icon">
-                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 17L7 12L8.41 10.59L12 14.17L15.59 10.59L17 12L12 17Z" fill="url(#grad2)"/>
-                  <circle cx="12" cy="8" r="2" fill="url(#grad2)"/>
-                  <defs>
-                    <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" style="stop-color:#a78bfa;stop-opacity:1" />
-                      <stop offset="100%" style="stop-color:#818cf8;stop-opacity:1" />
-                    </linearGradient>
-                  </defs>
-                </svg>
-              </div>
-              <h4>What Drives Me</h4>
-              <p>I love the challenge of taking ambiguous problems and transforming them into clear product strategies. Whether it's launching an MVP or optimizing complex workflows, I'm energized by impact.</p>
-            </div>
-            
-            <div class="highlight-card">
-              <div class="highlight-icon">
-                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M12 2L2 7L12 12L22 7L12 2Z" fill="url(#grad3)" stroke="url(#grad3)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  <path d="M2 17L12 22L22 17" stroke="url(#grad3)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  <path d="M2 12L12 17L22 12" stroke="url(#grad3)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  <defs>
-                    <linearGradient id="grad3" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" style="stop-color:#f472b6;stop-opacity:1" />
-                      <stop offset="100%" style="stop-color:#a78bfa;stop-opacity:1" />
-                    </linearGradient>
-                  </defs>
-                </svg>
-              </div>
-              <h4>How I Work</h4>
-              <p>Cross-functional collaboration is my superpower. I build bridges between engineering, design, and business stakeholders, ensuring everyone moves in the same direction toward shared goals.</p>
-            </div>
           </div>
         </div>
         
-        <div class="pm-skills-grid">
-          <div class="pm-skill-category">
-            <h3>Product Strategy</h3>
-            <ul>
-              <li>Roadmap Planning & Prioritization</li>
-              <li>Market Research & Competitive Analysis</li>
-              <li>0-to-1 MVP Development</li>
-              <li>Go-to-Market Strategy</li>
-              <li>KPI Definition & Tracking</li>
-            </ul>
+        <div class="hero-profile">
+          <div class="profile-card">
+            <div class="profile-image-container">
+              <div class="profile-image-bg"></div>
+              <img src="monisha-profile.png" alt="Monisha Sood" class="profile-image">
+            </div>
+            <h3 class="profile-name">Monisha Sood</h3>
+            <p class="profile-title">Product Manager | MBA '26</p>
+            <div class="profile-links">
+              <a href="Monisha_Sood_Resume.pdf" class="profile-link primary" download>
+                <span class="link-icon">📄</span>
+                Download Resume
+              </a>
+              <a href="https://www.linkedin.com/in/monishasood07/" class="profile-link" target="_blank">
+                <svg class="linkedin-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                </svg>
+                LinkedIn Profile
+              </a>
+              <a href="mailto:monisha.sood@wisc.edu" class="profile-link">
+                <span class="link-icon">✉️</span>
+                monisha.sood@wisc.edu
+              </a>
+            </div>
           </div>
-          
-          <div class="pm-skill-category">
-            <h3>Execution & Delivery</h3>
-            <ul>
-              <li>Agile/Scrum Methodologies</li>
-              <li>User Story Creation & Backlog Management</li>
-              <li>Sprint Planning & Retrospectives</li>
-              <li>Cross-functional Team Leadership</li>
-              <li>Stakeholder Management</li>
-            </ul>
+        </div>
+      </div>
+      
+      <div class="hero-metrics">
+          <div class="metric-card">
+            <div class="metric-value">6+</div>
+            <div class="metric-label">Years in Product</div>
+            <div class="metric-change">↑ Growing</div>
           </div>
-          
-          <div class="pm-skill-category">
-            <h3>Data & Analytics</h3>
-            <ul>
-              <li>SQL & Data Analysis</li>
-              <li>A/B Testing & Experimentation</li>
-              <li>Dashboard Development (Power BI, Airtable)</li>
-              <li>Metrics-Driven Decision Making</li>
-              <li>User Research & Insights</li>
-            </ul>
+          <div class="metric-card">
+            <div class="metric-value">$50M+</div>
+            <div class="metric-label">Value Created</div>
+            <div class="metric-change">↑ Contracts Closed</div>
           </div>
-          
-          <div class="pm-skill-category">
-            <h3>Technical Acumen</h3>
-            <ul>
-              <li>API & System Integration</li>
-              <li>Workflow Automation (Zapier)</li>
-              <li>HTML/CSS Fundamentals</li>
-              <li>Technical Documentation</li>
-              <li>Product Architecture Understanding</li>
-            </ul>
+          <div class="metric-card">
+            <div class="metric-value">70%</div>
+            <div class="metric-label">Efficiency Gains</div>
+            <div class="metric-change">↑ Through Automation</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-value">3</div>
+            <div class="metric-label">MVPs Launched</div>
+            <div class="metric-change">↑ 0→1 Products</div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Experience Section -->
-  <section id="experience">
+  <!-- Product Case Studies Section -->
+  <section id="case-studies">
     <div class="container">
       <div class="section-header">
-        <span class="section-tag">EXPERIENCE</span>
-        <h2 class="section-title">Career Journey</h2>
+        <span class="section-tag">PRODUCT WORK</span>
+        <h2 class="section-title">Featured Case Studies</h2>
+        <p class="section-description">
+          Real product problems. Data-driven solutions. Measurable impact.
+        </p>
       </div>
       
-      <div class="experience-grid">
-        <div class="exp-card">
-          <div class="exp-header">
-            <img src="https://media.licdn.com/dms/image/v2/D4E22AQEsUlLAElc46Q/feedshare-shrink_800/B4EZbt4_DNHYAg-/0/1747747861251?e=2147483647&v=beta&t=ITHl23dg-kucObRKv6S6_06vMHqZgrYEBR-gMUkfqPw" alt="SecondWind" class="company-logo">
-            <div class="exp-title">
-              <h3>Product Manager – NIL Technology & Strategy</h3>
-              <div class="exp-meta">
-                <span>SecondWind Pro</span>
-                <span>•</span>
-                <span>Jun 2025 – Present</span>
-              </div>
+      <div class="case-studies">
+        <!-- Case Study 1: SecondWind NIL Platform -->
+        <div class="case-study">
+          <div class="case-study-header">
+            <div class="case-study-meta">
+              <span class="company-tag">SecondWind Pro</span>
+              <span class="timeline">Jun 2025 – Present</span>
             </div>
+            <h3>Building NIL Valuation Platform from Zero</h3>
+            <p class="case-study-intro">
+              Led the 0→1 development of an AI-powered platform connecting Division 1 athletes with NIL opportunities, coordinating cross-functional teams to deliver an MVP that enabled $500K+ in fundraising within the first month.
+            </p>
           </div>
-          <div class="exp-content">
-            <p>Led a cross-functional team of 8 members across data, engineering, and fundraising to launch MVP v1 of SecondWind's NIL Valuation Platform, enabling verified NIL profiles for 25+ Division 1 athletes in the first month. Developed and executed the product roadmap, prioritizing features through user research and feedback while supporting $500K+ in active fundraising by aligning platform value to donor strategy.</p>
-            <p>Designed and implemented Airtable and Zapier-based automations, reducing manual outreach tasks by 70% and ensuring scalable engagement with 100+ schools and collectives. Built core internal operations processes for the fundraising team and led weekly leadership standups, increasing team coordination and delivery speed by 40%.</p>
-            <div class="tags">
-              <span class="tag">MVP Launch</span>
-              <span class="tag">Cross-functional Leadership</span>
-              <span class="tag">Product Roadmap</span>
-              <span class="tag">Process Automation</span>
-              <span class="tag">Fundraising Strategy</span>
-              <span class="tag">Airtable & Zapier</span>
+          
+          <div class="case-study-grid">
+            <div class="case-section">
+              <h4>The Challenge</h4>
+              <div class="problem-statement">
+                <p>College athletes needed a trusted platform to showcase their NIL value, while donors and collectives lacked data-driven tools to identify and evaluate talent across 100+ schools. Manual outreach was eating 80% of the team's time.</p>
+              </div>
+              
+              <h4>My Approach</h4>
+              <ul class="solution-list">
+                <li>Conducted user interviews with 15+ athletes, donors, and collectives to validate product-market fit</li>
+                <li>Designed product roadmap prioritizing verified profiles and automated outreach</li>
+                <li>Built cross-functional team of 8 (engineering, data, fundraising) with clear OKRs</li>
+                <li>Architected Airtable/Zapier automation reducing manual work by 70%</li>
+                <li>Led weekly leadership standups to maintain velocity and alignment</li>
+              </ul>
+            </div>
+            
+            <div class="case-section">
+              <h4>Impact Delivered</h4>
+              <div class="impact-metrics">
+                <div class="impact-card">
+                  <div class="impact-number">25+</div>
+                  <div class="impact-label">Athletes Onboarded (Month 1)</div>
+                </div>
+                <div class="impact-card">
+                  <div class="impact-number">$500K+</div>
+                  <div class="impact-label">Fundraising Supported</div>
+                </div>
+                <div class="impact-card">
+                  <div class="impact-number">70%</div>
+                  <div class="impact-label">Time Saved via Automation</div>
+                </div>
+                <div class="impact-card">
+                  <div class="impact-number">40%</div>
+                  <div class="impact-label">Faster Team Delivery</div>
+                </div>
+              </div>
+              
+              <h4>Key Learnings</h4>
+              <ul class="solution-list">
+                <li><strong>Start with the problem:</strong> User research uncovered that trust & verification mattered more than fancy features</li>
+                <li><strong>Automate ruthlessly:</strong> Building scalable systems early enabled us to punch above our weight</li>
+                <li><strong>Cross-functional = competitive advantage:</strong> Breaking down silos between teams accelerated every decision</li>
+              </ul>
+              
+              <div class="tools-used">
+                <span class="tool-badge">Airtable</span>
+                <span class="tool-badge">Zapier</span>
+                <span class="tool-badge">User Research</span>
+                <span class="tool-badge">OKRs</span>
+                <span class="tool-badge">Agile</span>
+              </div>
             </div>
           </div>
         </div>
 
-        <div class="exp-card">
-          <div class="exp-header">
-            <img src="https://brand.wisc.edu/content/uploads/2023/09/vert-w-crest-logo-web-digital-color.png" alt="Wisconsin" class="company-logo">
-            <div class="exp-title">
-              <h3>MBA Candidate</h3>
-              <div class="exp-meta">
-                <span>UW–Madison School of Business</span>
-                <span>•</span>
-                <span>2024 – 2026</span>
-              </div>
+        <!-- Case Study 2: Flyhomes Sales Compensation -->
+        <div class="case-study">
+          <div class="case-study-header">
+            <div class="case-study-meta">
+              <span class="company-tag">Flyhomes</span>
+              <span class="timeline">Jun 2023 – Jun 2024</span>
             </div>
+            <h3>Redesigning Sales Compensation to Save $48MM</h3>
+            <p class="case-study-intro">
+              Transformed a broken compensation system through data analysis and stakeholder alignment, migrating 100+ users to a new platform while maintaining 95% satisfaction and unlocking massive cost savings.
+            </p>
           </div>
-          <div class="exp-content">
-            <p>Specializing in Technology Strategy and Product Management. Coursework includes applied innovation, marketing analytics, and agile product development.</p>
-            <div class="tags">
-              <span class="tag">Tech Strategy</span>
-              <span class="tag">Product Management</span>
-              <span class="tag">Innovation</span>
+          
+          <div class="case-study-grid">
+            <div class="case-section">
+              <h4>The Challenge</h4>
+              <div class="problem-statement">
+                <p>Sales team was demotivated by opaque compensation plans. Manual processing errors created mistrust. Company needed to optimize variable incentives without losing top performers.</p>
+              </div>
+              
+              <h4>My Approach</h4>
+              <ul class="solution-list">
+                <li>Analyzed performance data for 200+ agents to identify compensation optimization opportunities</li>
+                <li>Partnered with finance & engineering to redesign system architecture</li>
+                <li>Led cross-functional migration with zero downtime for $600K in processed commissions</li>
+                <li>Created training program onboarding 50+ associates in 3 days</li>
+                <li>Built Airtable dashboards for real-time performance tracking</li>
+              </ul>
+            </div>
+            
+            <div class="case-section">
+              <h4>Impact Delivered</h4>
+              <div class="impact-metrics">
+                <div class="impact-card">
+                  <div class="impact-number">$48MM</div>
+                  <div class="impact-label">Cost Savings Achieved</div>
+                </div>
+                <div class="impact-card">
+                  <div class="impact-number">95%</div>
+                  <div class="impact-label">Agent Satisfaction Rate</div>
+                </div>
+                <div class="impact-card">
+                  <div class="impact-number">17%</div>
+                  <div class="impact-label">CSAT Improvement</div>
+                </div>
+                <div class="impact-card">
+                  <div class="impact-number">28%</div>
+                  <div class="impact-label">Team Effectiveness Boost</div>
+                </div>
+              </div>
+              
+              <h4>Key Learnings</h4>
+              <ul class="solution-list">
+                <li><strong>Stakeholder buy-in is everything:</strong> Transparent communication turned skeptics into champions</li>
+                <li><strong>Data drives decisions:</strong> Analytics revealed insights that intuition missed</li>
+                <li><strong>Change management matters:</strong> Technical excellence means nothing if users don't adopt</li>
+              </ul>
+              
+              <div class="tools-used">
+                <span class="tool-badge">Data Analysis</span>
+                <span class="tool-badge">Airtable</span>
+                <span class="tool-badge">Change Management</span>
+                <span class="tool-badge">SQL</span>
+                <span class="tool-badge">Stakeholder Alignment</span>
+              </div>
             </div>
           </div>
         </div>
 
-        <div class="exp-card">
-          <div class="exp-header">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQh-iCg1zWa-8WtkL7GbBDeZwT3R-NfheMFI3THnY8pCMVUJGGre670PBm6ekxpsGbLG4A&usqp=CAU" alt="Flyhomes" class="company-logo">
-            <div class="exp-title">
-              <h3>Product Strategy (Sales Ops & Leadership)</h3>
-              <div class="exp-meta">
-                <span>Flyhomes</span>
-                <span>•</span>
-                <span>Jun 2023 – Jun 2024</span>
+        <!-- Case Study 3: Flyhomes Product Development -->
+        <div class="case-study">
+          <div class="case-study-header">
+            <div class="case-study-meta">
+              <span class="company-tag">Flyhomes</span>
+              <span class="timeline">Apr 2022 – Jun 2023</span>
+            </div>
+            <h3>Accelerating Product Velocity Through Agile Transformation</h3>
+            <p class="case-study-intro">
+              Transformed product development process from waterfall to agile, leading end-to-end initiatives that improved team efficiency 68% and customer satisfaction 32% through rapid iteration and data-driven prioritization.
+            </p>
+          </div>
+          
+          <div class="case-study-grid">
+            <div class="case-section">
+              <h4>The Challenge</h4>
+              <div class="problem-statement">
+                <p>Product releases were slow and buggy. Teams worked in silos. Customer feedback loop was broken. SLAs were consistently missed, eroding trust with clients.</p>
+              </div>
+              
+              <h4>My Approach</h4>
+              <ul class="solution-list">
+                <li>Implemented agile ceremonies (sprint planning, retrospectives, daily standups)</li>
+                <li>Created user story framework tied to customer pain points</li>
+                <li>Built SQL dashboards for real-time KPI tracking and decision-making</li>
+                <li>Established cross-functional testing protocols reducing bugs 40%</li>
+                <li>Led product inspections with clients for continuous feedback</li>
+              </ul>
+            </div>
+            
+            <div class="case-section">
+              <h4>Impact Delivered</h4>
+              <div class="impact-metrics">
+                <div class="impact-card">
+                  <div class="impact-number">68%</div>
+                  <div class="impact-label">Team Efficiency Gain</div>
+                </div>
+                <div class="impact-card">
+                  <div class="impact-number">32%</div>
+                  <div class="impact-label">CSAT Increase</div>
+                </div>
+                <div class="impact-card">
+                  <div class="impact-number">20%</div>
+                  <div class="impact-label">Faster Delivery</div>
+                </div>
+                <div class="impact-card">
+                  <div class="impact-number">8%</div>
+                  <div class="impact-label">SLA Reduction</div>
+                </div>
+              </div>
+              
+              <h4>Key Learnings</h4>
+              <ul class="solution-list">
+                <li><strong>Process enables innovation:</strong> The right framework unlocks creativity rather than constraining it</li>
+                <li><strong>Measure what matters:</strong> KPIs aligned teams around shared goals</li>
+                <li><strong>Customer proximity wins:</strong> Regular feedback loops shortened the path to product-market fit</li>
+              </ul>
+              
+              <div class="tools-used">
+                <span class="tool-badge">Agile/Scrum</span>
+                <span class="tool-badge">JIRA</span>
+                <span class="tool-badge">SQL</span>
+                <span class="tool-badge">User Stories</span>
+                <span class="tool-badge">Cross-functional Testing</span>
               </div>
             </div>
           </div>
-          <div class="exp-content">
-            <p>Migrated sales compensation plans with 100% accuracy to third-party vendor through effective cross-functional collaboration, successfully managing $600K for agents. Created marketing plans that improved agent and customer engagement, leading to a 17% boost in CSAT scores.</p>
-            <p>Saved $48MM by researching market trends and internal data to refine variable incentive compensation plans while maintaining high agent motivation and performance. Onboarded 50+ new sales associates in 3 days by designing impactful training sessions. Improved team effectiveness by 28% through performance assessment of 78 members by defining metrics and maintaining interactive dashboards on Airtable.</p>
-            <div class="tags">
-              <span class="tag">Sales Compensation</span>
-              <span class="tag">$48MM Cost Savings</span>
-              <span class="tag">Training & Onboarding</span>
-              <span class="tag">Performance Management</span>
-              <span class="tag">CSAT +17%</span>
-            </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PM Principles Section -->
+  <section id="principles">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">MY APPROACH</span>
+        <h2 class="section-title">Product Philosophy</h2>
+        <p class="section-description">
+          How I think about building products that matter
+        </p>
+      </div>
+      
+      <div class="principles-grid">
+        <div class="principle-card">
+          <div class="principle-icon">🎯</div>
+          <h3>Start with the Problem</h3>
+          <p>Great products emerge from deep customer understanding, not feature lists. I invest heavily in user research, qualitative feedback, and data analysis before writing a single user story.</p>
+        </div>
+        
+        <div class="principle-card">
+          <div class="principle-icon">📊</div>
+          <h3>Let Data Drive Decisions</h3>
+          <p>Opinions are cheap. Data is truth. I build dashboards, run A/B tests, and define clear metrics to validate assumptions and measure impact at every stage.</p>
+        </div>
+        
+        <div class="principle-card">
+          <div class="principle-icon">⚡</div>
+          <h3>Ship Fast, Learn Faster</h3>
+          <p>MVPs beat perfection every time. I prioritize ruthlessly, cut scope aggressively, and iterate based on real user behavior rather than hypothetical requirements.</p>
+        </div>
+        
+        <div class="principle-card">
+          <div class="principle-icon">🤝</div>
+          <h3>Cross-functional is Non-negotiable</h3>
+          <p>Product managers are multipliers, not individual contributors. I build bridges between engineering, design, and business stakeholders to align everyone around shared goals.</p>
+        </div>
+        
+        <div class="principle-card">
+          <div class="principle-icon">🔧</div>
+          <h3>Automate the Boring Stuff</h3>
+          <p>Manual processes are technical debt. I build systems that scale, using tools like Zapier and Airtable to eliminate repetitive work and free teams to focus on what matters.</p>
+        </div>
+        
+        <div class="principle-card">
+          <div class="principle-icon">💡</div>
+          <h3>Empathy + Execution</h3>
+          <p>The best PMs balance vision with pragmatism. I care deeply about user problems while staying ruthlessly focused on delivering tangible business outcomes.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section id="skills">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">CAPABILITIES</span>
+        <h2 class="section-title">Product Management Toolkit</h2>
+        <p class="section-description">
+          Technical skills and methodologies I use to ship great products
+        </p>
+      </div>
+      
+      <div class="skills-categories">
+        <div class="skill-category">
+          <h3>Product Strategy</h3>
+          <div class="skill-items">
+            <span class="skill-item">Roadmap Planning</span>
+            <span class="skill-item">Prioritization Frameworks</span>
+            <span class="skill-item">Competitive Analysis</span>
+            <span class="skill-item">0→1 MVP Development</span>
+            <span class="skill-item">Go-to-Market Strategy</span>
+            <span class="skill-item">User Research</span>
+            <span class="skill-item">OKR Definition</span>
+            <span class="skill-item">Market Sizing</span>
           </div>
         </div>
-
-        <div class="exp-card">
-          <div class="exp-header">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQh-iCg1zWa-8WtkL7GbBDeZwT3R-NfheMFI3THnY8pCMVUJGGre670PBm6ekxpsGbLG4A&usqp=CAU" alt="Flyhomes" class="company-logo">
-            <div class="exp-title">
-              <h3>Associate Product Manager</h3>
-              <div class="exp-meta">
-                <span>Flyhomes</span>
-                <span>•</span>
-                <span>Apr 2022 – Jun 2023</span>
-              </div>
-            </div>
-          </div>
-          <div class="exp-content">
-            <p>Led end-to-end product development from initial concept to execution, creating user stories and reducing SLA by 8%. Improved UX through client feedback, product inspections, and proactive maintenance, ensuring seamless project execution and client satisfaction.</p>
-            <p>Spearheaded cross-functional testing and strategic project execution that boosted team efficiency by 68% and customer satisfaction by 32%. Adapted to shifting business goals by implementing agile workflows, leading to 20% faster product delivery. Utilized SQL and interactive dashboards to track KPIs, derive insights, and refine strategies that improved team effectiveness by 28%.</p>
-            <div class="tags">
-              <span class="tag">Product Development</span>
-              <span class="tag">Agile Workflows</span>
-              <span class="tag">SQL & Analytics</span>
-              <span class="tag">Team Efficiency +68%</span>
-              <span class="tag">CSAT +32%</span>
-            </div>
+        
+        <div class="skill-category">
+          <h3>Execution & Delivery</h3>
+          <div class="skill-items">
+            <span class="skill-item">Agile/Scrum</span>
+            <span class="skill-item">User Story Writing</span>
+            <span class="skill-item">Sprint Planning</span>
+            <span class="skill-item">JIRA</span>
+            <span class="skill-item">Confluence</span>
+            <span class="skill-item">Backlog Management</span>
+            <span class="skill-item">Cross-functional Leadership</span>
+            <span class="skill-item">Stakeholder Management</span>
           </div>
         </div>
-
-        <div class="exp-card">
-          <div class="exp-header">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQh-iCg1zWa-8WtkL7GbBDeZwT3R-NfheMFI3THnY8pCMVUJGGre670PBm6ekxpsGbLG4A&usqp=CAU" alt="Flyhomes" class="company-logo">
-            <div class="exp-title">
-              <h3>Senior Operations Associate</h3>
-              <div class="exp-meta">
-                <span>Flyhomes</span>
-                <span>•</span>
-                <span>Jan 2021 – Mar 2022</span>
-              </div>
-            </div>
-          </div>
-          <div class="exp-content">
-            <p>Saved $50,000 per transaction on average by developing home pricing strategies to analyze home prices and provide thorough reports to clients. Collaborated with multiple teams to ensure end-to-end operational excellence, overseeing 200+ closings while maintaining a strong focus on customer needs.</p>
-            <p>Improved team compliance and efficiency by 78% by training 7 operations team members and developing training videos and programs.</p>
-            <div class="tags">
-              <span class="tag">Pricing Strategy</span>
-              <span class="tag">$50K Savings/Transaction</span>
-              <span class="tag">200+ Closings</span>
-              <span class="tag">Team Training</span>
-              <span class="tag">Compliance +78%</span>
-            </div>
+        
+        <div class="skill-category">
+          <h3>Data & Analytics</h3>
+          <div class="skill-items">
+            <span class="skill-item">SQL</span>
+            <span class="skill-item">Power BI</span>
+            <span class="skill-item">A/B Testing</span>
+            <span class="skill-item">KPI Tracking</span>
+            <span class="skill-item">Data Studio</span>
+            <span class="skill-item">R</span>
+            <span class="skill-item">Excel Advanced</span>
+            <span class="skill-item">Metrics-Driven Decisions</span>
           </div>
         </div>
-
-        <div class="exp-card">
-          <div class="exp-header">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQh-iCg1zWa-8WtkL7GbBDeZwT3R-NfheMFI3THnY8pCMVUJGGre670PBm6ekxpsGbLG4A&usqp=CAU" alt="Flyhomes" class="company-logo">
-            <div class="exp-title">
-              <h3>Operations Associate</h3>
-              <div class="exp-meta">
-                <span>Flyhomes</span>
-                <span>•</span>
-                <span>Jun 2019 – Dec 2020</span>
-              </div>
-            </div>
-          </div>
-          <div class="exp-content">
-            <p>Enhanced workstream efficiency by over 52% through streamlined processes and reduced dependency by implementing new SOPs, creating Basecamps, and automating workflows using Zapier. Audited 500+ transactions to identify discrepancies and enhance accuracy.</p>
-            <p>Coordinated BAU and ad-hoc tasks across WA, CA, OR, and TX, ensuring operational excellence by collaborating with stakeholders from different teams and managing teams across multiple time zones.</p>
-            <div class="tags">
-              <span class="tag">Process Optimization</span>
-              <span class="tag">Workflow Automation</span>
-              <span class="tag">500+ Audits</span>
-              <span class="tag">Multi-state Operations</span>
-              <span class="tag">Efficiency +52%</span>
-            </div>
+        
+        <div class="skill-category">
+          <h3>Tools & Technical</h3>
+          <div class="skill-items">
+            <span class="skill-item">Figma</span>
+            <span class="skill-item">Airtable</span>
+            <span class="skill-item">Zapier</span>
+            <span class="skill-item">Salesforce</span>
+            <span class="skill-item">Asana</span>
+            <span class="skill-item">Lucidchart</span>
+            <span class="skill-item">HTML/CSS</span>
+            <span class="skill-item">GitHub</span>
+            <span class="skill-item">API Integration</span>
           </div>
         </div>
-
       </div>
     </div>
   </section>
@@ -1326,193 +1559,56 @@
     <div class="container">
       <div class="section-header">
         <span class="section-tag">RECOGNITION</span>
-        <h2 class="section-title">Awards & Achievements</h2>
+        <h2 class="section-title">Awards & Impact</h2>
+        <p class="section-description">
+          Recognized for driving measurable business outcomes
+        </p>
       </div>
       
-      <div class="awards-grid">
-        <div class="award-card">
-          <div class="award-icon">
-            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M6 9C6 10.5913 6.63214 12.1174 7.75736 13.2426C8.88258 14.3679 10.4087 15 12 15C13.5913 15 15.1174 14.3679 16.2426 13.2426C17.3679 12.1174 18 10.5913 18 9" stroke="url(#trophy1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M6 9H2V11C2 11.7956 2.31607 12.5587 2.87868 13.1213C3.44129 13.6839 4.20435 14 5 14H6" stroke="url(#trophy1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M18 9H22V11C22 11.7956 21.6839 12.5587 21.1213 13.1213C20.5587 13.6839 19.7956 14 19 14H18" stroke="url(#trophy1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M12 15V19" stroke="url(#trophy1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M8 22H16" stroke="url(#trophy1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M12 3L14 7L18 7.5L15 10.5L16 14.5L12 12.5L8 14.5L9 10.5L6 7.5L10 7L12 3Z" fill="url(#trophy1)"/>
-              <defs>
-                <linearGradient id="trophy1" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" style="stop-color:#fbbf24;stop-opacity:1" />
-                  <stop offset="100%" style="stop-color:#f59e0b;stop-opacity:1" />
-                </linearGradient>
-              </defs>
-            </svg>
-          </div>
+      <div class="awards-showcase">
+        <div class="award-card-modern">
+          <div class="award-icon-modern">🏆</div>
           <h3>Most Trusted Partner</h3>
-          <p>Honored for closing contracts worth $10 million and building strong client relationships at Flyhomes</p>
+          <p>Honored for closing $10M+ in contracts and building exceptional client relationships at Flyhomes</p>
         </div>
         
-        <div class="award-card">
-          <div class="award-icon">
-            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" fill="url(#star1)" stroke="url(#star1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M12 2L14 6L12 8L10 6L12 2Z" fill="url(#star2)" opacity="0.7"/>
-              <defs>
-                <linearGradient id="star1" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" style="stop-color:#fbbf24;stop-opacity:1" />
-                  <stop offset="100%" style="stop-color:#f59e0b;stop-opacity:1" />
-                </linearGradient>
-                <linearGradient id="star2" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" style="stop-color:#fef3c7;stop-opacity:1" />
-                  <stop offset="100%" style="stop-color:#fbbf24;stop-opacity:1" />
-                </linearGradient>
-              </defs>
-            </svg>
-          </div>
+        <div class="award-card-modern">
+          <div class="award-icon-modern">⭐</div>
           <h3>Superstar of the Month</h3>
-          <p>Awarded in January 2023 for improving productivity by 30% and surpassing targets through process improvement with Skedulo</p>
+          <p>Awarded for 30% productivity improvement and exceeding targets through process innovation</p>
         </div>
         
-        <div class="award-card">
-          <div class="award-icon">
-            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M9 11L12 14L22 4C22 4 21 2 19 2C17 2 9 11 9 11Z" fill="url(#rocket1)" stroke="url(#rocket1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M9 11V17L12 20L15 17V11" stroke="url(#rocket1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M3 21L9 17" stroke="url(#rocket1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M15 17L21 21" stroke="url(#rocket1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              <circle cx="16" cy="8" r="2" fill="url(#rocket2)"/>
-              <path d="M2 12C2 12 4 11 6 13C8 15 7 17 7 17" stroke="url(#rocket1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              <defs>
-                <linearGradient id="rocket1" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" style="stop-color:#818cf8;stop-opacity:1" />
-                  <stop offset="100%" style="stop-color:#f472b6;stop-opacity:1" />
-                </linearGradient>
-                <linearGradient id="rocket2" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" style="stop-color:#fbbf24;stop-opacity:1" />
-                  <stop offset="100%" style="stop-color:#f59e0b;stop-opacity:1" />
-                </linearGradient>
-              </defs>
-            </svg>
-          </div>
+        <div class="award-card-modern">
+          <div class="award-icon-modern">🚀</div>
           <h3>Product Impact Champion</h3>
-          <p>Recognized for launching the MVP and improving workflows to boost engagement and reduce manual work by 70%</p>
+          <p>Recognized for MVP launch that boosted engagement and reduced manual work by 70%</p>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- Certifications Section -->
-  <section id="certifications">
-    <div class="container">
-      <div class="section-header">
+      
+      <div class="section-header" style="margin-top: 80px;">
         <span class="section-tag">CERTIFICATIONS</span>
-        <h2 class="section-title">Professional Development</h2>
+        <h2 class="section-title">Continuous Learning</h2>
       </div>
       
-      <div class="cert-grid">
-        <div class="cert-item">
-          <div class="cert-check">✓</div>
-          <div class="cert-name">Business Management</div>
-          <div class="cert-org">London Business School, UK</div>
+      <div class="skills-categories">
+        <div class="skill-category">
+          <h3>Product & Business</h3>
+          <div class="skill-items">
+            <span class="skill-item">Product Management (Udemy)</span>
+            <span class="skill-item">Business Management (London Business School)</span>
+            <span class="skill-item">Generative AI for PM</span>
+            <span class="skill-item">Six Sigma</span>
+          </div>
         </div>
-        <div class="cert-item">
-          <div class="cert-check">✓</div>
-          <div class="cert-name">SQL Certification</div>
-          <div class="cert-org">Udemy</div>
-        </div>
-        <div class="cert-item">
-          <div class="cert-check">✓</div>
-          <div class="cert-name">Product Management</div>
-          <div class="cert-org">Udemy</div>
-        </div>
-        <div class="cert-item">
-          <div class="cert-check">✓</div>
-          <div class="cert-name">MS Excel Advanced</div>
-          <div class="cert-org">Udemy</div>
-        </div>
-        <div class="cert-item">
-          <div class="cert-check">✓</div>
-          <div class="cert-name">Power BI</div>
-          <div class="cert-org">Microsoft</div>
-        </div>
-        <div class="cert-item">
-          <div class="cert-check">✓</div>
-          <div class="cert-name">Generative AI for PM</div>
-          <div class="cert-org">Professional Certification</div>
-        </div>
-        <div class="cert-item">
-          <div class="cert-check">✓</div>
-          <div class="cert-name">Six Sigma</div>
-          <div class="cert-org">Professional Certification</div>
-        </div>
-      </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Skills Section -->
-  <section id="skills">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-tag">TOOLS & SKILLS</span>
-        <h2 class="section-title">Technical Arsenal</h2>
-      </div>
-      
-      <div class="skills-grid">
-        <div class="skill-card">
-          <img src="https://cdn.worldvectorlogo.com/logos/jira-1.svg" alt="JIRA">
-          <div class="skill-name">JIRA</div>
-        </div>
-        <div class="skill-card">
-          <img src="https://seeklogo.com/images/A/airtable-logo-216B9AF035-seeklogo.com.png" alt="Airtable">
-          <div class="skill-name">Airtable</div>
-        </div>
-        <div class="skill-card">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/4/45/Notion_app_logo.png" alt="Notion">
-          <div class="skill-name">Notion</div>
-        </div>
-        <div class="skill-card">
-          <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="GitHub">
-          <div class="skill-name">GitHub</div>
-        </div>
-        <div class="skill-card">
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUSaE5ng-zDAnTHzqdlTciPELtABg0jD8oHw&s" alt="Zapier">
-          <div class="skill-name">Zapier</div>
-        </div>
-        <div class="skill-card">
-          <img src="https://cdn.worldvectorlogo.com/logos/confluence-1.svg" alt="Confluence">
-          <div class="skill-name">Confluence</div>
-        </div>
-        <div class="skill-card">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Salesforce.com_logo.svg/2560px-Salesforce.com_logo.svg.png" alt="Salesforce">
-          <div class="skill-name">Salesforce</div>
-        </div>
-        <div class="skill-card">
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScD1nIKyMQn9x7WWbGxQqVk31VJ5Vb5YFnwg&s" alt="Asana">
-          <div class="skill-name">Asana</div>
-        </div>
-        <div class="skill-card">
-          <img src="https://avatars.slack-edge.com/2022-07-26/3865608556737_8f4ae4a98b36ab6912b3_512.png" alt="Lucidchart">
-          <div class="skill-name">Lucidchart</div>
-        </div>
-        <div class="skill-card">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/3/33/Figma-logo.svg" alt="Figma">
-          <div class="skill-name">Figma</div>
-        </div>
-        <div class="skill-card">
-          <img src="https://cdn.worldvectorlogo.com/logos/power-bi.svg" alt="Power BI">
-          <div class="skill-name">Power BI</div>
-        </div>
-        <div class="skill-card">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/Sql_data_base_with_logo.png" alt="SQL">
-          <div class="skill-name">SQL</div>
-        </div>
-        <div class="skill-card">
-          <img src="https://www.r-project.org/logo/Rlogo.svg" alt="R">
-          <div class="skill-name">R</div>
-        </div>
-        <div class="skill-card">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg" alt="HTML/CSS">
-          <div class="skill-name">HTML/CSS</div>
+        
+        <div class="skill-category">
+          <h3>Technical & Analytics</h3>
+          <div class="skill-items">
+            <span class="skill-item">SQL Certification</span>
+            <span class="skill-item">Power BI</span>
+            <span class="skill-item">MS Excel Advanced</span>
+            <span class="skill-item">Data Analysis</span>
+          </div>
         </div>
       </div>
     </div>
@@ -1524,38 +1620,66 @@
       <div class="footer-content">
         <div class="footer-brand">
           <h3>Monisha Sood</h3>
-          <p>Product Manager passionate about building impactful, data-driven solutions. Let's connect and create something amazing together.</p>
+          <p>Product Manager passionate about solving hard problems with elegant solutions. Currently pursuing my MBA at Wisconsin School of Business while building products that scale.</p>
           <div class="social-links">
-            <a href="https://www.linkedin.com/in/monishasood07/" class="social-link" target="_blank">💼</a>
-            <a href="mailto:monisha.sood@wisc.edu" class="social-link">✉️</a>
-            <a href="Monisha_Sood_Resume.pdf" class="social-link" download>📄</a>
+            <a href="https://www.linkedin.com/in/monishasood07/" class="social-link" target="_blank" title="LinkedIn">
+              <svg class="linkedin-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+              </svg>
+            </a>
+            <a href="mailto:monisha.sood@wisc.edu" class="social-link" title="Email">✉️</a>
+            <a href="Monisha_Sood_Resume.pdf" class="social-link" download title="Resume">📄</a>
           </div>
         </div>
-        <div class="footer-links">
-          <h4>Quick Links</h4>
+        
+        <div class="footer-section">
+          <h4>Navigation</h4>
           <ul>
             <li><a href="#home">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#experience">Experience</a></li>
-            <li><a href="#awards">Awards</a></li>
+            <li><a href="#case-studies">Case Studies</a></li>
+            <li><a href="#principles">Approach</a></li>
             <li><a href="#skills">Skills</a></li>
           </ul>
         </div>
-        <div class="footer-links">
+        
+        <div class="footer-section">
           <h4>Contact</h4>
           <ul>
             <li><a href="mailto:monisha.sood@wisc.edu">monisha.sood@wisc.edu</a></li>
-            <li><a href="https://www.linkedin.com/in/monishasood07/" target="_blank">LinkedIn Profile</a></li>
+            <li><a href="tel:+16086587795">(608) 658-7795</a></li>
+            <li><a href="https://www.linkedin.com/in/monishasood07/" target="_blank">LinkedIn</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-section">
+          <h4>Education</h4>
+          <ul>
+            <li><a href="https://business.wisc.edu/" target="_blank">UW-Madison MBA '26</a></li>
+            <li>Tech Strategy & Product Management</li>
           </ul>
         </div>
       </div>
+      
       <div class="footer-bottom">
-        <p>© 2025 Monisha Sood. Designed with innovation and passion.</p>
+        <p>© 2025 Monisha Sood. Built with intention for Product Managers who care about craft.</p>
       </div>
     </div>
   </footer>
 
   <!-- Scroll to Top -->
-  <a href="#home" class="scroll-top">↑</a>
+  <a href="#home" class="scroll-top" id="scrollTop">↑</a>
+
+  <script>
+    // Scroll to top button
+    const scrollTop = document.getElementById('scrollTop');
+    
+    window.addEventListener('scroll', () => {
+      if (window.pageYOffset > 300) {
+        scrollTop.classList.add('visible');
+      } else {
+        scrollTop.classList.remove('visible');
+      }
+    });
+  </script>
 </body>
 </html>
