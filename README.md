@@ -1402,7 +1402,7 @@
             <a href="#case-studies" class="btn btn-primary">
               <span>View Case Studies →</span>
             </a>
-            <a href="Monisha_Sood_Resume.pdf" class="btn btn-secondary" download>
+            <a href="./Monisha_Sood_Resume.pdf" class="btn btn-secondary" download>
               <span>Download Resume</span>
             </a>
             <a href="https://www.linkedin.com/in/monishasood07/" class="btn btn-secondary" target="_blank">
@@ -1418,12 +1418,12 @@
           <div class="profile-card">
             <div class="profile-image-container">
               <div class="profile-image-bg"></div>
-              <img src="monisha-profile.png" alt="Monisha Sood" class="profile-image" onerror="this.src='https://ui-avatars.com/api/?name=Monisha+Sood&size=280&background=6366f1&color=fff&bold=true&font-size=0.4'">
+              <img src="./monisha-profile.png" alt="Monisha Sood" class="profile-image">
             </div>
             <h3 class="profile-name">Monisha Sood</h3>
             <p class="profile-title">Product Manager | MBA '26</p>
             <div class="profile-links">
-              <a href="Monisha_Sood_Resume.pdf" class="profile-link primary" download>
+              <a href="./Monisha_Sood_Resume.pdf" class="profile-link primary" download>
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
                   <polyline points="14 2 14 8 20 8"></polyline>
@@ -2006,7 +2006,7 @@
                 <polyline points="22,6 12,13 2,6"></polyline>
               </svg>
             </a>
-            <a href="Monisha_Sood_Resume.pdf" class="social-link" download title="Resume">
+            <a href="./Monisha_Sood_Resume.pdf" class="social-link" download title="Resume">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
                 <polyline points="14 2 14 8 20 8"></polyline>
