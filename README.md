@@ -495,6 +495,8 @@
     
     .link-icon {
       font-size: 18px;
+      color: var(--primary-light);
+      font-weight: 400;
     }
     
     /* LinkedIn Icon SVG */
@@ -758,6 +760,9 @@
       margin-bottom: 20px;
       position: relative;
       z-index: 1;
+      font-weight: 300;
+      color: var(--primary-light);
+      text-shadow: 0 0 20px rgba(99, 102, 241, 0.5);
     }
     
     .principle-card h3 {
@@ -902,6 +907,9 @@
       margin-bottom: 16px;
       position: relative;
       z-index: 1;
+      font-weight: 300;
+      color: var(--accent);
+      text-shadow: 0 0 20px rgba(236, 72, 153, 0.5);
     }
     
     .award-card-modern h3 {
@@ -1121,6 +1129,139 @@
         padding: 24px;
       }
     }
+    
+    /* Interactive Animation Keyframes */
+    @keyframes float-particle {
+      0% {
+        opacity: 0;
+        transform: translateY(0) scale(0);
+      }
+      50% {
+        opacity: 0.8;
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(-100px) scale(1);
+      }
+    }
+    
+    @keyframes ripple {
+      to {
+        transform: scale(4);
+        opacity: 0;
+      }
+    }
+    
+    @keyframes glow {
+      0%, 100% {
+        box-shadow: 0 0 20px rgba(99, 102, 241, 0.5);
+      }
+      50% {
+        box-shadow: 0 0 40px rgba(99, 102, 241, 0.8);
+      }
+    }
+    
+    /* Cursor trail effect */
+    .cursor-trail {
+      position: fixed;
+      width: 8px;
+      height: 8px;
+      background: var(--primary-light);
+      border-radius: 50%;
+      pointer-events: none;
+      opacity: 0.6;
+      z-index: 9999;
+      animation: fade-out 1s forwards;
+    }
+    
+    @keyframes fade-out {
+      to {
+        opacity: 0;
+        transform: scale(2);
+      }
+    }
+    
+    /* Gradient text animation */
+    .gradient-text {
+      background: linear-gradient(
+        90deg,
+        var(--primary-light),
+        var(--accent),
+        var(--secondary),
+        var(--primary-light)
+      );
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: gradient-shift 3s linear infinite;
+      display: inline-block;
+      min-width: 200px;
+    }
+    
+    @keyframes gradient-shift {
+      0% {
+        background-position: 0% center;
+      }
+      100% {
+        background-position: 200% center;
+      }
+    }
+    
+    /* Hover state for cards with 3D effect */
+    .case-study:hover,
+    .principle-card:hover,
+    .award-card-modern:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 25px 70px rgba(99, 102, 241, 0.3);
+    }
+    
+    /* Pulse animation for status dot */
+    @keyframes pulse {
+      0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+      50% {
+        opacity: 0.5;
+        transform: scale(1.2);
+      }
+    }
+    
+    /* Shake animation for CTAs */
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      75% { transform: translateX(5px); }
+    }
+    
+    .btn:active {
+      animation: shake 0.3s;
+    }
+    
+    /* Interactive metric cards */
+    .metric-card {
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .metric-card:active {
+      transform: scale(0.95);
+    }
+    
+    /* Profile image zoom on hover */
+    .profile-image {
+      transition: transform 0.5s ease;
+    }
+    
+    .profile-image-container:hover .profile-image {
+      transform: scale(1.05);
+    }
+    
+    /* Smooth color transitions */
+    * {
+      transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+    }
   </style>
 </head>
 <body>
@@ -1184,7 +1325,7 @@
             <p class="profile-title">Product Manager | MBA '26</p>
             <div class="profile-links">
               <a href="Monisha_Sood_Resume.pdf" class="profile-link primary" download>
-                <span class="link-icon">📄</span>
+                <span class="link-icon">▣</span>
                 Download Resume
               </a>
               <a href="https://www.linkedin.com/in/monishasood07/" class="profile-link" target="_blank">
@@ -1194,7 +1335,7 @@
                 LinkedIn Profile
               </a>
               <a href="mailto:monisha.sood@wisc.edu" class="profile-link">
-                <span class="link-icon">✉️</span>
+                <span class="link-icon">✉</span>
                 monisha.sood@wisc.edu
               </a>
             </div>
@@ -1463,13 +1604,13 @@
       
       <div class="principles-grid">
         <div class="principle-card">
-          <div class="principle-icon">🎯</div>
+          <div class="principle-icon">◉</div>
           <h3>Start with the Problem</h3>
           <p>Great products emerge from deep customer understanding, not feature lists. I invest heavily in user research, qualitative feedback, and data analysis before writing a single user story.</p>
         </div>
         
         <div class="principle-card">
-          <div class="principle-icon">📊</div>
+          <div class="principle-icon">◈</div>
           <h3>Let Data Drive Decisions</h3>
           <p>Opinions are cheap. Data is truth. I build dashboards, run A/B tests, and define clear metrics to validate assumptions and measure impact at every stage.</p>
         </div>
@@ -1481,19 +1622,19 @@
         </div>
         
         <div class="principle-card">
-          <div class="principle-icon">🤝</div>
+          <div class="principle-icon">◆</div>
           <h3>Cross-functional is Non-negotiable</h3>
           <p>Product managers are multipliers, not individual contributors. I build bridges between engineering, design, and business stakeholders to align everyone around shared goals.</p>
         </div>
         
         <div class="principle-card">
-          <div class="principle-icon">🔧</div>
+          <div class="principle-icon">⚙</div>
           <h3>Automate the Boring Stuff</h3>
           <p>Manual processes are technical debt. I build systems that scale, using tools like Zapier and Airtable to eliminate repetitive work and free teams to focus on what matters.</p>
         </div>
         
         <div class="principle-card">
-          <div class="principle-icon">💡</div>
+          <div class="principle-icon">◎</div>
           <h3>Empathy + Execution</h3>
           <p>The best PMs balance vision with pragmatism. I care deeply about user problems while staying ruthlessly focused on delivering tangible business outcomes.</p>
         </div>
@@ -1513,7 +1654,7 @@
       </div>
       
       <div class="skills-categories">
-        <div class="skill-category">
+        <div class="skill-category" data-category="strategy">
           <h3>Product Strategy</h3>
           <div class="skill-items">
             <span class="skill-item">Roadmap Planning</span>
@@ -1527,7 +1668,7 @@
           </div>
         </div>
         
-        <div class="skill-category">
+        <div class="skill-category" data-category="execution">
           <h3>Execution & Delivery</h3>
           <div class="skill-items">
             <span class="skill-item">Agile/Scrum</span>
@@ -1541,7 +1682,7 @@
           </div>
         </div>
         
-        <div class="skill-category">
+        <div class="skill-category" data-category="data">
           <h3>Data & Analytics</h3>
           <div class="skill-items">
             <span class="skill-item">SQL</span>
@@ -1555,7 +1696,7 @@
           </div>
         </div>
         
-        <div class="skill-category">
+        <div class="skill-category" data-category="tools">
           <h3>Tools & Technical</h3>
           <div class="skill-items">
             <span class="skill-item">Figma</span>
@@ -1586,19 +1727,19 @@
       
       <div class="awards-showcase">
         <div class="award-card-modern">
-          <div class="award-icon-modern">🏆</div>
+          <div class="award-icon-modern">★</div>
           <h3>Most Trusted Partner</h3>
           <p>Honored for closing $10M+ in contracts and building exceptional client relationships at Flyhomes</p>
         </div>
         
         <div class="award-card-modern">
-          <div class="award-icon-modern">⭐</div>
+          <div class="award-icon-modern">◆</div>
           <h3>Superstar of the Month</h3>
           <p>Awarded for 30% productivity improvement and exceeding targets through process innovation</p>
         </div>
         
         <div class="award-card-modern">
-          <div class="award-icon-modern">🚀</div>
+          <div class="award-icon-modern">▲</div>
           <h3>Product Impact Champion</h3>
           <p>Recognized for MVP launch that boosted engagement and reduced manual work by 70%</p>
         </div>
@@ -1648,8 +1789,8 @@
                 <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
               </svg>
             </a>
-            <a href="mailto:monisha.sood@wisc.edu" class="social-link" title="Email">✉️</a>
-            <a href="Monisha_Sood_Resume.pdf" class="social-link" download title="Resume">📄</a>
+            <a href="mailto:monisha.sood@wisc.edu" class="social-link" title="Email">✉</a>
+            <a href="Monisha_Sood_Resume.pdf" class="social-link" download title="Resume">▣</a>
           </div>
         </div>
         
@@ -1700,6 +1841,272 @@
       } else {
         scrollTop.classList.remove('visible');
       }
+    });
+    
+    // Typing animation for hero text
+    const words = ['drive impact', 'solve problems', 'create value', 'scale systems'];
+    let wordIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    const typingSpeed = 100;
+    const deletingSpeed = 50;
+    const pauseTime = 2000;
+    
+    function typeText() {
+      const gradientText = document.querySelector('.gradient-text');
+      if (!gradientText) return;
+      
+      const currentWord = words[wordIndex];
+      
+      if (isDeleting) {
+        gradientText.textContent = currentWord.substring(0, charIndex - 1);
+        charIndex--;
+      } else {
+        gradientText.textContent = currentWord.substring(0, charIndex + 1);
+        charIndex++;
+      }
+      
+      let timeout = isDeleting ? deletingSpeed : typingSpeed;
+      
+      if (!isDeleting && charIndex === currentWord.length) {
+        timeout = pauseTime;
+        isDeleting = true;
+      } else if (isDeleting && charIndex === 0) {
+        isDeleting = false;
+        wordIndex = (wordIndex + 1) % words.length;
+      }
+      
+      setTimeout(typeText, timeout);
+    }
+    
+    // Start typing animation after page load
+    setTimeout(typeText, 1000);
+    
+    // Animate metrics on scroll
+    const observerOptions = {
+      threshold: 0.5,
+      rootMargin: '0px'
+    };
+    
+    const animateValue = (element, start, end, duration) => {
+      const range = end - start;
+      const increment = range / (duration / 16);
+      let current = start;
+      
+      const timer = setInterval(() => {
+        current += increment;
+        if (current >= end) {
+          element.textContent = formatNumber(end);
+          clearInterval(timer);
+        } else {
+          element.textContent = formatNumber(Math.floor(current));
+        }
+      }, 16);
+    };
+    
+    const formatNumber = (num) => {
+      if (num >= 1000000) {
+        return '$' + (num / 1000000).toFixed(0) + 'M+';
+      } else if (num >= 1000) {
+        return (num / 1000).toFixed(0) + 'K+';
+      }
+      return num + '+';
+    };
+    
+    const metricObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !entry.target.classList.contains('animated')) {
+          entry.target.classList.add('animated');
+          const value = entry.target.querySelector('.metric-value');
+          const text = value.textContent;
+          
+          if (text.includes('$')) {
+            animateValue(value, 0, 50000000, 2000);
+          } else if (text.includes('%')) {
+            const num = parseInt(text);
+            animateValue(value, 0, num, 1500);
+            setTimeout(() => {
+              value.textContent = num + '%';
+            }, 1500);
+          } else {
+            const num = parseInt(text);
+            let start = 0;
+            const timer = setInterval(() => {
+              start++;
+              value.textContent = start + (text.includes('+') ? '+' : '');
+              if (start >= num) clearInterval(timer);
+            }, 100);
+          }
+        }
+      });
+    }, observerOptions);
+    
+    document.querySelectorAll('.metric-card').forEach(card => {
+      metricObserver.observe(card);
+    });
+    
+    // Animate sections on scroll
+    const sectionObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.1 });
+    
+    document.querySelectorAll('.case-study, .principle-card, .skill-category, .award-card-modern').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(30px)';
+      el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+      sectionObserver.observe(el);
+    });
+    
+    // Interactive skill items with progress bars
+    document.querySelectorAll('.skill-item').forEach(item => {
+      item.addEventListener('mouseenter', function() {
+        this.style.transform = 'scale(1.05) translateY(-2px)';
+      });
+      
+      item.addEventListener('mouseleave', function() {
+        this.style.transform = 'scale(1) translateY(0)';
+      });
+    });
+    
+    // Add particle effect to hero
+    function createParticle() {
+      const hero = document.querySelector('.hero');
+      const particle = document.createElement('div');
+      particle.className = 'particle';
+      particle.style.cssText = `
+        position: absolute;
+        width: 4px;
+        height: 4px;
+        background: var(--primary-light);
+        border-radius: 50%;
+        pointer-events: none;
+        opacity: 0;
+        animation: float-particle 4s ease-in-out forwards;
+      `;
+      
+      particle.style.left = Math.random() * 100 + '%';
+      particle.style.top = Math.random() * 100 + '%';
+      
+      hero.appendChild(particle);
+      
+      setTimeout(() => particle.remove(), 4000);
+    }
+    
+    // Create particles periodically
+    setInterval(createParticle, 800);
+    
+    // Add ripple effect on button clicks
+    document.querySelectorAll('.btn, .profile-link').forEach(button => {
+      button.addEventListener('click', function(e) {
+        const ripple = document.createElement('span');
+        const rect = this.getBoundingClientRect();
+        const size = Math.max(rect.width, rect.height);
+        const x = e.clientX - rect.left - size / 2;
+        const y = e.clientY - rect.top - size / 2;
+        
+        ripple.style.cssText = `
+          position: absolute;
+          width: ${size}px;
+          height: ${size}px;
+          left: ${x}px;
+          top: ${y}px;
+          background: rgba(255, 255, 255, 0.5);
+          border-radius: 50%;
+          transform: scale(0);
+          animation: ripple 0.6s ease-out;
+          pointer-events: none;
+        `;
+        
+        this.style.position = 'relative';
+        this.style.overflow = 'hidden';
+        this.appendChild(ripple);
+        
+        setTimeout(() => ripple.remove(), 600);
+      });
+    });
+    
+    // Smooth parallax effect for orbs
+    let mouseX = 0;
+    let mouseY = 0;
+    
+    document.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX / window.innerWidth;
+      mouseY = e.clientY / window.innerHeight;
+    });
+    
+    function animateOrbs() {
+      const orb1 = document.querySelector('.orb1');
+      const orb2 = document.querySelector('.orb2');
+      
+      if (orb1) {
+        orb1.style.transform = `translate(${mouseX * 50}px, ${mouseY * 50}px)`;
+      }
+      if (orb2) {
+        orb2.style.transform = `translate(${-mouseX * 30}px, ${-mouseY * 30}px)`;
+      }
+      
+      requestAnimationFrame(animateOrbs);
+    }
+    
+    animateOrbs();
+    
+    // Add tooltip for certifications
+    document.querySelectorAll('a.skill-item').forEach(item => {
+      const tooltip = document.createElement('div');
+      tooltip.textContent = 'Click to verify';
+      tooltip.style.cssText = `
+        position: absolute;
+        bottom: 100%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-8px);
+        background: var(--dark-surface);
+        color: white;
+        padding: 6px 12px;
+        border-radius: 6px;
+        font-size: 11px;
+        white-space: nowrap;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s, transform 0.3s;
+        border: 1px solid var(--border);
+      `;
+      
+      item.style.position = 'relative';
+      item.appendChild(tooltip);
+      
+      item.addEventListener('mouseenter', () => {
+        tooltip.style.opacity = '1';
+        tooltip.style.transform = 'translateX(-50%) translateY(-12px)';
+      });
+      
+      item.addEventListener('mouseleave', () => {
+        tooltip.style.opacity = '0';
+        tooltip.style.transform = 'translateX(-50%) translateY(-8px)';
+      });
+    });
+    
+    // Add progress indicator to case studies
+    const progressBar = document.createElement('div');
+    progressBar.style.cssText = `
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      width: 0%;
+      z-index: 9999;
+      transition: width 0.1s;
+    `;
+    document.body.appendChild(progressBar);
+    
+    window.addEventListener('scroll', () => {
+      const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+      progressBar.style.width = scrollPercent + '%';
     });
   </script>
 </body>
