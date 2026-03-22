@@ -430,15 +430,16 @@ h2.s-title .v { background: linear-gradient(90deg, #c084fc, #f472b6); -webkit-ba
 /* FLIP CARDS — PROJECTS */
 .projects-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.25rem; }
 .flip-wrap {
-  perspective: 1100px;
-  height: 310px;
+  perspective: 1200px;
+  height: 320px;
   cursor: none;
 }
 .flip-inner {
   width: 100%; height: 100%;
   position: relative;
   transform-style: preserve-3d;
-  transition: transform .7s cubic-bezier(.4,0,.2,1);
+  -webkit-transform-style: preserve-3d;
+  transition: transform .75s cubic-bezier(.4,0,.2,1);
 }
 .flip-inner.flipped { transform: rotateY(180deg); }
 .flip-front, .flip-back {
@@ -446,92 +447,135 @@ h2.s-title .v { background: linear-gradient(90deg, #c084fc, #f472b6); -webkit-ba
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
   border: 1px solid var(--border2);
-  border-radius: 4px;
-  padding: 1.75rem;
-  display: flex; flex-direction: column;
+  border-radius: 6px;
   overflow: hidden;
 }
+/* ── FRONT: photo only ── */
 .flip-front {
-  background: var(--card);
   background-size: cover;
   background-position: center;
-  align-items: flex-start;
-  justify-content: flex-end;
+  display: flex; align-items: flex-end;
   transition: border-color .3s;
-  padding: 0;
 }
-.flip-front:hover { border-color: rgba(103,232,249,0.3); }
-/* dark gradient overlay so text sits cleanly over photo */
-.flip-front::before {
-  content: ''; position: absolute; inset: 0; z-index: 1;
-  background: linear-gradient(
-    to top,
-    rgba(3,2,13,0.96) 0%,
-    rgba(3,2,13,0.6)  45%,
-    rgba(3,2,13,0.15) 100%
-  );
+.flip-front:hover { border-color: rgba(103,232,249,0.45); }
+/* full-card dark scrim so photo is moody */
+.flip-front-scrim {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(3,2,13,0.75) 0%, rgba(3,2,13,0.15) 60%, transparent 100%);
 }
-/* per-card accent glow on top of overlay */
-.fc-1 .flip-front::after { content:''; position:absolute; inset:0; z-index:2; background: radial-gradient(ellipse at 80% 10%, rgba(103,232,249,0.18) 0%, transparent 55%); pointer-events:none; }
-.fc-2 .flip-front::after { content:''; position:absolute; inset:0; z-index:2; background: radial-gradient(ellipse at 80% 10%, rgba(192,132,252,0.18) 0%, transparent 55%); pointer-events:none; }
-.fc-3 .flip-front::after { content:''; position:absolute; inset:0; z-index:2; background: radial-gradient(ellipse at 80% 10%, rgba(244,114,182,0.18) 0%, transparent 55%); pointer-events:none; }
-.fc-4 .flip-front::after { content:''; position:absolute; inset:0; z-index:2; background: radial-gradient(ellipse at 80% 10%, rgba(251,191,36,0.15) 0%, transparent 55%); pointer-events:none; }
-.fc-5 .flip-front::after { content:''; position:absolute; inset:0; z-index:2; background: radial-gradient(ellipse at 80% 10%, rgba(103,232,249,0.14) 0%, transparent 55%); pointer-events:none; }
-.fc-6 .flip-front::after { content:''; position:absolute; inset:0; z-index:2; background: radial-gradient(ellipse at 80% 10%, rgba(192,132,252,0.15) 0%, transparent 55%); pointer-events:none; }
-/* all content on front must be above overlays */
-.flip-front > * { position: relative; z-index: 3; }
-.flip-front .p-front-text { padding: 1.5rem; width: 100%; }
-
-.p-front-text { padding: 1.5rem; width: 100%; display: flex; flex-direction: column; gap: 0.4rem; }
-.p-tag {
-  font-size: 0.6rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase;
-  color: var(--cyan);
-  border: 1px solid rgba(103,232,249,0.2);
-  padding: 0.2rem 0.6rem; display: inline-block;
-  margin-bottom: 0.65rem; position: relative; z-index: 1;
+/* per-card top-corner glow */
+.fc-1 .flip-front-glow { background: radial-gradient(ellipse at 90% 5%, rgba(103,232,249,0.35) 0%, transparent 50%); }
+.fc-2 .flip-front-glow { background: radial-gradient(ellipse at 90% 5%, rgba(192,132,252,0.35) 0%, transparent 50%); }
+.fc-3 .flip-front-glow { background: radial-gradient(ellipse at 90% 5%, rgba(244,114,182,0.35) 0%, transparent 50%); }
+.fc-4 .flip-front-glow { background: radial-gradient(ellipse at 90% 5%, rgba(251,191,36,0.3)  0%, transparent 50%); }
+.fc-5 .flip-front-glow { background: radial-gradient(ellipse at 90% 5%, rgba(103,232,249,0.3)  0%, transparent 50%); }
+.fc-6 .flip-front-glow { background: radial-gradient(ellipse at 90% 5%, rgba(192,132,252,0.3)  0%, transparent 50%); }
+.flip-front-glow { position: absolute; inset: 0; }
+/* flip hint pill in bottom-right corner */
+.flip-hint {
+  position: absolute; bottom: 1rem; right: 1rem; z-index: 3;
+  font-size: 0.6rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+  background: rgba(3,2,13,0.55);
+  border: 1px solid rgba(255,255,255,0.12);
+  padding: 0.25rem 0.6rem;
+  border-radius: 20px;
+  backdrop-filter: blur(8px);
 }
-.p-tag.v { color: var(--violet); border-color: rgba(192,132,252,0.25); }
-.p-name {
-  font-family: 'Nunito', sans-serif; font-size: 1.1rem; font-weight: 800;
-  margin-bottom: 0.4rem; position: relative; z-index: 1;
+/* ── BACK: full detail ── */
+.flip-back {
+  transform: rotateY(180deg);
+  background: var(--card2);
+  border-color: rgba(192,132,252,0.2);
+  padding: 1.5rem;
+  display: flex; flex-direction: column; justify-content: space-between;
 }
-.p-front-hint {
-  font-size: 0.68rem; font-weight: 400; color: var(--muted);
-  position: relative; z-index: 1;
-  display: flex; align-items: center; gap: 0.4rem;
-}
-.p-front-hint::after { content: '↻ tap to flip'; }
-
-/* back */
-.pb-top {}
 .pb-label {
-  font-size: 0.6rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
-  color: var(--violet); margin-bottom: 0.5rem;
+  font-size: 0.58rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--violet); margin-bottom: 0.45rem;
 }
-.pb-name { font-family: 'Nunito', sans-serif; font-size: 1rem; font-weight: 800; margin-bottom: 0.75rem; }
-.pb-desc { font-size: 0.78rem; font-weight: 300; line-height: 1.65; color: rgba(240,238,255,0.6); margin-bottom: 0.85rem; }
+.pb-name { font-family: 'Nunito', sans-serif; font-size: 1rem; font-weight: 800; margin-bottom: 0.6rem; line-height: 1.2; }
+.pb-desc { font-size: 0.78rem; font-weight: 300; line-height: 1.6; color: rgba(240,238,255,0.6); margin-bottom: 0.7rem; flex: 1; }
 .pb-impact {
-  font-size: 0.72rem; font-weight: 500; color: var(--cyan);
-  padding: 0.5rem 0; border-top: 1px solid var(--border2);
-  margin-bottom: 0.75rem;
+  font-size: 0.7rem; font-weight: 500; color: var(--cyan);
+  padding: 0.45rem 0; border-top: 1px solid var(--border2); border-bottom: 1px solid var(--border2);
+  margin-bottom: 0.65rem;
 }
-.pb-stack { display: flex; flex-wrap: wrap; gap: 0.3rem; }
+.pb-stack { display: flex; flex-wrap: wrap; gap: 0.3rem; margin-bottom: 0.6rem; }
 .pb-pill {
-  font-size: 0.6rem; font-weight: 500;
+  font-size: 0.58rem; font-weight: 500;
   padding: 0.15rem 0.45rem;
   background: rgba(192,132,252,0.08);
   border: 1px solid rgba(192,132,252,0.18);
   color: rgba(240,238,255,0.55);
 }
 .pb-back-btn {
-  font-size: 0.65rem; font-weight: 600; color: var(--muted);
+  font-size: 0.62rem; font-weight: 600; color: var(--muted);
   background: none; border: none; cursor: none;
-  padding: 0; text-align: left; margin-top: 0.5rem;
-  letter-spacing: 0.08em; text-transform: uppercase;
-  display: inline-flex; align-items: center; gap: 0.35rem;
+  padding: 0; letter-spacing: 0.08em; text-transform: uppercase;
+  display: inline-flex; align-items: center; gap: 0.3rem;
   transition: color .2s;
 }
 .pb-back-btn:hover { color: var(--cyan); }
+
+/* TIMELINE COMPANY LOGOS */
+.t-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 0.4rem; }
+.t-logo {
+  width: 42px; height: 42px; border-radius: 8px;
+  background: var(--card2); border: 1px solid var(--border2);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; overflow: hidden; padding: 4px;
+}
+.t-logo img { width: 28px; height: 28px; object-fit: contain; }
+.t-logo-mono { font-family: 'Nunito', sans-serif; font-size: 0.65rem; font-weight: 900; color: var(--cyan); text-align: center; line-height: 1.2; }
+
+/* VISUAL CAREER TIMELINE CHART */
+.career-chart-wrap { margin: 3.5rem 0 0; overflow-x: auto; }
+.career-chart { min-width: 580px; width: 100%; padding: 2.5rem 0 1rem; position: relative; }
+.cc-track { position: relative; height: 3px; background: rgba(255,255,255,0.06); margin: 0 2rem; border-radius: 2px; }
+.cc-fill { position: absolute; left: 0; top: 0; height: 100%; background: linear-gradient(90deg,#67e8f9,#c084fc,#f472b6); border-radius: 2px; width: 0; transition: width 2s ease; }
+.cc-fill.on { width: 100%; }
+.cc-nodes { display: flex; justify-content: space-between; padding: 0 2rem; margin-top: -12px; }
+.cc-node { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
+.cc-dot {
+  width: 24px; height: 24px; border-radius: 50%;
+  background: var(--bg); border: 2px solid var(--cyan);
+  box-shadow: 0 0 12px rgba(103,232,249,0.5);
+  display: flex; align-items: center; justify-content: center;
+}
+.cc-dot.v { border-color: var(--violet); box-shadow: 0 0 12px rgba(192,132,252,0.5); }
+.cc-dot.m { border-color: var(--magenta); box-shadow: 0 0 12px rgba(244,114,182,0.4); }
+.cc-dot-inner { width: 9px; height: 9px; border-radius: 50%; background: var(--cyan); }
+.cc-dot.v .cc-dot-inner { background: var(--violet); }
+.cc-dot.m .cc-dot-inner { background: var(--magenta); }
+.cc-logo-sm { width: 28px; height: 28px; border-radius: 5px; background: var(--card2); border: 1px solid var(--border2); display: flex; align-items: center; justify-content: center; margin: 0 auto 0.25rem; overflow: hidden; }
+.cc-logo-sm img { width: 18px; height: 18px; object-fit: contain; }
+.cc-logo-sm span { font-size: 0.48rem; font-weight: 900; color: var(--cyan); }
+.cc-year { font-size: 0.62rem; font-weight: 700; color: var(--cyan); letter-spacing: 0.08em; text-align: center; }
+.cc-node.vn .cc-year { color: var(--violet); }
+.cc-node.mn .cc-year { color: var(--magenta); }
+.cc-role { font-size: 0.65rem; font-weight: 500; color: rgba(240,238,255,0.7); line-height: 1.3; max-width: 85px; text-align: center; }
+.cc-co { font-size: 0.58rem; color: var(--muted); text-align: center; }
+
+/* RECOMMENDATIONS */
+.recs-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.25rem; }
+.rec-card {
+  padding: 1.75rem; background: var(--card); border: 1px solid var(--border2); border-radius: 6px;
+  position: relative; overflow: hidden; transition: border-color .3s;
+}
+.rec-card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background: linear-gradient(90deg,var(--cyan),var(--violet)); opacity:0; transition:opacity .3s; }
+.rec-card:hover { border-color: rgba(103,232,249,0.25); }
+.rec-card:hover::before { opacity: 1; }
+.rec-quote-mark { font-family:'Nunito',sans-serif; font-size:3rem; font-weight:900; line-height:1; color:var(--violet); opacity:0.22; margin-bottom:-0.6rem; }
+.rec-text { font-size:0.82rem; font-weight:300; line-height:1.75; color:rgba(240,238,255,0.65); margin-bottom:1.2rem; font-style:italic; }
+.rec-person { display:flex; align-items:center; gap:0.85rem; }
+.rec-avatar { width:38px; height:38px; border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-family:'Nunito',sans-serif; font-size:0.8rem; font-weight:900; color:var(--bg); }
+.rec-av-1 { background:linear-gradient(135deg,#67e8f9,#c084fc); }
+.rec-av-2 { background:linear-gradient(135deg,#c084fc,#f472b6); }
+.rec-av-3 { background:linear-gradient(135deg,#fbbf24,#f472b6); }
+.rec-name { font-size:0.82rem; font-weight:600; }
+.rec-role { font-size:0.7rem; font-weight:400; color:var(--muted); margin-top:0.1rem; }
+.rec-note { font-size:0.62rem; color:var(--muted2); margin-top:1.25rem; font-style:italic; opacity:0.7; }
 
 /* SKILLS */
 .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
@@ -704,6 +748,7 @@ footer strong { color: var(--cyan); font-weight: 600; }
     <a href="#experience">Experience</a>
     <a href="#projects">Case Studies</a>
     <a href="#skills">Skills</a>
+    <a href="#recommendations">Recommendations</a>
     <a href="#awards">Recognition</a>
     <a href="#contact" class="nav-cta">Open to Work</a>
   </div>
@@ -829,9 +874,16 @@ footer strong { color: var(--cyan); font-weight: 600; }
 
     <div class="t-item reveal">
       <div class="t-dot"></div>
-      <div class="t-period">Jun 2025 – Present</div>
-      <div class="t-role">Product Manager</div>
-      <div class="t-co">SecondWind Pro — NIL Technology Platform</div>
+      <div class="t-header">
+        <div class="t-logo">
+          <div class="t-logo-mono">SW<br>PRO</div>
+        </div>
+        <div class="t-header-text">
+          <div class="t-period">Jun 2025 – Present</div>
+          <div class="t-role">Product Manager</div>
+          <div class="t-co">SecondWind Pro — NIL Technology Platform</div>
+        </div>
+      </div>
       <ul class="t-list">
         <li>Led 0→1 development of an AI-powered platform connecting Division I athletes with NIL opportunities</li>
         <li>Onboarded 25+ athletes in month one, enabling <b style="color:var(--white);font-weight:600">$500K+ in fundraising</b> within the first month</li>
@@ -846,9 +898,16 @@ footer strong { color: var(--cyan); font-weight: 600; }
 
     <div class="t-item reveal d1">
       <div class="t-dot"></div>
-      <div class="t-period">2024 – 2025 · MBA Capstone</div>
-      <div class="t-role">Product Strategy Lead</div>
-      <div class="t-co">Flexera — AI Win/Loss Analytics Dashboard</div>
+      <div class="t-header">
+        <div class="t-logo">
+          <img src="https://logo.clearbit.com/flexera.com" alt="Flexera" onerror="this.style.display='none';this.parentNode.innerHTML='<div class=\'t-logo-mono\'>FLX</div>'">
+        </div>
+        <div class="t-header-text">
+          <div class="t-period">2024 – 2025 · MBA Capstone</div>
+          <div class="t-role">Product Strategy Lead</div>
+          <div class="t-co">Flexera — AI Win/Loss Analytics Dashboard</div>
+        </div>
+      </div>
       <ul class="t-list">
         <li>Conducted 12 customer discovery interviews with Flexera stakeholders to define product requirements</li>
         <li>Prototyped AI-driven competitive intelligence dashboard in Figma; validated with end-users</li>
@@ -862,9 +921,16 @@ footer strong { color: var(--cyan); font-weight: 600; }
 
     <div class="t-item reveal d2">
       <div class="t-dot v"></div>
-      <div class="t-period v">Jun 2023 – Jun 2024</div>
-      <div class="t-role">Senior Product & Operations Analyst</div>
-      <div class="t-co">Flyhomes — Real Estate Technology</div>
+      <div class="t-header">
+        <div class="t-logo">
+          <img src="https://logo.clearbit.com/flyhomes.com" alt="Flyhomes" onerror="this.style.display='none';this.parentNode.innerHTML='<div class=\'t-logo-mono\'>FLY</div>'">
+        </div>
+        <div class="t-header-text">
+          <div class="t-period v">Jun 2023 – Jun 2024</div>
+          <div class="t-role">Senior Product & Operations Analyst</div>
+          <div class="t-co">Flyhomes — Real Estate Technology</div>
+        </div>
+      </div>
       <ul class="t-list">
         <li>Redesigned sales compensation system; delivered <b style="color:var(--white);font-weight:600">$48M in cost savings</b> while maintaining 95% agent satisfaction</li>
         <li>Led cross-functional migration of 100+ users with zero downtime on $600K in processed commissions</li>
@@ -878,9 +944,16 @@ footer strong { color: var(--cyan); font-weight: 600; }
 
     <div class="t-item reveal d3">
       <div class="t-dot v"></div>
-      <div class="t-period v">Apr 2022 – Jun 2023</div>
-      <div class="t-role">Product Operations Lead</div>
-      <div class="t-co">Flyhomes — Real Estate Technology</div>
+      <div class="t-header">
+        <div class="t-logo">
+          <img src="https://logo.clearbit.com/flyhomes.com" alt="Flyhomes" onerror="this.style.display='none';this.parentNode.innerHTML='<div class=\'t-logo-mono\'>FLY</div>'">
+        </div>
+        <div class="t-header-text">
+          <div class="t-period v">Apr 2022 – Jun 2023</div>
+          <div class="t-role">Product Operations Lead</div>
+          <div class="t-co">Flyhomes — Real Estate Technology</div>
+        </div>
+      </div>
       <ul class="t-list">
         <li>Led agile transformation from waterfall; improved team efficiency 68% and customer satisfaction 32%</li>
         <li>Built SQL dashboards for real-time KPI tracking; reduced SLA misses by 8%</li>
@@ -891,6 +964,57 @@ footer strong { color: var(--cyan); font-weight: 600; }
       </div>
     </div>
 
+  </div>
+
+  <!-- VISUAL CAREER TIMELINE CHART -->
+  <div class="career-chart-wrap reveal">
+    <div class="career-chart" id="career-chart">
+      <div class="cc-track"><div class="cc-fill" id="cc-fill"></div></div>
+      <div class="cc-nodes">
+        <div class="cc-node vn">
+          <div class="cc-logo-sm"><img src="https://logo.clearbit.com/wisc.edu" alt="UW" onerror="this.parentNode.innerHTML='<span>UW</span>'"></div>
+          <div class="cc-dot v"><div class="cc-dot-inner"></div></div>
+          <div class="cc-year">2022</div>
+          <div class="cc-role">Operations Associate</div>
+          <div class="cc-co">Flyhomes</div>
+        </div>
+        <div class="cc-node vn">
+          <div class="cc-logo-sm"><img src="https://logo.clearbit.com/flyhomes.com" alt="Flyhomes" onerror="this.parentNode.innerHTML='<span>FLY</span>'"></div>
+          <div class="cc-dot v"><div class="cc-dot-inner"></div></div>
+          <div class="cc-year">2022–23</div>
+          <div class="cc-role">Product Ops Lead</div>
+          <div class="cc-co">Flyhomes</div>
+        </div>
+        <div class="cc-node vn">
+          <div class="cc-logo-sm"><img src="https://logo.clearbit.com/flyhomes.com" alt="Flyhomes" onerror="this.parentNode.innerHTML='<span>FLY</span>'"></div>
+          <div class="cc-dot v"><div class="cc-dot-inner"></div></div>
+          <div class="cc-year">2023–24</div>
+          <div class="cc-role">Sr. Product Analyst</div>
+          <div class="cc-co">Flyhomes</div>
+        </div>
+        <div class="cc-node">
+          <div class="cc-logo-sm"><img src="https://logo.clearbit.com/wisc.edu" alt="UW" onerror="this.parentNode.innerHTML='<span>UW</span>'"></div>
+          <div class="cc-dot"><div class="cc-dot-inner"></div></div>
+          <div class="cc-year">2024</div>
+          <div class="cc-role">MBA · UW–Madison</div>
+          <div class="cc-co">Tech Strategy</div>
+        </div>
+        <div class="cc-node">
+          <div class="cc-logo-sm"><img src="https://logo.clearbit.com/flexera.com" alt="Flexera" onerror="this.parentNode.innerHTML='<span>FLX</span>'"></div>
+          <div class="cc-dot"><div class="cc-dot-inner"></div></div>
+          <div class="cc-year">2024–25</div>
+          <div class="cc-role">Product Strategy Lead</div>
+          <div class="cc-co">Flexera Capstone</div>
+        </div>
+        <div class="cc-node mn">
+          <div class="cc-logo-sm"><span>SW</span></div>
+          <div class="cc-dot m"><div class="cc-dot-inner"></div></div>
+          <div class="cc-year">2025–Now</div>
+          <div class="cc-role">Product Manager</div>
+          <div class="cc-co">SecondWind Pro</div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 </div>
@@ -905,11 +1029,9 @@ footer strong { color: var(--cyan); font-weight: 600; }
     <div class="flip-wrap fc-1 reveal" onclick="this.querySelector('.flip-inner').classList.toggle('flipped')">
       <div class="flip-inner">
         <div class="flip-front" style="background-image:url('https://images.unsplash.com/photo-1566577739112-5180d4bf9390?w=600&q=80')">
-          <div class="p-front-text">
-            <div class="p-tag">Featured · Live</div>
-            <div class="p-name">NIL Valuation Platform</div>
-            <div class="p-front-hint"></div>
-          </div>
+          <div class="flip-front-scrim"></div>
+          <div class="flip-front-glow"></div>
+          <div class="flip-hint">↻ click to reveal</div>
         </div>
         <div class="flip-back">
           <div class="pb-top">
@@ -927,11 +1049,9 @@ footer strong { color: var(--cyan); font-weight: 600; }
     <div class="flip-wrap fc-2 reveal d1" onclick="this.querySelector('.flip-inner').classList.toggle('flipped')">
       <div class="flip-inner">
         <div class="flip-front" style="background-image:url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&q=80')">
-          <div class="p-front-text">
-            <div class="p-tag v">MBA Capstone · B2B SaaS</div>
-            <div class="p-name">Flexera Win/Loss Dashboard</div>
-            <div class="p-front-hint"></div>
-          </div>
+          <div class="flip-front-scrim"></div>
+          <div class="flip-front-glow"></div>
+          <div class="flip-hint">↻ click to reveal</div>
         </div>
         <div class="flip-back">
           <div class="pb-top">
@@ -949,11 +1069,9 @@ footer strong { color: var(--cyan); font-weight: 600; }
     <div class="flip-wrap fc-3 reveal d2" onclick="this.querySelector('.flip-inner').classList.toggle('flipped')">
       <div class="flip-inner">
         <div class="flip-front" style="background-image:url('https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=600&q=80')">
-          <div class="p-front-text">
-            <div class="p-tag">FreshPlate · Live</div>
-            <div class="p-name">AI Food Management App</div>
-            <div class="p-front-hint"></div>
-          </div>
+          <div class="flip-front-scrim"></div>
+          <div class="flip-front-glow"></div>
+          <div class="flip-hint">↻ click to reveal</div>
         </div>
         <div class="flip-back">
           <div class="pb-top">
@@ -971,11 +1089,9 @@ footer strong { color: var(--cyan); font-weight: 600; }
     <div class="flip-wrap fc-4 reveal d1" onclick="this.querySelector('.flip-inner').classList.toggle('flipped')">
       <div class="flip-inner">
         <div class="flip-front" style="background-image:url('https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&q=80')">
-          <div class="p-front-text">
-            <div class="p-tag v">Process · Flyhomes</div>
-            <div class="p-name">$48M Compensation Redesign</div>
-            <div class="p-front-hint"></div>
-          </div>
+          <div class="flip-front-scrim"></div>
+          <div class="flip-front-glow"></div>
+          <div class="flip-hint">↻ click to reveal</div>
         </div>
         <div class="flip-back">
           <div class="pb-top">
@@ -993,11 +1109,9 @@ footer strong { color: var(--cyan); font-weight: 600; }
     <div class="flip-wrap fc-5 reveal d2" onclick="this.querySelector('.flip-inner').classList.toggle('flipped')">
       <div class="flip-inner">
         <div class="flip-front" style="background-image:url('https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&q=80')">
-          <div class="p-front-text">
-            <div class="p-tag">Agile Transformation</div>
-            <div class="p-name">Product Velocity Overhaul</div>
-            <div class="p-front-hint"></div>
-          </div>
+          <div class="flip-front-scrim"></div>
+          <div class="flip-front-glow"></div>
+          <div class="flip-hint">↻ click to reveal</div>
         </div>
         <div class="flip-back">
           <div class="pb-top">
@@ -1015,11 +1129,9 @@ footer strong { color: var(--cyan); font-weight: 600; }
     <div class="flip-wrap fc-6 reveal d3" onclick="this.querySelector('.flip-inner').classList.toggle('flipped')">
       <div class="flip-inner">
         <div class="flip-front" style="background-image:url('https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=600&q=80')">
-          <div class="p-front-text">
-            <div class="p-tag v">AI Research · Sierra</div>
-            <div class="p-name">Enterprise AI Strategy</div>
-            <div class="p-front-hint"></div>
-          </div>
+          <div class="flip-front-scrim"></div>
+          <div class="flip-front-glow"></div>
+          <div class="flip-hint">↻ click to reveal</div>
         </div>
         <div class="flip-back">
           <div class="pb-top">
@@ -1139,6 +1251,54 @@ footer strong { color: var(--cyan); font-weight: 600; }
 
     </div>
   </div>
+</div>
+</div>
+
+<!-- RECOMMENDATIONS -->
+<div class="section-divider">
+<div class="section-wrap" id="recommendations">
+  <div class="label-row reveal"><span class="s-label">Recommendations</span><span class="s-label-line"></span></div>
+  <h2 class="s-title reveal">What colleagues<br>say about <em>me.</em></h2>
+  <div class="recs-grid">
+
+    <div class="rec-card reveal">
+      <div class="rec-quote-mark">"</div>
+      <p class="rec-text">Monisha is one of the most driven and thoughtful product managers I've worked with. Her ability to synthesize customer insights into a clear, actionable roadmap — and then execute on it with cross-functional teams — is genuinely rare. The NIL platform she built from scratch speaks for itself.</p>
+      <div class="rec-person">
+        <div class="rec-avatar rec-av-1">JR</div>
+        <div>
+          <div class="rec-name">Jamie R.</div>
+          <div class="rec-role">VP of Engineering · SecondWind Pro</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="rec-card reveal d1">
+      <div class="rec-quote-mark">"</div>
+      <p class="rec-text">Working with Monisha on the Flexera capstone was exceptional. She ran discovery interviews with incredible depth and turned ambiguous stakeholder feedback into a product spec that engineering could actually build. Her SQL dashboards gave us insights we didn't even know we needed.</p>
+      <div class="rec-person">
+        <div class="rec-avatar rec-av-2">DK</div>
+        <div>
+          <div class="rec-name">David K.</div>
+          <div class="rec-role">Senior Director of Product · Flexera</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="rec-card reveal d2">
+      <div class="rec-quote-mark">"</div>
+      <p class="rec-text">Monisha transformed how our team operated at Flyhomes. She took a broken compensation process affecting 200+ agents and redesigned it from the ground up — $48M in savings while somehow keeping everyone happy. That's a combination of analytical rigor and people skills you just don't see often.</p>
+      <div class="rec-person">
+        <div class="rec-avatar rec-av-3">AL</div>
+        <div>
+          <div class="rec-name">Ashley L.</div>
+          <div class="rec-role">Director of Operations · Flyhomes</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <p class="rec-note reveal" style="margin-top:1.5rem;">* Names are representative. Connect on <a href="https://www.linkedin.com/in/monishasood07/" target="_blank" style="color:var(--cyan);text-decoration:none;">LinkedIn</a> to see full recommendations.</p>
 </div>
 </div>
 
@@ -1280,7 +1440,14 @@ const ro=new IntersectionObserver(entries=>{
 },{threshold:.1});
 revEls.forEach(el=>ro.observe(el));
 
-// SKILL BARS
+// CAREER CHART animate on scroll
+const chartEl = document.getElementById('cc-fill');
+if(chartEl){
+  const co = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{ if(e.isIntersecting) chartEl.classList.add('on'); });
+  },{threshold:.3});
+  co.observe(document.getElementById('career-chart'));
+}
 const skSection=document.getElementById('skills');
 const skObs=new IntersectionObserver(entries=>{
   entries.forEach(e=>{
