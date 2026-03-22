@@ -427,45 +427,111 @@ h2.s-title .v { background: linear-gradient(90deg, #c084fc, #f472b6); -webkit-ba
   color: rgba(238,242,255,0.55);
 }
 
-/* PROJECTS */
-.projects-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
-.p-card {
-  padding: 1.75rem;
-  background: var(--card);
-  border: 1px solid var(--border2);
-  clip-path: polygon(0 0,calc(100% - 16px) 0,100% 16px,100% 100%,16px 100%,0 calc(100% - 16px));
-  position: relative; overflow: hidden;
-  transition: border-color .3s, transform .3s;
+/* FLIP CARDS — PROJECTS */
+.projects-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.25rem; }
+.flip-wrap {
+  perspective: 1100px;
+  height: 310px;
   cursor: none;
+}
+.flip-inner {
+  width: 100%; height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform .7s cubic-bezier(.4,0,.2,1);
+}
+.flip-inner.flipped { transform: rotateY(180deg); }
+.flip-front, .flip-back {
+  position: absolute; inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border: 1px solid var(--border2);
+  border-radius: 4px;
+  padding: 1.75rem;
   display: flex; flex-direction: column;
+  overflow: hidden;
 }
-.p-card::after {
-  content: ''; position: absolute; inset: 0;
-  background: linear-gradient(135deg, rgba(56,189,248,0.05) 0%, transparent 55%);
-  opacity: 0; transition: opacity .3s;
+.flip-front {
+  background: var(--card);
+  background-size: cover;
+  background-position: center;
+  align-items: flex-start;
+  justify-content: flex-end;
+  transition: border-color .3s;
+  padding: 0;
 }
-.p-card:hover { border-color: rgba(56,189,248,0.35); transform: translateY(-4px); }
-.p-card:hover::after { opacity: 1; }
-.p-card.featured { border-color: rgba(56,189,248,0.22); }
+.flip-front:hover { border-color: rgba(103,232,249,0.3); }
+/* dark gradient overlay so text sits cleanly over photo */
+.flip-front::before {
+  content: ''; position: absolute; inset: 0; z-index: 1;
+  background: linear-gradient(
+    to top,
+    rgba(3,2,13,0.96) 0%,
+    rgba(3,2,13,0.6)  45%,
+    rgba(3,2,13,0.15) 100%
+  );
+}
+/* per-card accent glow on top of overlay */
+.fc-1 .flip-front::after { content:''; position:absolute; inset:0; z-index:2; background: radial-gradient(ellipse at 80% 10%, rgba(103,232,249,0.18) 0%, transparent 55%); pointer-events:none; }
+.fc-2 .flip-front::after { content:''; position:absolute; inset:0; z-index:2; background: radial-gradient(ellipse at 80% 10%, rgba(192,132,252,0.18) 0%, transparent 55%); pointer-events:none; }
+.fc-3 .flip-front::after { content:''; position:absolute; inset:0; z-index:2; background: radial-gradient(ellipse at 80% 10%, rgba(244,114,182,0.18) 0%, transparent 55%); pointer-events:none; }
+.fc-4 .flip-front::after { content:''; position:absolute; inset:0; z-index:2; background: radial-gradient(ellipse at 80% 10%, rgba(251,191,36,0.15) 0%, transparent 55%); pointer-events:none; }
+.fc-5 .flip-front::after { content:''; position:absolute; inset:0; z-index:2; background: radial-gradient(ellipse at 80% 10%, rgba(103,232,249,0.14) 0%, transparent 55%); pointer-events:none; }
+.fc-6 .flip-front::after { content:''; position:absolute; inset:0; z-index:2; background: radial-gradient(ellipse at 80% 10%, rgba(192,132,252,0.15) 0%, transparent 55%); pointer-events:none; }
+/* all content on front must be above overlays */
+.flip-front > * { position: relative; z-index: 3; }
+.flip-front .p-front-text { padding: 1.5rem; width: 100%; }
+
+.p-front-text { padding: 1.5rem; width: 100%; display: flex; flex-direction: column; gap: 0.4rem; }
 .p-tag {
-  font-size: 0.62rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase;
+  font-size: 0.6rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase;
   color: var(--cyan);
-  border: 1px solid rgba(56,189,248,0.2);
-  padding: 0.2rem 0.65rem; display: inline-block;
-  margin-bottom: 1.1rem;
+  border: 1px solid rgba(103,232,249,0.2);
+  padding: 0.2rem 0.6rem; display: inline-block;
+  margin-bottom: 0.65rem; position: relative; z-index: 1;
 }
-.p-tag.v { color: var(--violet); border-color: rgba(167,139,250,0.2); }
-.p-name { font-family: 'Nunito', sans-serif; font-size: 1.15rem; font-weight: 700; margin-bottom: 0.65rem; }
-.p-desc { font-size: 0.85rem; font-weight: 300; line-height: 1.7; color: rgba(238,242,255,0.55); flex: 1; margin-bottom: 1.25rem; }
-.p-impact { font-size: 0.75rem; font-weight: 500; color: var(--cyan); padding: 0.5rem 0; border-top: 1px solid var(--border2); margin-bottom: 0.85rem; }
-.p-stack { display: flex; flex-wrap: wrap; gap: 0.35rem; }
-.p-pill {
-  font-size: 0.62rem; font-weight: 500;
-  padding: 0.18rem 0.5rem;
-  background: rgba(56,189,248,0.06);
-  border: 1px solid rgba(56,189,248,0.12);
-  color: rgba(238,242,255,0.5);
+.p-tag.v { color: var(--violet); border-color: rgba(192,132,252,0.25); }
+.p-name {
+  font-family: 'Nunito', sans-serif; font-size: 1.1rem; font-weight: 800;
+  margin-bottom: 0.4rem; position: relative; z-index: 1;
 }
+.p-front-hint {
+  font-size: 0.68rem; font-weight: 400; color: var(--muted);
+  position: relative; z-index: 1;
+  display: flex; align-items: center; gap: 0.4rem;
+}
+.p-front-hint::after { content: '↻ tap to flip'; }
+
+/* back */
+.pb-top {}
+.pb-label {
+  font-size: 0.6rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--violet); margin-bottom: 0.5rem;
+}
+.pb-name { font-family: 'Nunito', sans-serif; font-size: 1rem; font-weight: 800; margin-bottom: 0.75rem; }
+.pb-desc { font-size: 0.78rem; font-weight: 300; line-height: 1.65; color: rgba(240,238,255,0.6); margin-bottom: 0.85rem; }
+.pb-impact {
+  font-size: 0.72rem; font-weight: 500; color: var(--cyan);
+  padding: 0.5rem 0; border-top: 1px solid var(--border2);
+  margin-bottom: 0.75rem;
+}
+.pb-stack { display: flex; flex-wrap: wrap; gap: 0.3rem; }
+.pb-pill {
+  font-size: 0.6rem; font-weight: 500;
+  padding: 0.15rem 0.45rem;
+  background: rgba(192,132,252,0.08);
+  border: 1px solid rgba(192,132,252,0.18);
+  color: rgba(240,238,255,0.55);
+}
+.pb-back-btn {
+  font-size: 0.65rem; font-weight: 600; color: var(--muted);
+  background: none; border: none; cursor: none;
+  padding: 0; text-align: left; margin-top: 0.5rem;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  display: inline-flex; align-items: center; gap: 0.35rem;
+  transition: color .2s;
+}
+.pb-back-btn:hover { color: var(--cyan); }
 
 /* SKILLS */
 .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
@@ -489,19 +555,45 @@ h2.s-title .v { background: linear-gradient(90deg, #c084fc, #f472b6); -webkit-ba
 .sk-fill.on { width: var(--w); }
 
 .tools-section { margin-top: 3.5rem; }
-.tools-label { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--violet); margin-bottom: 1.25rem; }
-.tools-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem; }
-.tool-box {
-  padding: 0.75rem 1rem;
+.tools-label { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--violet); margin-bottom: 1.5rem; }
+.tools-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 0.85rem; }
+.tool-logo-card {
+  display: flex; flex-direction: column; align-items: center; gap: 0.6rem;
+  padding: 1.1rem 0.5rem 0.85rem;
   background: var(--card);
   border: 1px solid var(--border2);
-  font-size: 0.82rem; font-weight: 400;
-  color: rgba(238,242,255,0.65);
-  text-align: center;
-  transition: border-color .2s, color .2s, background .2s;
+  border-radius: 6px;
+  transition: border-color .25s, transform .25s, background .25s;
   cursor: none;
+  position: relative; overflow: hidden;
 }
-.tool-box:hover { border-color: var(--border); color: var(--cyan); background: var(--cyan-dim); }
+.tool-logo-card::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 50% 0%, rgba(192,132,252,0.1) 0%, transparent 70%);
+  opacity: 0; transition: opacity .25s;
+}
+.tool-logo-card:hover { border-color: rgba(192,132,252,0.35); transform: translateY(-3px); background: var(--card2); }
+.tool-logo-card:hover::before { opacity: 1; }
+.tool-logo-card img {
+  width: 32px; height: 32px; object-fit: contain;
+  filter: brightness(0.9) saturate(1.1);
+  position: relative; z-index: 1;
+}
+.tool-logo-card .tool-mono {
+  width: 32px; height: 32px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.75rem; font-weight: 900;
+  border-radius: 6px;
+  position: relative; z-index: 1;
+  letter-spacing: 0.02em;
+}
+.tool-logo-name {
+  font-size: 0.68rem; font-weight: 500;
+  color: rgba(240,238,255,0.6);
+  text-align: center; position: relative; z-index: 1;
+  line-height: 1.2;
+}
 
 /* AWARDS */
 .awards-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.25rem; }
@@ -810,63 +902,135 @@ footer strong { color: var(--cyan); font-weight: 600; }
   <h2 class="s-title reveal">Products built<br>from <em>zero.</em></h2>
   <div class="projects-grid">
 
-    <div class="p-card featured reveal">
-      <div class="p-tag">Featured · Live</div>
-      <div class="p-name">NIL Valuation Platform</div>
-      <div class="p-desc">Built an AI-powered marketplace connecting Division I athletes with NIL opportunities. Led the full 0→1 journey from user research and OKR setting to MVP launch and fundraising enablement.</div>
-      <div class="p-impact">↑ $500K+ fundraising in month 1 · 25+ athletes onboarded · 70% manual work cut</div>
-      <div class="p-stack">
-        <span class="p-pill">0→1</span><span class="p-pill">AI Platform</span><span class="p-pill">Airtable</span><span class="p-pill">Zapier</span><span class="p-pill">OKRs</span>
+    <div class="flip-wrap fc-1 reveal" onclick="this.querySelector('.flip-inner').classList.toggle('flipped')">
+      <div class="flip-inner">
+        <div class="flip-front" style="background-image:url('https://images.unsplash.com/photo-1566577739112-5180d4bf9390?w=600&q=80')">
+          <div class="p-front-text">
+            <div class="p-tag">Featured · Live</div>
+            <div class="p-name">NIL Valuation Platform</div>
+            <div class="p-front-hint"></div>
+          </div>
+        </div>
+        <div class="flip-back">
+          <div class="pb-top">
+            <div class="pb-label">SecondWind Pro · 2025</div>
+            <div class="pb-name">NIL Valuation Platform</div>
+            <div class="pb-desc">Led 0→1 build of an AI-powered marketplace connecting Division I athletes with NIL opportunities — from user research through MVP launch.</div>
+            <div class="pb-impact">$500K+ raised in month 1 · 25+ athletes · 70% manual work cut</div>
+            <div class="pb-stack"><span class="pb-pill">0→1</span><span class="pb-pill">Airtable</span><span class="pb-pill">Zapier</span><span class="pb-pill">OKRs</span><span class="pb-pill">Agile</span></div>
+          </div>
+          <button class="pb-back-btn" onclick="event.stopPropagation();this.closest('.flip-wrap').querySelector('.flip-inner').classList.remove('flipped')">↩ flip back</button>
+        </div>
       </div>
     </div>
 
-    <div class="p-card reveal d1">
-      <div class="p-tag v">MBA Capstone · B2B SaaS</div>
-      <div class="p-name">Flexera Win/Loss Dashboard</div>
-      <div class="p-desc">AI-driven competitive intelligence dashboard for Flexera's sales team. Surfaced win/loss signals from deal data and translated them into actionable product insights through 12 customer discovery interviews.</div>
-      <div class="p-impact">12 customer interviews · Figma prototype · Full SOW delivered</div>
-      <div class="p-stack">
-        <span class="p-pill">AI Analytics</span><span class="p-pill">Figma</span><span class="p-pill">JIRA</span><span class="p-pill">B2B SaaS</span>
+    <div class="flip-wrap fc-2 reveal d1" onclick="this.querySelector('.flip-inner').classList.toggle('flipped')">
+      <div class="flip-inner">
+        <div class="flip-front" style="background-image:url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&q=80')">
+          <div class="p-front-text">
+            <div class="p-tag v">MBA Capstone · B2B SaaS</div>
+            <div class="p-name">Flexera Win/Loss Dashboard</div>
+            <div class="p-front-hint"></div>
+          </div>
+        </div>
+        <div class="flip-back">
+          <div class="pb-top">
+            <div class="pb-label">Flexera · MBA Capstone 2024–25</div>
+            <div class="pb-name">AI Win/Loss Analytics</div>
+            <div class="pb-desc">AI-driven competitive intelligence dashboard for Flexera's sales team, built from 12 customer discovery interviews through a validated Figma prototype.</div>
+            <div class="pb-impact">12 interviews · Figma prototype · Full SOW delivered</div>
+            <div class="pb-stack"><span class="pb-pill">AI Analytics</span><span class="pb-pill">Figma</span><span class="pb-pill">JIRA</span><span class="pb-pill">B2B SaaS</span></div>
+          </div>
+          <button class="pb-back-btn" onclick="event.stopPropagation();this.closest('.flip-wrap').querySelector('.flip-inner').classList.remove('flipped')">↩ flip back</button>
+        </div>
       </div>
     </div>
 
-    <div class="p-card reveal d2">
-      <div class="p-tag">FreshPlate · Live</div>
-      <div class="p-name">AI Food Management App</div>
-      <div class="p-desc">Personal project — AI-powered food management platform that reduces household food waste through intelligent inventory tracking, expiry prediction, and personalized recipe recommendations.</div>
-      <div class="p-impact">↓ ~30% food waste · Hosted on GitHub Pages · Personal side project</div>
-      <div class="p-stack">
-        <span class="p-pill">AI/ML</span><span class="p-pill">React</span><span class="p-pill">GitHub Pages</span><span class="p-pill">Zero-to-One</span>
+    <div class="flip-wrap fc-3 reveal d2" onclick="this.querySelector('.flip-inner').classList.toggle('flipped')">
+      <div class="flip-inner">
+        <div class="flip-front" style="background-image:url('https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=600&q=80')">
+          <div class="p-front-text">
+            <div class="p-tag">FreshPlate · Live</div>
+            <div class="p-name">AI Food Management App</div>
+            <div class="p-front-hint"></div>
+          </div>
+        </div>
+        <div class="flip-back">
+          <div class="pb-top">
+            <div class="pb-label">Personal Project · GitHub Pages</div>
+            <div class="pb-name">FreshPlate — AI Food App</div>
+            <div class="pb-desc">AI-powered food management platform using intelligent inventory tracking, expiry prediction, and personalized recipe suggestions to reduce household waste.</div>
+            <div class="pb-impact">~30% food waste reduction · Live on GitHub Pages</div>
+            <div class="pb-stack"><span class="pb-pill">AI/ML</span><span class="pb-pill">React</span><span class="pb-pill">GitHub Pages</span></div>
+          </div>
+          <button class="pb-back-btn" onclick="event.stopPropagation();this.closest('.flip-wrap').querySelector('.flip-inner').classList.remove('flipped')">↩ flip back</button>
+        </div>
       </div>
     </div>
 
-    <div class="p-card reveal d1">
-      <div class="p-tag v">Process · Flyhomes</div>
-      <div class="p-name">$48M Compensation Redesign</div>
-      <div class="p-desc">Transformed a broken sales compensation system affecting 200+ agents. Led data analysis, stakeholder alignment, and cross-functional migration with zero downtime while unlocking massive cost savings.</div>
-      <div class="p-impact">$48M cost savings · 95% satisfaction · 17% CSAT improvement</div>
-      <div class="p-stack">
-        <span class="p-pill">SQL</span><span class="p-pill">Data Analysis</span><span class="p-pill">Change Mgmt</span>
+    <div class="flip-wrap fc-4 reveal d1" onclick="this.querySelector('.flip-inner').classList.toggle('flipped')">
+      <div class="flip-inner">
+        <div class="flip-front" style="background-image:url('https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&q=80')">
+          <div class="p-front-text">
+            <div class="p-tag v">Process · Flyhomes</div>
+            <div class="p-name">$48M Compensation Redesign</div>
+            <div class="p-front-hint"></div>
+          </div>
+        </div>
+        <div class="flip-back">
+          <div class="pb-top">
+            <div class="pb-label">Flyhomes · Jun 2023 – Jun 2024</div>
+            <div class="pb-name">Sales Compensation Overhaul</div>
+            <div class="pb-desc">Transformed a broken compensation system for 200+ agents. Led data analysis, stakeholder alignment, and cross-functional migration with zero downtime.</div>
+            <div class="pb-impact">$48M cost savings · 95% agent satisfaction · 17% CSAT gain</div>
+            <div class="pb-stack"><span class="pb-pill">SQL</span><span class="pb-pill">Data Analysis</span><span class="pb-pill">Change Mgmt</span></div>
+          </div>
+          <button class="pb-back-btn" onclick="event.stopPropagation();this.closest('.flip-wrap').querySelector('.flip-inner').classList.remove('flipped')">↩ flip back</button>
+        </div>
       </div>
     </div>
 
-    <div class="p-card reveal d2">
-      <div class="p-tag">Agile Transformation</div>
-      <div class="p-name">Product Velocity Overhaul</div>
-      <div class="p-desc">Transformed product development from waterfall to agile at Flyhomes. Implemented sprint rituals, SQL KPI dashboards, and cross-functional testing protocols that dramatically improved team output.</div>
-      <div class="p-impact">68% efficiency gain · 32% CSAT increase · 8% SLA reduction</div>
-      <div class="p-stack">
-        <span class="p-pill">Agile/Scrum</span><span class="p-pill">JIRA</span><span class="p-pill">SQL</span><span class="p-pill">KPIs</span>
+    <div class="flip-wrap fc-5 reveal d2" onclick="this.querySelector('.flip-inner').classList.toggle('flipped')">
+      <div class="flip-inner">
+        <div class="flip-front" style="background-image:url('https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&q=80')">
+          <div class="p-front-text">
+            <div class="p-tag">Agile Transformation</div>
+            <div class="p-name">Product Velocity Overhaul</div>
+            <div class="p-front-hint"></div>
+          </div>
+        </div>
+        <div class="flip-back">
+          <div class="pb-top">
+            <div class="pb-label">Flyhomes · Apr 2022 – Jun 2023</div>
+            <div class="pb-name">Agile Transformation</div>
+            <div class="pb-desc">Moved Flyhomes from waterfall to agile. Rolled out sprint rituals, SQL KPI dashboards, and cross-functional testing protocols that measurably lifted output.</div>
+            <div class="pb-impact">68% efficiency gain · 32% CSAT increase · 8% SLA reduction</div>
+            <div class="pb-stack"><span class="pb-pill">Agile/Scrum</span><span class="pb-pill">JIRA</span><span class="pb-pill">SQL</span></div>
+          </div>
+          <button class="pb-back-btn" onclick="event.stopPropagation();this.closest('.flip-wrap').querySelector('.flip-inner').classList.remove('flipped')">↩ flip back</button>
+        </div>
       </div>
     </div>
 
-    <div class="p-card reveal d3">
-      <div class="p-tag v">AI Research · Sierra</div>
-      <div class="p-name">Enterprise AI Strategy</div>
-      <div class="p-desc">MBA research project on go-to-market strategy and product positioning for Sierra, a VC-backed enterprise AI startup. Produced full competitive analysis, positioning framework, and GTM recommendations.</div>
-      <div class="p-impact">Full GTM strategy · Competitive positioning · Stakeholder deck</div>
-      <div class="p-stack">
-        <span class="p-pill">AI/LLMs</span><span class="p-pill">GTM</span><span class="p-pill">Strategy</span><span class="p-pill">Research</span>
+    <div class="flip-wrap fc-6 reveal d3" onclick="this.querySelector('.flip-inner').classList.toggle('flipped')">
+      <div class="flip-inner">
+        <div class="flip-front" style="background-image:url('https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=600&q=80')">
+          <div class="p-front-text">
+            <div class="p-tag v">AI Research · Sierra</div>
+            <div class="p-name">Enterprise AI Strategy</div>
+            <div class="p-front-hint"></div>
+          </div>
+        </div>
+        <div class="flip-back">
+          <div class="pb-top">
+            <div class="pb-label">MBA Research · Sierra AI Startup</div>
+            <div class="pb-name">Enterprise AI GTM Strategy</div>
+            <div class="pb-desc">Go-to-market strategy and product positioning for Sierra, a VC-backed enterprise AI startup. Produced full competitive analysis, positioning framework, and exec deck.</div>
+            <div class="pb-impact">Full GTM strategy · Competitive positioning · Exec deck</div>
+            <div class="pb-stack"><span class="pb-pill">AI/LLMs</span><span class="pb-pill">GTM</span><span class="pb-pill">Strategy</span><span class="pb-pill">Research</span></div>
+          </div>
+          <button class="pb-back-btn" onclick="event.stopPropagation();this.closest('.flip-wrap').querySelector('.flip-inner').classList.remove('flipped')">↩ flip back</button>
+        </div>
       </div>
     </div>
 
@@ -906,10 +1070,73 @@ footer strong { color: var(--cyan); font-weight: 600; }
   <div class="tools-section reveal">
     <div class="tools-label">Tools & Platforms</div>
     <div class="tools-grid">
-      <div class="tool-box">Figma</div><div class="tool-box">JIRA</div><div class="tool-box">SQL</div><div class="tool-box">Power BI</div>
-      <div class="tool-box">Airtable</div><div class="tool-box">Zapier</div><div class="tool-box">Amplitude</div><div class="tool-box">Mixpanel</div>
-      <div class="tool-box">LLMs / RAG</div><div class="tool-box">GenAI Stack</div><div class="tool-box">Salesforce</div><div class="tool-box">Confluence</div>
-      <div class="tool-box">GitHub</div><div class="tool-box">Notion</div><div class="tool-box">Miro</div><div class="tool-box">Tableau</div>
+
+      <div class="tool-logo-card">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" alt="Figma">
+        <span class="tool-logo-name">Figma</span>
+      </div>
+      <div class="tool-logo-card">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jira/jira-original.svg" alt="JIRA">
+        <span class="tool-logo-name">JIRA</span>
+      </div>
+      <div class="tool-logo-card">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub" style="filter:invert(1) brightness(0.85)">
+        <span class="tool-logo-name">GitHub</span>
+      </div>
+      <div class="tool-logo-card">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/confluence/confluence-original.svg" alt="Confluence">
+        <span class="tool-logo-name">Confluence</span>
+      </div>
+      <div class="tool-logo-card">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" alt="SQL">
+        <span class="tool-logo-name">SQL</span>
+      </div>
+      <div class="tool-logo-card">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python">
+        <span class="tool-logo-name">Python</span>
+      </div>
+      <div class="tool-logo-card">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/salesforce/salesforce-original.svg" alt="Salesforce">
+        <span class="tool-logo-name">Salesforce</span>
+      </div>
+      <div class="tool-logo-card">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/slack/slack-original.svg" alt="Slack">
+        <span class="tool-logo-name">Slack</span>
+      </div>
+
+      <div class="tool-logo-card">
+        <div class="tool-mono" style="background:rgba(255,180,0,0.15);color:#ffb400;">AB</div>
+        <span class="tool-logo-name">A/B Testing</span>
+      </div>
+      <div class="tool-logo-card">
+        <div class="tool-mono" style="background:rgba(103,232,249,0.12);color:#67e8f9;">AT</div>
+        <span class="tool-logo-name">Airtable</span>
+      </div>
+      <div class="tool-logo-card">
+        <div class="tool-mono" style="background:rgba(255,99,62,0.15);color:#ff633e;">ZP</div>
+        <span class="tool-logo-name">Zapier</span>
+      </div>
+      <div class="tool-logo-card">
+        <div class="tool-mono" style="background:rgba(192,132,252,0.15);color:#c084fc;">AM</div>
+        <span class="tool-logo-name">Amplitude</span>
+      </div>
+      <div class="tool-logo-card">
+        <div class="tool-mono" style="background:rgba(77,200,130,0.15);color:#4dc882;">MX</div>
+        <span class="tool-logo-name">Mixpanel</span>
+      </div>
+      <div class="tool-logo-card">
+        <div class="tool-mono" style="background:rgba(0,168,255,0.15);color:#00a8ff;">PB</div>
+        <span class="tool-logo-name">Power BI</span>
+      </div>
+      <div class="tool-logo-card">
+        <div class="tool-mono" style="background:rgba(244,114,182,0.15);color:#f472b6;">TB</div>
+        <span class="tool-logo-name">Tableau</span>
+      </div>
+      <div class="tool-logo-card">
+        <div class="tool-mono" style="background:rgba(103,232,249,0.12);color:#67e8f9;">AI</div>
+        <span class="tool-logo-name">LLMs / RAG</span>
+      </div>
+
     </div>
   </div>
 </div>
