@@ -1,2113 +1,1068 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Monisha Sood – Product Manager</title>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    
-    :root {
-      --primary: #6366f1;
-      --primary-light: #818cf8;
-      --secondary: #8b5cf6;
-      --accent: #ec4899;
-      --success: #10b981;
-      --dark: #0f172a;
-      --dark-surface: #1e293b;
-      --light: #f1f5f9;
-      --text-primary: #e2e8f0;
-      --text-secondary: #cbd5e1;
-      --text-muted: #94a3b8;
-      --border: rgba(255, 255, 255, 0.1);
-    }
-    
-    html {
-      scroll-behavior: smooth;
-    }
-    
-    body {
-      font-family: 'Inter', sans-serif;
-      background: var(--dark);
-      color: var(--light);
-      overflow-x: hidden;
-      line-height: 1.6;
-    }
-    
-    /* Animated Background */
-    .bg-animation {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 0;
-      overflow: hidden;
-      opacity: 0.6;
-    }
-    
-    .grid-bg {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      background-image: 
-        linear-gradient(rgba(99, 102, 241, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(99, 102, 241, 0.03) 1px, transparent 1px);
-      background-size: 50px 50px;
-      animation: gridMove 20s linear infinite;
-    }
-    
-    @keyframes gridMove {
-      0% { transform: translate(0, 0); }
-      100% { transform: translate(50px, 50px); }
-    }
-    
-    .orb {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(80px);
-      opacity: 0.3;
-      animation: float 20s infinite ease-in-out;
-    }
-    
-    .orb1 {
-      width: 500px;
-      height: 500px;
-      background: var(--primary);
-      top: -200px;
-      left: -200px;
-    }
-    
-    .orb2 {
-      width: 400px;
-      height: 400px;
-      background: var(--secondary);
-      bottom: -150px;
-      right: -150px;
-      animation-delay: 5s;
-    }
-    
-    @keyframes float {
-      0%, 100% { transform: translate(0, 0) scale(1); }
-      50% { transform: translate(30px, -30px) scale(1.05); }
-    }
-    
-    /* Navigation */
-    nav {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      padding: 16px 0;
-      background: rgba(15, 23, 42, 0.9);
-      backdrop-filter: blur(20px);
-      z-index: 1000;
-      border-bottom: 1px solid var(--border);
-    }
-    
-    nav .container {
-      max-width: 1400px;
-      margin: 0 auto;
-      padding: 0 40px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    
-    .logo {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 24px;
-      font-weight: 700;
-      background: linear-gradient(135deg, var(--primary-light), var(--accent));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    
-    .nav-links {
-      display: flex;
-      gap: 32px;
-      list-style: none;
-      align-items: center;
-    }
-    
-    .nav-links a {
-      color: var(--text-secondary);
-      text-decoration: none;
-      font-weight: 500;
-      font-size: 14px;
-      transition: all 0.3s;
-      position: relative;
-    }
-    
-    .nav-links a:hover {
-      color: var(--primary-light);
-    }
-    
-    .nav-cta {
-      padding: 10px 24px;
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
-      border-radius: 8px;
-      color: white !important;
-      font-weight: 600;
-      transition: all 0.3s;
-    }
-    
-    .nav-cta:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(99, 102, 241, 0.4);
-    }
-    
-    /* Container */
-    .container {
-      max-width: 1400px;
-      margin: 0 auto;
-      padding: 0 40px;
-      position: relative;
-      z-index: 1;
-    }
-    
-    /* Hero Section */
-    .hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      padding-top: 80px;
-    }
-    
-    .hero-content {
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 80px;
-      align-items: center;
-    }
-    
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 16px;
-      background: rgba(99, 102, 241, 0.1);
-      border: 1px solid rgba(99, 102, 241, 0.3);
-      border-radius: 50px;
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--primary-light);
-      margin-bottom: 24px;
-      animation: slideInLeft 1s ease-out;
-    }
-    
-    .status-dot {
-      width: 8px;
-      height: 8px;
-      background: var(--success);
-      border-radius: 50%;
-      animation: pulse 2s infinite;
-    }
-    
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.5; }
-    }
-    
-    .hero-text h1 {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 64px;
-      font-weight: 700;
-      line-height: 1.1;
-      margin-bottom: 16px;
-      color: white;
-      animation: slideInLeft 1s ease-out 0.1s backwards;
-    }
-    
-    .hero-text h1 .gradient-text {
-      background: linear-gradient(135deg, var(--primary-light), var(--accent));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    
-    .hero-text .subtitle {
-      font-size: 22px;
-      color: var(--text-secondary);
-      margin-bottom: 24px;
-      font-weight: 500;
-      animation: slideInLeft 1s ease-out 0.2s backwards;
-    }
-    
-    .hero-text p {
-      font-size: 17px;
-      line-height: 1.7;
-      color: var(--text-primary);
-      margin-bottom: 32px;
-      animation: slideInLeft 1s ease-out 0.3s backwards;
-    }
-    
-    @keyframes slideInLeft {
-      from {
-        opacity: 0;
-        transform: translateX(-30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateX(0);
-      }
-    }
-    
-    .cta-buttons {
-      display: flex;
-      gap: 16px;
-      animation: slideInLeft 1s ease-out 0.4s backwards;
-      flex-wrap: wrap;
-    }
-    
-    .btn {
-      padding: 14px 28px;
-      border-radius: 10px;
-      font-weight: 600;
-      font-size: 15px;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      transition: all 0.3s;
-      cursor: pointer;
-    }
-    
-    .btn-primary {
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
-      color: white;
-      box-shadow: 0 8px 24px rgba(99, 102, 241, 0.3);
-    }
-    
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 12px 32px rgba(99, 102, 241, 0.4);
-    }
-    
-    .btn-secondary {
-      background: var(--dark-surface);
-      color: white;
-      border: 1px solid var(--border);
-    }
-    
-    .btn-secondary:hover {
-      background: rgba(255, 255, 255, 0.08);
-      border-color: var(--primary);
-      transform: translateY(-2px);
-    }
-    
-    /* Metrics Dashboard in Hero */
-    .hero-metrics {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 16px;
-      animation: slideInRight 1s ease-out 0.5s backwards;
-    }
-    
-    @keyframes slideInRight {
-      from {
-        opacity: 0;
-        transform: translateX(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateX(0);
-      }
-    }
-    
-    .metric-card {
-      background: rgba(255, 255, 255, 0.04);
-      backdrop-filter: blur(10px);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 24px;
-      transition: all 0.3s;
-      position: relative;
-      overflow: hidden;
-    }
-    
-    .metric-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 3px;
-      background: linear-gradient(90deg, var(--primary), var(--accent));
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.5s;
-    }
-    
-    .metric-card:hover::before {
-      transform: scaleX(1);
-    }
-    
-    .metric-card:hover {
-      background: rgba(255, 255, 255, 0.06);
-      border-color: var(--primary);
-      transform: translateY(-4px);
-    }
-    
-    .metric-value {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 36px;
-      font-weight: 700;
-      background: linear-gradient(135deg, var(--primary-light), var(--accent));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      margin-bottom: 8px;
-    }
-    
-    .metric-label {
-      color: var(--text-secondary);
-      font-size: 13px;
-      font-weight: 500;
-    }
-    
-    .metric-change {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      margin-top: 8px;
-      padding: 4px 8px;
-      background: rgba(16, 185, 129, 0.1);
-      border-radius: 6px;
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--success);
-    }
-    
-    /* Profile Picture Section */
-    .hero-profile {
-      position: relative;
-      animation: slideInRight 1s ease-out 0.5s backwards;
-    }
-    
-    .profile-card {
-      background: rgba(255, 255, 255, 0.04);
-      backdrop-filter: blur(10px);
-      border: 1px solid var(--border);
-      border-radius: 24px;
-      padding: 32px;
-      text-align: center;
-      transition: all 0.4s;
-    }
-    
-    .profile-card:hover {
-      border-color: var(--primary);
-      transform: translateY(-8px);
-      box-shadow: 0 20px 60px rgba(99, 102, 241, 0.3);
-    }
-    
-    .profile-image-container {
-      position: relative;
-      width: 280px;
-      height: 280px;
-      margin: 0 auto 24px;
-    }
-    
-    .profile-image-bg {
-      position: absolute;
-      inset: -8px;
-      background: linear-gradient(135deg, var(--primary), var(--accent));
-      border-radius: 50%;
-      animation: rotate 8s linear infinite;
-      opacity: 0.5;
-    }
-    
-    @keyframes rotate {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-    
-    .profile-image {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 4px solid var(--dark);
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-    }
-    
-    .profile-name {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 24px;
-      font-weight: 700;
-      color: white;
-      margin-bottom: 8px;
-    }
-    
-    .profile-title {
-      color: var(--text-secondary);
-      font-size: 14px;
-      font-weight: 500;
-      margin-bottom: 24px;
-      padding-bottom: 24px;
-      border-bottom: 1px solid var(--border);
-    }
-    
-    .profile-links {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-    
-    .profile-link {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      padding: 12px 20px;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      color: var(--text-primary);
-      text-decoration: none;
-      font-size: 14px;
-      font-weight: 600;
-      transition: all 0.3s;
-    }
-    
-    .profile-link:hover {
-      background: rgba(99, 102, 241, 0.15);
-      border-color: var(--primary);
-      transform: translateX(4px);
-    }
-    
-    .profile-link.primary {
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
-      border-color: transparent;
-      color: white;
-    }
-    
-    .profile-link.primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(99, 102, 241, 0.4);
-    }
-    
-    .link-icon {
-      font-size: 18px;
-      color: var(--primary-light);
-      font-weight: 400;
-    }
-    
-    /* LinkedIn Icon SVG */
-    .linkedin-icon {
-      width: 18px;
-      height: 18px;
-      fill: currentColor;
-    }
-    
-    .social-link .linkedin-icon {
-      width: 20px;
-      height: 20px;
-    }
-    
-    /* Section */
-    section {
-      padding: 120px 0;
-      position: relative;
-    }
-    
-    .section-header {
-      text-align: center;
-      margin-bottom: 80px;
-    }
-    
-    .section-tag {
-      display: inline-block;
-      padding: 6px 16px;
-      background: rgba(99, 102, 241, 0.1);
-      border: 1px solid rgba(99, 102, 241, 0.3);
-      border-radius: 50px;
-      color: var(--primary-light);
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
-      margin-bottom: 16px;
-    }
-    
-    .section-title {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 48px;
-      font-weight: 700;
-      margin-bottom: 16px;
-      color: white;
-    }
-    
-    .section-description {
-      font-size: 18px;
-      color: var(--text-secondary);
-      max-width: 700px;
-      margin: 0 auto;
-      line-height: 1.7;
-    }
-    
-    /* Product Case Studies - NEW */
-    .case-studies {
-      display: grid;
-      gap: 40px;
-    }
-    
-    .case-study {
-      background: rgba(255, 255, 255, 0.03);
-      backdrop-filter: blur(10px);
-      border: 1px solid var(--border);
-      border-radius: 24px;
-      overflow: hidden;
-      transition: all 0.4s;
-      position: relative;
-    }
-    
-    .case-study:hover {
-      border-color: var(--primary);
-      transform: translateY(-8px);
-      box-shadow: 0 20px 60px rgba(99, 102, 241, 0.2);
-    }
-    
-    .case-study-header {
-      padding: 40px 40px 0;
-    }
-    
-    .case-study-meta {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 24px;
-    }
-    
-    .company-tag {
-      padding: 6px 14px;
-      background: rgba(99, 102, 241, 0.15);
-      border: 1px solid rgba(99, 102, 241, 0.3);
-      border-radius: 8px;
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--primary-light);
-    }
-    
-    .timeline {
-      color: var(--text-muted);
-      font-size: 13px;
-      font-weight: 500;
-    }
-    
-    .case-study h3 {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 32px;
-      font-weight: 700;
-      color: white;
-      margin-bottom: 16px;
-      line-height: 1.3;
-    }
-    
-    .case-study-intro {
-      color: var(--text-secondary);
-      font-size: 16px;
-      line-height: 1.7;
-      margin-bottom: 32px;
-    }
-    
-    .case-study-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 40px;
-      padding: 0 40px 40px;
-    }
-    
-    .case-section h4 {
-      font-size: 14px;
-      font-weight: 700;
-      color: var(--primary-light);
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-bottom: 16px;
-    }
-    
-    .problem-statement {
-      background: rgba(236, 72, 153, 0.08);
-      border-left: 3px solid var(--accent);
-      padding: 20px;
-      border-radius: 8px;
-      margin-bottom: 24px;
-    }
-    
-    .problem-statement p {
-      color: var(--text-primary);
-      font-size: 15px;
-      line-height: 1.6;
-      margin: 0;
-    }
-    
-    .solution-list {
-      list-style: none;
-      padding: 0;
-    }
-    
-    .solution-list li {
-      color: var(--text-primary);
-      font-size: 15px;
-      line-height: 1.6;
-      margin-bottom: 12px;
-      padding-left: 24px;
-      position: relative;
-    }
-    
-    .solution-list li::before {
-      content: '→';
-      position: absolute;
-      left: 0;
-      color: var(--primary-light);
-      font-weight: bold;
-    }
-    
-    .impact-metrics {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 16px;
-      margin-top: 24px;
-    }
-    
-    .impact-card {
-      background: rgba(16, 185, 129, 0.08);
-      border: 1px solid rgba(16, 185, 129, 0.2);
-      border-radius: 12px;
-      padding: 16px;
-      text-align: center;
-    }
-    
-    .impact-number {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 28px;
-      font-weight: 700;
-      color: var(--success);
-      margin-bottom: 4px;
-    }
-    
-    .impact-label {
-      font-size: 12px;
-      color: var(--text-secondary);
-      font-weight: 500;
-    }
-    
-    .tools-used {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 16px;
-    }
-    
-    .tool-badge {
-      padding: 6px 12px;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--text-secondary);
-    }
-    
-    /* PM Principles - NEW */
-    .principles-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-      margin-top: 60px;
-    }
-    
-    .principle-card {
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 32px;
-      transition: all 0.3s;
-      position: relative;
-      overflow: hidden;
-    }
-    
-    .principle-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(135deg, var(--primary) 0%, transparent 70%);
-      opacity: 0;
-      transition: opacity 0.3s;
-    }
-    
-    .principle-card:hover {
-      border-color: var(--primary);
-      transform: translateY(-4px);
-    }
-    
-    .principle-card:hover::before {
-      opacity: 0.08;
-    }
-    
-    .principle-icon {
-      font-size: 40px;
-      margin-bottom: 20px;
-      position: relative;
-      z-index: 1;
-      font-weight: 300;
-      color: var(--primary-light);
-      text-shadow: 0 0 20px rgba(99, 102, 241, 0.5);
-    }
-    
-    .principle-card h3 {
-      font-size: 20px;
-      font-weight: 600;
-      color: white;
-      margin-bottom: 12px;
-      position: relative;
-      z-index: 1;
-    }
-    
-    .principle-card p {
-      color: var(--text-secondary);
-      font-size: 14px;
-      line-height: 1.6;
-      position: relative;
-      z-index: 1;
-    }
-    
-    /* Skills Section - Modernized */
-    .skills-categories {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 24px;
-    }
-    
-    .skill-category {
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 32px;
-      transition: all 0.3s;
-    }
-    
-    .skill-category:hover {
-      border-color: var(--primary);
-      background: rgba(255, 255, 255, 0.05);
-    }
-    
-    .skill-category h3 {
-      font-size: 20px;
-      font-weight: 600;
-      color: white;
-      margin-bottom: 20px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    
-    .skill-category h3::before {
-      content: '';
-      width: 4px;
-      height: 24px;
-      background: linear-gradient(180deg, var(--primary), var(--accent));
-      border-radius: 2px;
-    }
-    
-    .skill-items {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-    
-    .skill-item {
-      padding: 8px 16px;
-      background: rgba(99, 102, 241, 0.1);
-      border: 1px solid rgba(99, 102, 241, 0.2);
-      border-radius: 8px;
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--text-primary);
-      transition: all 0.3s;
-      cursor: pointer;
-      text-decoration: none;
-      display: inline-block;
-    }
-    
-    .skill-item:hover {
-      background: rgba(99, 102, 241, 0.2);
-      border-color: var(--primary);
-      transform: translateY(-2px);
-    }
-    
-    /* Certification links - clickable ones have extra styling */
-    a.skill-item {
-      position: relative;
-    }
-    
-    a.skill-item::after {
-      content: '↗';
-      margin-left: 6px;
-      font-size: 11px;
-      opacity: 0;
-      transition: opacity 0.3s;
-    }
-    
-    a.skill-item:hover::after {
-      opacity: 1;
-    }
-    
-    /* Awards - Redesigned */
-    .awards-showcase {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-    }
-    
-    .award-card-modern {
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 32px;
-      text-align: center;
-      transition: all 0.3s;
-      position: relative;
-      overflow: hidden;
-    }
-    
-    .award-card-modern::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(135deg, var(--accent) 0%, transparent 70%);
-      opacity: 0;
-      transition: opacity 0.3s;
-    }
-    
-    .award-card-modern:hover {
-      border-color: var(--accent);
-      transform: translateY(-6px);
-    }
-    
-    .award-card-modern:hover::before {
-      opacity: 0.1;
-    }
-    
-    .award-icon-modern {
-      font-size: 48px;
-      margin-bottom: 16px;
-      position: relative;
-      z-index: 1;
-      font-weight: 300;
-      color: var(--accent);
-      text-shadow: 0 0 20px rgba(236, 72, 153, 0.5);
-    }
-    
-    .award-card-modern h3 {
-      font-size: 18px;
-      font-weight: 600;
-      color: white;
-      margin-bottom: 12px;
-      position: relative;
-      z-index: 1;
-    }
-    
-    .award-card-modern p {
-      color: var(--text-secondary);
-      font-size: 14px;
-      line-height: 1.6;
-      position: relative;
-      z-index: 1;
-    }
-    
-    /* Footer */
-    footer {
-      background: rgba(15, 23, 42, 0.95);
-      backdrop-filter: blur(20px);
-      border-top: 1px solid var(--border);
-      padding: 60px 0 30px;
-      margin-top: 120px;
-    }
-    
-    .footer-content {
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr 1fr;
-      gap: 60px;
-      margin-bottom: 40px;
-    }
-    
-    .footer-brand h3 {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 24px;
-      margin-bottom: 12px;
-      background: linear-gradient(135deg, var(--primary-light), var(--accent));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    
-    .footer-brand p {
-      color: var(--text-secondary);
-      line-height: 1.6;
-      font-size: 14px;
-      margin-bottom: 20px;
-    }
-    
-    .social-links {
-      display: flex;
-      gap: 12px;
-    }
-    
-    .social-link {
-      width: 40px;
-      height: 40px;
-      border-radius: 10px;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-decoration: none;
-      font-size: 18px;
-      transition: all 0.3s;
-    }
-    
-    .social-link:hover {
-      background: var(--primary);
-      border-color: var(--primary);
-      transform: translateY(-3px);
-    }
-    
-    .footer-section h4 {
-      font-size: 14px;
-      font-weight: 600;
-      color: white;
-      margin-bottom: 16px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-    
-    .footer-section ul {
-      list-style: none;
-    }
-    
-    .footer-section a {
-      color: var(--text-secondary);
-      text-decoration: none;
-      display: block;
-      margin-bottom: 10px;
-      font-size: 14px;
-      transition: color 0.3s;
-    }
-    
-    .footer-section a:hover {
-      color: var(--primary-light);
-    }
-    
-    .footer-bottom {
-      text-align: center;
-      padding-top: 30px;
-      border-top: 1px solid var(--border);
-      color: var(--text-muted);
-      font-size: 13px;
-    }
-    
-    /* Scroll to top */
-    .scroll-top {
-      position: fixed;
-      bottom: 30px;
-      right: 30px;
-      width: 50px;
-      height: 50px;
-      border-radius: 12px;
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-decoration: none;
-      font-size: 24px;
-      box-shadow: 0 8px 24px rgba(99, 102, 241, 0.4);
-      transition: all 0.3s;
-      z-index: 999;
-      opacity: 0;
-      pointer-events: none;
-    }
-    
-    .scroll-top.visible {
-      opacity: 1;
-      pointer-events: all;
-    }
-    
-    .scroll-top:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 32px rgba(99, 102, 241, 0.5);
-    }
-    
-    /* Responsive */
-    @media (max-width: 1024px) {
-      .hero-content {
-        grid-template-columns: 1fr;
-        gap: 60px;
-      }
-      
-      .profile-image-container {
-        width: 220px;
-        height: 220px;
-      }
-      
-      .hero-metrics {
-        grid-template-columns: repeat(2, 1fr);
-      }
-      
-      .case-study-grid {
-        grid-template-columns: 1fr;
-      }
-      
-      .principles-grid {
-        grid-template-columns: 1fr;
-      }
-      
-      .skills-categories {
-        grid-template-columns: 1fr;
-      }
-      
-      .awards-showcase {
-        grid-template-columns: 1fr;
-      }
-      
-      .footer-content {
-        grid-template-columns: 1fr;
-        gap: 40px;
-      }
-    }
-    
-    @media (max-width: 768px) {
-      .container {
-        padding: 0 20px;
-      }
-      
-      section {
-        padding: 80px 0;
-      }
-      
-      .hero-text h1 {
-        font-size: 42px;
-      }
-      
-      .section-title {
-        font-size: 36px;
-      }
-      
-      .nav-links {
-        display: none;
-      }
-      
-      .hero-metrics {
-        grid-template-columns: 1fr;
-      }
-      
-      .metric-card {
-        padding: 20px;
-      }
-      
-      .case-study h3 {
-        font-size: 24px;
-      }
-      
-      .case-study-header,
-      .case-study-grid {
-        padding: 24px;
-      }
-    }
-    
-    /* Interactive Animation Keyframes */
-    @keyframes float-particle {
-      0% {
-        opacity: 0;
-        transform: translateY(0) scale(0);
-      }
-      50% {
-        opacity: 0.8;
-      }
-      100% {
-        opacity: 0;
-        transform: translateY(-100px) scale(1);
-      }
-    }
-    
-    @keyframes ripple {
-      to {
-        transform: scale(4);
-        opacity: 0;
-      }
-    }
-    
-    @keyframes glow {
-      0%, 100% {
-        box-shadow: 0 0 20px rgba(99, 102, 241, 0.5);
-      }
-      50% {
-        box-shadow: 0 0 40px rgba(99, 102, 241, 0.8);
-      }
-    }
-    
-    /* Cursor trail effect */
-    .cursor-trail {
-      position: fixed;
-      width: 8px;
-      height: 8px;
-      background: var(--primary-light);
-      border-radius: 50%;
-      pointer-events: none;
-      opacity: 0.6;
-      z-index: 9999;
-      animation: fade-out 1s forwards;
-    }
-    
-    @keyframes fade-out {
-      to {
-        opacity: 0;
-        transform: scale(2);
-      }
-    }
-    
-    /* Gradient text animation */
-    .gradient-text {
-      background: linear-gradient(
-        90deg,
-        var(--primary-light),
-        var(--accent),
-        var(--secondary),
-        var(--primary-light)
-      );
-      background-size: 200% auto;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      animation: gradient-shift 3s linear infinite;
-      display: inline-block;
-      min-width: 200px;
-    }
-    
-    @keyframes gradient-shift {
-      0% {
-        background-position: 0% center;
-      }
-      100% {
-        background-position: 200% center;
-      }
-    }
-    
-    /* Hover state for cards with 3D effect */
-    .case-study:hover,
-    .principle-card:hover,
-    .award-card-modern:hover {
-      transform: translateY(-8px) scale(1.02);
-      box-shadow: 0 25px 70px rgba(99, 102, 241, 0.3);
-    }
-    
-    /* Pulse animation for status dot */
-    @keyframes pulse {
-      0%, 100% {
-        opacity: 1;
-        transform: scale(1);
-      }
-      50% {
-        opacity: 0.5;
-        transform: scale(1.2);
-      }
-    }
-    
-    /* Shake animation for CTAs */
-    @keyframes shake {
-      0%, 100% { transform: translateX(0); }
-      25% { transform: translateX(-5px); }
-      75% { transform: translateX(5px); }
-    }
-    
-    .btn:active {
-      animation: shake 0.3s;
-    }
-    
-    /* Interactive metric cards */
-    .metric-card {
-      cursor: pointer;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    
-    .metric-card:active {
-      transform: scale(0.95);
-    }
-    
-    /* Profile image zoom on hover */
-    .profile-image {
-      transition: transform 0.5s ease;
-    }
-    
-    .profile-image-container:hover .profile-image {
-      transform: scale(1.05);
-    }
-    
-    /* Smooth color transitions */
-    * {
-      transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Monisha Sood — Product Manager</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<style>
+:root {
+  --bg: #03020d;
+  --surface: #07061a;
+  --card: #0b0920;
+  --card2: #100d28;
+  --cyan: #67e8f9;
+  --cyan-dim: rgba(103,232,249,0.1);
+  --violet: #c084fc;
+  --violet-dim: rgba(192,132,252,0.1);
+  --magenta: #f472b6;
+  --gold: #fbbf24;
+  --white: #f0eeff;
+  --muted: #6b6a8f;
+  --muted2: #4f4e6e;
+  --border: rgba(103,232,249,0.13);
+  --border2: rgba(255,255,255,0.06);
+  --glow: 0 0 40px rgba(103,232,249,0.18);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--white);
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* GALAXY BACKGROUND — fixed nebula layer behind everything */
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: -1;
+  background:
+    radial-gradient(ellipse 80% 60% at 75% 15%, rgba(139,92,246,0.22) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 15% 70%, rgba(236,72,153,0.16) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 40% at 85% 80%, rgba(6,182,212,0.12) 0%, transparent 50%),
+    radial-gradient(ellipse 90% 70% at 50% 50%, rgba(88,28,135,0.18) 0%, transparent 70%),
+    #03020d;
+}
+/* Subtle star-noise texture */
+body::after {
+  content: '';
+  position: fixed; inset: 0; z-index: -1;
+  background-image:
+    radial-gradient(1px 1px at 10% 20%, rgba(255,255,255,0.7) 0%, transparent 100%),
+    radial-gradient(1px 1px at 30% 55%, rgba(255,255,255,0.5) 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 55% 10%, rgba(255,255,255,0.6) 0%, transparent 100%),
+    radial-gradient(1px 1px at 70% 40%, rgba(255,255,255,0.4) 0%, transparent 100%),
+    radial-gradient(1px 1px at 88% 25%, rgba(255,255,255,0.65) 0%, transparent 100%),
+    radial-gradient(1px 1px at 20% 80%, rgba(255,255,255,0.5) 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 45% 65%, rgba(255,255,255,0.55) 0%, transparent 100%),
+    radial-gradient(1px 1px at 92% 72%, rgba(255,255,255,0.4) 0%, transparent 100%),
+    radial-gradient(1px 1px at 5% 45%, rgba(200,180,255,0.5) 0%, transparent 100%),
+    radial-gradient(1px 1px at 63% 88%, rgba(180,240,255,0.45) 0%, transparent 100%);
+  pointer-events: none;
+  animation: starTwinkle 8s ease-in-out infinite alternate;
+}
+@keyframes starTwinkle {
+  0% { opacity: 0.6; }
+  50% { opacity: 1; }
+  100% { opacity: 0.7; }
+}
+
+/* CURSOR */
+#cursor {
+  width: 10px; height: 10px;
+  background: var(--cyan);
+  border-radius: 50%;
+  position: fixed; top: 0; left: 0;
+  pointer-events: none; z-index: 9999;
+  transform: translate(-50%,-50%);
+  mix-blend-mode: difference;
+  transition: width .15s, height .15s;
+}
+#cursor-ring {
+  width: 32px; height: 32px;
+  border: 1px solid rgba(192,132,252,0.5);
+  border-radius: 50%;
+  position: fixed; top: 0; left: 0;
+  pointer-events: none; z-index: 9998;
+  transform: translate(-50%,-50%);
+  transition: width .2s, height .2s;
+}
+body:hover #cursor { opacity: 1; }
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.25rem 5rem;
+  background: rgba(4,4,15,0.75);
+  backdrop-filter: blur(24px);
+  border-bottom: 1px solid var(--border2);
+}
+.nav-logo {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 900; font-size: 1.05rem;
+  letter-spacing: 0.08em;
+  color: var(--white);
+  text-decoration: none;
+}
+.nav-logo span { color: var(--cyan); }
+.nav-links { display: flex; gap: 2.5rem; align-items: center; }
+.nav-links a {
+  color: var(--muted); text-decoration: none;
+  font-size: 0.82rem; font-weight: 500;
+  letter-spacing: 0.04em;
+  transition: color .2s;
+}
+.nav-links a:hover { color: var(--white); }
+.nav-cta {
+  padding: 0.5rem 1.25rem;
+  border: 1px solid var(--border);
+  color: var(--cyan) !important;
+  font-size: 0.78rem !important;
+  font-weight: 600 !important;
+  transition: background .2s, border-color .2s !important;
+  clip-path: polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px));
+}
+.nav-cta:hover { background: var(--cyan-dim) !important; }
+
+/* HERO */
+#hero {
+  position: relative; height: 100vh; min-height: 680px;
+  display: flex; align-items: center;
+  overflow: hidden;
+}
+#hero-canvas { position: absolute; inset: 0; z-index: 0; }
+.grid-overlay {
+  position: absolute; inset: 0; z-index: 1;
+  background-image:
+    radial-gradient(1px 1px at 15% 25%, rgba(255,255,255,0.8) 0%, transparent 100%),
+    radial-gradient(1px 1px at 35% 60%, rgba(255,255,255,0.6) 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 60% 15%, rgba(200,180,255,0.9) 0%, transparent 100%),
+    radial-gradient(1px 1px at 80% 45%, rgba(255,255,255,0.5) 0%, transparent 100%),
+    radial-gradient(1px 1px at 90% 20%, rgba(255,255,255,0.7) 0%, transparent 100%),
+    radial-gradient(1px 1px at 25% 85%, rgba(180,240,255,0.6) 0%, transparent 100%),
+    radial-gradient(2px 2px at 50% 70%, rgba(255,200,255,0.5) 0%, transparent 100%),
+    radial-gradient(1px 1px at 95% 75%, rgba(255,255,255,0.5) 0%, transparent 100%),
+    radial-gradient(1px 1px at 8% 50%, rgba(200,180,255,0.6) 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 70% 90%, rgba(180,240,255,0.5) 0%, transparent 100%),
+    radial-gradient(1px 1px at 42% 38%, rgba(255,255,255,0.7) 0%, transparent 100%),
+    radial-gradient(1px 1px at 78% 62%, rgba(255,200,255,0.55) 0%, transparent 100%);
+  animation: starTwinkle 6s ease-in-out infinite alternate;
+}
+.orb {
+  position: absolute; border-radius: 50%;
+  pointer-events: none; z-index: 1; filter: blur(110px);
+}
+.orb-1 { width: 560px; height: 560px; background: rgba(139,92,246,0.28); top: -200px; right: -80px; animation: orbFloat 9s ease-in-out infinite; }
+.orb-2 { width: 420px; height: 420px; background: rgba(236,72,153,0.2); bottom: -120px; right: 260px; animation: orbFloat 12s ease-in-out infinite reverse; }
+.orb-3 { width: 320px; height: 320px; background: rgba(6,182,212,0.14); top: 35%; left: -120px; animation: orbFloat 7s ease-in-out infinite; }
+.orb-4 { width: 250px; height: 250px; background: rgba(251,191,36,0.1); top: 20%; left: 40%; animation: orbFloat 11s ease-in-out infinite reverse; }
+@keyframes orbFloat {
+  0%,100% { transform: translate(0,0) scale(1); }
+  50% { transform: translate(18px,-25px) scale(1.04); }
+}
+
+.hero-inner {
+  position: relative; z-index: 2;
+  width: 100%; padding: 0 5rem;
+  display: grid; grid-template-columns: 1fr auto;
+  gap: 4rem; align-items: center;
+}
+.hero-left {}
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  font-size: 0.72rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--cyan); margin-bottom: 1.75rem;
+}
+.hero-badge-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--cyan);
+  box-shadow: 0 0 8px var(--cyan);
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%,100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.8); }
+}
+h1.hero-name {
+  font-family: 'Nunito', sans-serif;
+  font-size: clamp(3.8rem, 7vw, 6.5rem);
+  font-weight: 900;
+  line-height: 0.95;
+  letter-spacing: -0.01em;
+  margin-bottom: 1.25rem;
+}
+.hero-name .n1 { display: block; color: var(--white); }
+.hero-name .n2 {
+  display: block;
+  background: linear-gradient(100deg, #67e8f9 0%, #c084fc 50%, #f472b6 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero-tagline {
+  font-size: 1.05rem; font-weight: 300; line-height: 1.7;
+  color: rgba(238,242,255,0.55);
+  max-width: 480px; margin-bottom: 2.5rem;
+}
+.hero-tagline strong { color: rgba(238,242,255,0.85); font-weight: 500; }
+.hero-metrics {
+  display: flex; gap: 2.5rem; margin-bottom: 2.75rem;
+}
+.hm {
+  display: flex; flex-direction: column;
+}
+.hm-val {
+  font-family: 'Nunito', sans-serif;
+  font-size: 1.75rem; font-weight: 800;
+  color: var(--cyan); line-height: 1;
+}
+.hm-label {
+  font-size: 0.72rem; font-weight: 500; color: var(--muted);
+  margin-top: 0.2rem; letter-spacing: 0.04em;
+}
+.hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+.btn-fill {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.85rem 2rem;
+  background: var(--cyan); color: #04040f;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.85rem; font-weight: 600;
+  text-decoration: none; cursor: none;
+  clip-path: polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px));
+  transition: transform .2s, box-shadow .2s;
+}
+.btn-fill:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(56,189,248,0.35); }
+.btn-outline {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.85rem 2rem;
+  background: transparent; color: var(--white);
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.85rem; font-weight: 600;
+  border: 1px solid var(--border2);
+  text-decoration: none; cursor: none;
+  clip-path: polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px));
+  transition: border-color .2s, color .2s;
+}
+.btn-outline:hover { border-color: rgba(56,189,248,0.4); color: var(--cyan); }
+
+/* HERO PHOTO */
+.hero-right { display: flex; flex-direction: column; align-items: center; gap: 1.5rem; }
+.photo-frame {
+  position: relative; width: 280px; height: 340px;
+}
+.photo-frame::before {
+  content: ''; position: absolute;
+  inset: -2px; z-index: -1;
+  background: linear-gradient(135deg, #67e8f9, #c084fc, #f472b6);
+  clip-path: polygon(0 0,calc(100% - 20px) 0,100% 20px,100% 100%,20px 100%,0 calc(100% - 20px));
+}
+.photo-frame::after {
+  content: ''; position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 60%, var(--bg) 100%);
+  z-index: 1;
+}
+.photo-frame img {
+  width: 100%; height: 100%; object-fit: cover; object-position: top;
+  display: block;
+  clip-path: polygon(0 0,calc(100% - 20px) 0,100% 20px,100% 100%,20px 100%,0 calc(100% - 20px));
+  filter: grayscale(20%) contrast(1.05);
+}
+.photo-tag {
+  position: absolute; bottom: 1.25rem; left: 1.25rem; z-index: 2;
+  padding: 0.4rem 0.9rem;
+  background: rgba(4,4,15,0.85);
+  border: 1px solid var(--border);
+  font-size: 0.7rem; font-weight: 600;
+  color: var(--cyan); letter-spacing: 0.1em; text-transform: uppercase;
+}
+.hero-scroll-hint {
+  position: absolute; bottom: 2rem; left: 5rem; z-index: 2;
+  font-size: 0.72rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--muted2);
+  display: flex; align-items: center; gap: 0.75rem;
+}
+.hero-scroll-hint::after {
+  content: ''; display: block; width: 36px; height: 1px;
+  background: var(--muted2);
+  animation: linePulse 2.5s ease-in-out infinite;
+}
+@keyframes linePulse {
+  0%,100% { opacity: 0.3; width: 36px; }
+  50% { opacity: 1; width: 52px; }
+}
+
+/* MARQUEE */
+.marquee-wrap {
+  background: rgba(139,92,246,0.06);
+  border-top: 1px solid rgba(192,132,252,0.15);
+  border-bottom: 1px solid rgba(192,132,252,0.15);
+  padding: 0.85rem 0; overflow: hidden;
+}
+.marquee-track {
+  display: flex; gap: 0; white-space: nowrap;
+  animation: marquee 28s linear infinite;
+}
+.marquee-track:hover { animation-play-state: paused; }
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.marquee-item {
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  font-size: 0.75rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--muted); padding: 0 2.5rem;
+  flex-shrink: 0;
+}
+.marquee-item span { color: var(--cyan); font-size: 0.55rem; }
+
+/* SECTIONS */
+.section-wrap {
+  max-width: 1160px; margin: 0 auto;
+  padding: 7rem 5rem;
+}
+.section-divider { border-top: 1px solid var(--border2); }
+.label-row {
+  display: flex; align-items: center; gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+.s-label {
+  font-size: 0.68rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--cyan);
+}
+.s-label-line { flex: 0 0 36px; height: 1px; background: var(--cyan); }
+h2.s-title {
+  font-family: 'Nunito', sans-serif;
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  font-weight: 800; line-height: 1.15;
+  letter-spacing: -0.01em;
+  margin-bottom: 3.5rem;
+}
+h2.s-title em { font-style: normal; background: linear-gradient(90deg, #67e8f9, #c084fc); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+h2.s-title .v { background: linear-gradient(90deg, #c084fc, #f472b6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+/* ABOUT */
+.about-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 5rem; align-items: start; }
+.about-body p {
+  font-size: 1rem; line-height: 1.85; font-weight: 300;
+  color: rgba(238,242,255,0.65);
+  margin-bottom: 1.2rem;
+}
+.about-body p b { color: var(--white); font-weight: 600; }
+.about-body p a { color: var(--cyan); text-decoration: none; }
+.about-pillars { display: flex; flex-direction: column; gap: 1rem; margin-top: 2rem; }
+.pillar {
+  display: flex; align-items: flex-start; gap: 1rem;
+  padding: 1rem 1.25rem;
+  background: var(--card);
+  border: 1px solid var(--border2);
+  clip-path: polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px));
+  transition: border-color .25s, background .25s;
+}
+.pillar:hover { border-color: var(--border); background: var(--card2); }
+.pillar-icon { font-size: 1rem; margin-top: 1px; min-width: 20px; }
+.pillar-text h4 { font-size: 0.88rem; font-weight: 600; margin-bottom: 0.2rem; }
+.pillar-text p { font-size: 0.8rem; font-weight: 300; color: rgba(238,242,255,0.5); line-height: 1.55; }
+
+.about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.stat-box {
+  padding: 1.75rem 1.5rem;
+  background: var(--card);
+  border: 1px solid var(--border2);
+  clip-path: polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,12px 100%,0 calc(100% - 12px));
+  position: relative; overflow: hidden;
+  transition: border-color .25s;
+}
+.stat-box::before {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(56,189,248,0.04) 0%, transparent 55%);
+}
+.stat-box:hover { border-color: var(--border); }
+.stat-val {
+  font-family: 'Nunito', sans-serif;
+  font-size: 2.2rem; font-weight: 900;
+  color: var(--cyan); display: block; line-height: 1;
+}
+.stat-val.violet { color: var(--violet); }
+.stat-desc { font-size: 0.75rem; font-weight: 500; color: var(--muted); margin-top: 0.4rem; letter-spacing: 0.03em; }
+
+/* EXPERIENCE */
+.timeline { position: relative; padding-left: 1.75rem; }
+.timeline::before {
+  content: ''; position: absolute; left: 0; top: 8px; bottom: 40px;
+  width: 1px;
+  background: linear-gradient(to bottom, var(--cyan) 0%, var(--violet) 60%, transparent 100%);
+}
+.t-item { position: relative; padding: 0 0 3.5rem 2.25rem; }
+.t-dot {
+  position: absolute; left: -6px; top: 6px;
+  width: 13px; height: 13px; border-radius: 50%;
+  background: var(--bg); border: 2px solid var(--cyan);
+  box-shadow: 0 0 10px rgba(56,189,248,0.5);
+}
+.t-dot.v { border-color: var(--violet); box-shadow: 0 0 10px rgba(167,139,250,0.5); }
+.t-period { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--cyan); margin-bottom: 0.4rem; }
+.t-period.v { color: var(--violet); }
+.t-role { font-family: 'Nunito', sans-serif; font-size: 1.2rem; font-weight: 700; margin-bottom: 0.15rem; }
+.t-co { font-size: 0.85rem; font-weight: 400; color: var(--muted); margin-bottom: 1rem; }
+.t-list { list-style: none; }
+.t-list li {
+  font-size: 0.9rem; font-weight: 300; line-height: 1.7;
+  color: rgba(238,242,255,0.6);
+  padding: 0.2rem 0 0.2rem 1.2rem;
+  position: relative;
+}
+.t-list li::before { content: '▸'; position: absolute; left: 0; color: var(--cyan); font-size: 0.65rem; top: 0.38rem; }
+.t-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.9rem; }
+.t-tag {
+  font-size: 0.65rem; font-weight: 500;
+  padding: 0.2rem 0.6rem;
+  background: rgba(56,189,248,0.06);
+  border: 1px solid rgba(56,189,248,0.14);
+  color: rgba(238,242,255,0.55);
+}
+
+/* PROJECTS */
+.projects-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+.p-card {
+  padding: 1.75rem;
+  background: var(--card);
+  border: 1px solid var(--border2);
+  clip-path: polygon(0 0,calc(100% - 16px) 0,100% 16px,100% 100%,16px 100%,0 calc(100% - 16px));
+  position: relative; overflow: hidden;
+  transition: border-color .3s, transform .3s;
+  cursor: none;
+  display: flex; flex-direction: column;
+}
+.p-card::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(56,189,248,0.05) 0%, transparent 55%);
+  opacity: 0; transition: opacity .3s;
+}
+.p-card:hover { border-color: rgba(56,189,248,0.35); transform: translateY(-4px); }
+.p-card:hover::after { opacity: 1; }
+.p-card.featured { border-color: rgba(56,189,248,0.22); }
+.p-tag {
+  font-size: 0.62rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--cyan);
+  border: 1px solid rgba(56,189,248,0.2);
+  padding: 0.2rem 0.65rem; display: inline-block;
+  margin-bottom: 1.1rem;
+}
+.p-tag.v { color: var(--violet); border-color: rgba(167,139,250,0.2); }
+.p-name { font-family: 'Nunito', sans-serif; font-size: 1.15rem; font-weight: 700; margin-bottom: 0.65rem; }
+.p-desc { font-size: 0.85rem; font-weight: 300; line-height: 1.7; color: rgba(238,242,255,0.55); flex: 1; margin-bottom: 1.25rem; }
+.p-impact { font-size: 0.75rem; font-weight: 500; color: var(--cyan); padding: 0.5rem 0; border-top: 1px solid var(--border2); margin-bottom: 0.85rem; }
+.p-stack { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+.p-pill {
+  font-size: 0.62rem; font-weight: 500;
+  padding: 0.18rem 0.5rem;
+  background: rgba(56,189,248,0.06);
+  border: 1px solid rgba(56,189,248,0.12);
+  color: rgba(238,242,255,0.5);
+}
+
+/* SKILLS */
+.skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
+.sk-group-label {
+  font-size: 0.68rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--violet); margin-bottom: 1.5rem;
+}
+.sk-bars { display: flex; flex-direction: column; gap: 1.35rem; }
+.sk-row {}
+.sk-row-top {
+  display: flex; justify-content: space-between; align-items: baseline;
+  font-size: 0.88rem; font-weight: 400; margin-bottom: 0.4rem;
+}
+.sk-pct { font-size: 0.75rem; font-weight: 600; color: var(--cyan); }
+.sk-track { height: 2px; background: rgba(255,255,255,0.06); position: relative; overflow: hidden; }
+.sk-fill {
+  position: absolute; top: 0; left: 0; height: 100%;
+  background: linear-gradient(90deg, #67e8f9 0%, #c084fc 60%, #f472b6 100%);
+  width: 0; transition: width 1.3s cubic-bezier(.16,1,.3,1);
+}
+.sk-fill.on { width: var(--w); }
+
+.tools-section { margin-top: 3.5rem; }
+.tools-label { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--violet); margin-bottom: 1.25rem; }
+.tools-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem; }
+.tool-box {
+  padding: 0.75rem 1rem;
+  background: var(--card);
+  border: 1px solid var(--border2);
+  font-size: 0.82rem; font-weight: 400;
+  color: rgba(238,242,255,0.65);
+  text-align: center;
+  transition: border-color .2s, color .2s, background .2s;
+  cursor: none;
+}
+.tool-box:hover { border-color: var(--border); color: var(--cyan); background: var(--cyan-dim); }
+
+/* AWARDS */
+.awards-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.25rem; }
+.award-card {
+  padding: 1.75rem;
+  background: var(--card);
+  border: 1px solid var(--border2);
+  clip-path: polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,12px 100%,0 calc(100% - 12px));
+  transition: border-color .25s;
+}
+.award-card:hover { border-color: rgba(167,139,250,0.35); }
+.award-icon { font-size: 1.5rem; margin-bottom: 0.85rem; }
+.award-title { font-family: 'Nunito', sans-serif; font-size: 1rem; font-weight: 700; margin-bottom: 0.6rem; }
+.award-desc { font-size: 0.82rem; font-weight: 300; line-height: 1.65; color: rgba(238,242,255,0.5); }
+
+/* CONTACT */
+#contact { text-align: center; }
+.contact-wrap { max-width: 640px; margin: 0 auto; }
+.contact-big {
+  font-family: 'Nunito', sans-serif;
+  font-size: clamp(2.4rem, 5vw, 4.5rem);
+  font-weight: 900; line-height: 1.1;
+  letter-spacing: -0.01em;
+  margin-bottom: 1.25rem;
+}
+.contact-big em {
+  font-style: normal;
+  background: linear-gradient(100deg, #67e8f9, #c084fc, #f472b6);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.contact-sub {
+  font-size: 0.95rem; font-weight: 300; line-height: 1.75;
+  color: rgba(238,242,255,0.45); margin-bottom: 2.75rem;
+}
+.contact-grid { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 2.5rem; }
+.c-link {
+  display: flex; align-items: center; gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border: 1px solid var(--border2);
+  font-size: 0.82rem; font-weight: 500;
+  color: rgba(238,242,255,0.65);
+  text-decoration: none;
+  transition: border-color .2s, color .2s;
+  clip-path: polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px));
+}
+.c-link svg { width: 14px; height: 14px; opacity: .7; flex-shrink: 0; }
+.c-link:hover { border-color: var(--border); color: var(--cyan); }
+.avail-badge {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.45rem 1rem;
+  background: rgba(56,189,248,0.06);
+  border: 1px solid var(--border);
+  font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--cyan);
+}
+.avail-dot { width: 6px; height: 6px; border-radius: 50%; background: #4ade80; box-shadow: 0 0 6px #4ade80; animation: pulse 2s infinite; }
+
+/* FOOTER */
+footer {
+  border-top: 1px solid var(--border2);
+  padding: 1.75rem 5rem;
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 0.78rem; font-weight: 400; color: var(--muted2);
+}
+footer a { color: var(--muted2); text-decoration: none; transition: color .2s; }
+footer a:hover { color: var(--cyan); }
+footer strong { color: var(--cyan); font-weight: 600; }
+
+/* REVEAL */
+.reveal { opacity: 0; transform: translateY(32px); transition: opacity .7s ease, transform .7s ease; }
+.reveal.in { opacity: 1; transform: translateY(0); }
+.d1 { transition-delay: .1s; } .d2 { transition-delay: .2s; } .d3 { transition-delay: .3s; } .d4 { transition-delay: .4s; }
+
+/* GLITCH */
+@keyframes glitch {
+  0%,88%,100% { transform: none; }
+  90% { transform: translate(-2px,1px); }
+  93% { transform: translate(2px,-1px); }
+  96% { transform: translate(-1px,1px); }
+}
+.hero-name { animation: glitch 9s infinite; }
+
+@media (max-width: 960px) {
+  nav { padding: 1.25rem 1.5rem; }
+  .nav-links { display: none; }
+  .hero-inner { grid-template-columns: 1fr; padding: 0 1.5rem; }
+  .hero-right { display: none; }
+  .section-wrap { padding: 5rem 1.5rem; }
+  .about-grid, .skills-grid { grid-template-columns: 1fr; }
+  .projects-grid, .awards-grid { grid-template-columns: 1fr; }
+  .tools-grid { grid-template-columns: repeat(3,1fr); }
+  footer { padding: 1.5rem; flex-direction: column; gap: 0.5rem; text-align: center; }
+  .hero-metrics { flex-wrap: wrap; gap: 1.5rem; }
+}
+</style>
 </head>
 <body>
-  <!-- Animated Background -->
-  <div class="bg-animation">
-    <div class="grid-bg"></div>
-    <div class="orb orb1"></div>
-    <div class="orb orb2"></div>
+
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo">M<span>.</span>Sood</a>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#experience">Experience</a>
+    <a href="#projects">Case Studies</a>
+    <a href="#skills">Skills</a>
+    <a href="#awards">Recognition</a>
+    <a href="#contact" class="nav-cta">Open to Work</a>
   </div>
+</nav>
 
-  <!-- Navigation -->
-  <nav>
-    <div class="container">
-      <div class="logo">MS</div>
-      <ul class="nav-links">
-        <li><a href="#home">Home</a></li>
-        <li><a href="#case-studies">Case Studies</a></li>
-        <li><a href="#principles">Approach</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#awards">Recognition</a></li>
-        <li><a href="#contact" class="nav-cta">Get in Touch</a></li>
-      </ul>
-    </div>
-  </nav>
-
-  <!-- Hero Section -->
-  <section id="home" class="hero">
-    <div class="container">
-      <div class="hero-content">
-        <div class="hero-text">
-          <div class="hero-badge">
-            <span class="status-dot"></span>
-            Open to PM Opportunities
-          </div>
-          <h1>Building products that <span class="gradient-text">drive impact</span></h1>
-          <p class="subtitle">Product Manager | MBA '26 | Data-Driven Strategist</p>
-          <p>I transform complex challenges into elegant solutions through user-centered design, data-driven strategy, and cross-functional collaboration. With 6+ years leading product initiatives from 0→1, I've driven $50M+ in business value and built systems that scale.</p>
-          <div class="cta-buttons">
-            <a href="#case-studies" class="btn btn-primary">
-              View Case Studies →
-            </a>
-            <a href="Monisha_Sood_Resume.pdf" class="btn btn-secondary" download>
-              Download Resume
-            </a>
-            <a href="https://www.linkedin.com/in/monishasood07/" class="btn btn-secondary" target="_blank">
-              <svg class="linkedin-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-              </svg>
-              LinkedIn
-            </a>
-          </div>
-        </div>
-        
-        <div class="hero-profile">
-          <div class="profile-card">
-            <div class="profile-image-container">
-              <div class="profile-image-bg"></div>
-              <img src="monisha-profile.png" alt="Monisha Sood" class="profile-image">
-            </div>
-            <h3 class="profile-name">Monisha Sood</h3>
-            <p class="profile-title">Product Manager | MBA '26</p>
-            <div class="profile-links">
-              <a href="Monisha_Sood_Resume.pdf" class="profile-link primary" download>
-                <span class="link-icon">▣</span>
-                Download Resume
-              </a>
-              <a href="https://www.linkedin.com/in/monishasood07/" class="profile-link" target="_blank">
-                <svg class="linkedin-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                </svg>
-                LinkedIn Profile
-              </a>
-              <a href="mailto:monisha.sood@wisc.edu" class="profile-link">
-                <span class="link-icon">✉</span>
-                monisha.sood@wisc.edu
-              </a>
-            </div>
-          </div>
-        </div>
+<!-- HERO -->
+<section id="hero">
+  <canvas id="hero-canvas"></canvas>
+  <div class="grid-overlay"></div>
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+  <div class="orb orb-4"></div>
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-badge">
+        <span class="hero-badge-dot"></span>
+        Open to PM Opportunities · May 2026
       </div>
-      
+      <h1 class="hero-name">
+        <span class="n1">Monisha</span>
+        <span class="n2">Sood.</span>
+      </h1>
+      <p class="hero-tagline">
+        Product Manager with <strong>6+ years</strong> building zero-to-one products at the intersection of <strong>AI, strategy, and human impact</strong>. MBA candidate at Wisconsin School of Business.
+      </p>
       <div class="hero-metrics">
-          <div class="metric-card">
-            <div class="metric-value">6+</div>
-            <div class="metric-label">Years in Product</div>
-            <div class="metric-change">↑ Growing</div>
-          </div>
-          <div class="metric-card">
-            <div class="metric-value">$50M+</div>
-            <div class="metric-label">Value Created</div>
-            <div class="metric-change">↑ Contracts Closed</div>
-          </div>
-          <div class="metric-card">
-            <div class="metric-value">70%</div>
-            <div class="metric-label">Efficiency Gains</div>
-            <div class="metric-change">↑ Through Automation</div>
-          </div>
-          <div class="metric-card">
-            <div class="metric-value">3</div>
-            <div class="metric-label">MVPs Launched</div>
-            <div class="metric-change">↑ 0→1 Products</div>
-          </div>
+        <div class="hm">
+          <span class="hm-val">$50M+</span>
+          <span class="hm-label">Business Value</span>
         </div>
+        <div class="hm">
+          <span class="hm-val">$48M</span>
+          <span class="hm-label">Cost Savings Led</span>
+        </div>
+        <div class="hm">
+          <span class="hm-val">3</span>
+          <span class="hm-label">MVPs Launched</span>
+        </div>
+        <div class="hm">
+          <span class="hm-val">70%</span>
+          <span class="hm-label">Efficiency Gains</span>
+        </div>
+      </div>
+      <div class="hero-actions">
+        <a href="#projects" class="btn-fill">View Case Studies ↓</a>
+        <a href="https://monishasood.github.io/Product-Manager/Monisha_Sood_Resume.pdf" target="_blank" class="btn-outline">Download Resume</a>
       </div>
     </div>
-  </section>
-
-  <!-- Product Case Studies Section -->
-  <section id="case-studies">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-tag">PRODUCT WORK</span>
-        <h2 class="section-title">Featured Case Studies</h2>
-        <p class="section-description">
-          Real product problems. Data-driven solutions. Measurable impact.
-        </p>
-      </div>
-      
-      <div class="case-studies">
-        <!-- Case Study 1: SecondWind NIL Platform -->
-        <div class="case-study">
-          <div class="case-study-header">
-            <div class="case-study-meta">
-              <span class="company-tag">SecondWind Pro</span>
-              <span class="timeline">Jun 2025 – Present</span>
-            </div>
-            <h3>Building NIL Valuation Platform from Zero</h3>
-            <p class="case-study-intro">
-              Led the 0→1 development of an AI-powered platform connecting Division 1 athletes with NIL opportunities, coordinating cross-functional teams to deliver an MVP that enabled $500K+ in fundraising within the first month.
-            </p>
-          </div>
-          
-          <div class="case-study-grid">
-            <div class="case-section">
-              <h4>The Challenge</h4>
-              <div class="problem-statement">
-                <p>College athletes needed a trusted platform to showcase their NIL value, while donors and collectives lacked data-driven tools to identify and evaluate talent across 100+ schools. Manual outreach was eating 80% of the team's time.</p>
-              </div>
-              
-              <h4>My Approach</h4>
-              <ul class="solution-list">
-                <li>Conducted user interviews with 15+ athletes, donors, and collectives to validate product-market fit</li>
-                <li>Designed product roadmap prioritizing verified profiles and automated outreach</li>
-                <li>Built cross-functional team of 8 (engineering, data, fundraising) with clear OKRs</li>
-                <li>Architected Airtable/Zapier automation reducing manual work by 70%</li>
-                <li>Led weekly leadership standups to maintain velocity and alignment</li>
-              </ul>
-            </div>
-            
-            <div class="case-section">
-              <h4>Impact Delivered</h4>
-              <div class="impact-metrics">
-                <div class="impact-card">
-                  <div class="impact-number">25+</div>
-                  <div class="impact-label">Athletes Onboarded (Month 1)</div>
-                </div>
-                <div class="impact-card">
-                  <div class="impact-number">$500K+</div>
-                  <div class="impact-label">Fundraising Supported</div>
-                </div>
-                <div class="impact-card">
-                  <div class="impact-number">70%</div>
-                  <div class="impact-label">Time Saved via Automation</div>
-                </div>
-                <div class="impact-card">
-                  <div class="impact-number">40%</div>
-                  <div class="impact-label">Faster Team Delivery</div>
-                </div>
-              </div>
-              
-              <h4>Key Learnings</h4>
-              <ul class="solution-list">
-                <li><strong>Start with the problem:</strong> User research uncovered that trust & verification mattered more than fancy features</li>
-                <li><strong>Automate ruthlessly:</strong> Building scalable systems early enabled us to punch above our weight</li>
-                <li><strong>Cross-functional = competitive advantage:</strong> Breaking down silos between teams accelerated every decision</li>
-              </ul>
-              
-              <div class="tools-used">
-                <span class="tool-badge">Airtable</span>
-                <span class="tool-badge">Zapier</span>
-                <span class="tool-badge">User Research</span>
-                <span class="tool-badge">OKRs</span>
-                <span class="tool-badge">Agile</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Case Study 2: Flyhomes Sales Compensation -->
-        <div class="case-study">
-          <div class="case-study-header">
-            <div class="case-study-meta">
-              <span class="company-tag">Flyhomes</span>
-              <span class="timeline">Jun 2023 – Jun 2024</span>
-            </div>
-            <h3>Redesigning Sales Compensation to Save $48MM</h3>
-            <p class="case-study-intro">
-              Transformed a broken compensation system through data analysis and stakeholder alignment, migrating 100+ users to a new platform while maintaining 95% satisfaction and unlocking massive cost savings.
-            </p>
-          </div>
-          
-          <div class="case-study-grid">
-            <div class="case-section">
-              <h4>The Challenge</h4>
-              <div class="problem-statement">
-                <p>Sales team was demotivated by opaque compensation plans. Manual processing errors created mistrust. Company needed to optimize variable incentives without losing top performers.</p>
-              </div>
-              
-              <h4>My Approach</h4>
-              <ul class="solution-list">
-                <li>Analyzed performance data for 200+ agents to identify compensation optimization opportunities</li>
-                <li>Partnered with finance & engineering to redesign system architecture</li>
-                <li>Led cross-functional migration with zero downtime for $600K in processed commissions</li>
-                <li>Created training program onboarding 50+ associates in 3 days</li>
-                <li>Built Airtable dashboards for real-time performance tracking</li>
-              </ul>
-            </div>
-            
-            <div class="case-section">
-              <h4>Impact Delivered</h4>
-              <div class="impact-metrics">
-                <div class="impact-card">
-                  <div class="impact-number">$48MM</div>
-                  <div class="impact-label">Cost Savings Achieved</div>
-                </div>
-                <div class="impact-card">
-                  <div class="impact-number">95%</div>
-                  <div class="impact-label">Agent Satisfaction Rate</div>
-                </div>
-                <div class="impact-card">
-                  <div class="impact-number">17%</div>
-                  <div class="impact-label">CSAT Improvement</div>
-                </div>
-                <div class="impact-card">
-                  <div class="impact-number">28%</div>
-                  <div class="impact-label">Team Effectiveness Boost</div>
-                </div>
-              </div>
-              
-              <h4>Key Learnings</h4>
-              <ul class="solution-list">
-                <li><strong>Stakeholder buy-in is everything:</strong> Transparent communication turned skeptics into champions</li>
-                <li><strong>Data drives decisions:</strong> Analytics revealed insights that intuition missed</li>
-                <li><strong>Change management matters:</strong> Technical excellence means nothing if users don't adopt</li>
-              </ul>
-              
-              <div class="tools-used">
-                <span class="tool-badge">Data Analysis</span>
-                <span class="tool-badge">Airtable</span>
-                <span class="tool-badge">Change Management</span>
-                <span class="tool-badge">SQL</span>
-                <span class="tool-badge">Stakeholder Alignment</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Case Study 3: Flyhomes Product Development -->
-        <div class="case-study">
-          <div class="case-study-header">
-            <div class="case-study-meta">
-              <span class="company-tag">Flyhomes</span>
-              <span class="timeline">Apr 2022 – Jun 2023</span>
-            </div>
-            <h3>Accelerating Product Velocity Through Agile Transformation</h3>
-            <p class="case-study-intro">
-              Transformed product development process from waterfall to agile, leading end-to-end initiatives that improved team efficiency 68% and customer satisfaction 32% through rapid iteration and data-driven prioritization.
-            </p>
-          </div>
-          
-          <div class="case-study-grid">
-            <div class="case-section">
-              <h4>The Challenge</h4>
-              <div class="problem-statement">
-                <p>Product releases were slow and buggy. Teams worked in silos. Customer feedback loop was broken. SLAs were consistently missed, eroding trust with clients.</p>
-              </div>
-              
-              <h4>My Approach</h4>
-              <ul class="solution-list">
-                <li>Implemented agile ceremonies (sprint planning, retrospectives, daily standups)</li>
-                <li>Created user story framework tied to customer pain points</li>
-                <li>Built SQL dashboards for real-time KPI tracking and decision-making</li>
-                <li>Established cross-functional testing protocols reducing bugs 40%</li>
-                <li>Led product inspections with clients for continuous feedback</li>
-              </ul>
-            </div>
-            
-            <div class="case-section">
-              <h4>Impact Delivered</h4>
-              <div class="impact-metrics">
-                <div class="impact-card">
-                  <div class="impact-number">68%</div>
-                  <div class="impact-label">Team Efficiency Gain</div>
-                </div>
-                <div class="impact-card">
-                  <div class="impact-number">32%</div>
-                  <div class="impact-label">CSAT Increase</div>
-                </div>
-                <div class="impact-card">
-                  <div class="impact-number">20%</div>
-                  <div class="impact-label">Faster Delivery</div>
-                </div>
-                <div class="impact-card">
-                  <div class="impact-number">8%</div>
-                  <div class="impact-label">SLA Reduction</div>
-                </div>
-              </div>
-              
-              <h4>Key Learnings</h4>
-              <ul class="solution-list">
-                <li><strong>Process enables innovation:</strong> The right framework unlocks creativity rather than constraining it</li>
-                <li><strong>Measure what matters:</strong> KPIs aligned teams around shared goals</li>
-                <li><strong>Customer proximity wins:</strong> Regular feedback loops shortened the path to product-market fit</li>
-              </ul>
-              
-              <div class="tools-used">
-                <span class="tool-badge">Agile/Scrum</span>
-                <span class="tool-badge">JIRA</span>
-                <span class="tool-badge">SQL</span>
-                <span class="tool-badge">User Stories</span>
-                <span class="tool-badge">Cross-functional Testing</span>
-              </div>
-            </div>
-          </div>
-        </div>
+    <div class="hero-right">
+      <div class="photo-frame">
+        <img src="https://monishasood.github.io/Product-Manager/monisha-profile.png" alt="Monisha Sood" />
+        <div class="photo-tag">Product Manager · MBA '26</div>
       </div>
     </div>
-  </section>
+  </div>
+  <div class="hero-scroll-hint">Scroll to explore</div>
+</section>
 
-  <!-- PM Principles Section -->
-  <section id="principles">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-tag">MY APPROACH</span>
-        <h2 class="section-title">Product Philosophy</h2>
-        <p class="section-description">
-          How I think about building products that matter
-        </p>
-      </div>
-      
-      <div class="principles-grid">
-        <div class="principle-card">
-          <div class="principle-icon">◉</div>
-          <h3>Start with the Problem</h3>
-          <p>Great products emerge from deep customer understanding, not feature lists. I invest heavily in user research, qualitative feedback, and data analysis before writing a single user story.</p>
-        </div>
-        
-        <div class="principle-card">
-          <div class="principle-icon">◈</div>
-          <h3>Let Data Drive Decisions</h3>
-          <p>Opinions are cheap. Data is truth. I build dashboards, run A/B tests, and define clear metrics to validate assumptions and measure impact at every stage.</p>
-        </div>
-        
-        <div class="principle-card">
-          <div class="principle-icon">⚡</div>
-          <h3>Ship Fast, Learn Faster</h3>
-          <p>MVPs beat perfection every time. I prioritize ruthlessly, cut scope aggressively, and iterate based on real user behavior rather than hypothetical requirements.</p>
-        </div>
-        
-        <div class="principle-card">
-          <div class="principle-icon">◆</div>
-          <h3>Cross-functional is Non-negotiable</h3>
-          <p>Product managers are multipliers, not individual contributors. I build bridges between engineering, design, and business stakeholders to align everyone around shared goals.</p>
-        </div>
-        
-        <div class="principle-card">
-          <div class="principle-icon">⚙</div>
-          <h3>Automate the Boring Stuff</h3>
-          <p>Manual processes are technical debt. I build systems that scale, using tools like Zapier and Airtable to eliminate repetitive work and free teams to focus on what matters.</p>
-        </div>
-        
-        <div class="principle-card">
-          <div class="principle-icon">◎</div>
-          <h3>Empathy + Execution</h3>
-          <p>The best PMs balance vision with pragmatism. I care deeply about user problems while staying ruthlessly focused on delivering tangible business outcomes.</p>
-        </div>
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span class="marquee-item">Product Strategy <span>✦</span></span>
+    <span class="marquee-item">AI/ML Products <span>✦</span></span>
+    <span class="marquee-item">Zero-to-One Builds <span>✦</span></span>
+    <span class="marquee-item">Data-Driven PM <span>✦</span></span>
+    <span class="marquee-item">Cross-functional Leadership <span>✦</span></span>
+    <span class="marquee-item">UW–Madison MBA '26 <span>✦</span></span>
+    <span class="marquee-item">Agile &amp; Scrum <span>✦</span></span>
+    <span class="marquee-item">Go-to-Market Strategy <span>✦</span></span>
+    <span class="marquee-item">User Research <span>✦</span></span>
+    <span class="marquee-item">OKR Frameworks <span>✦</span></span>
+    <!-- duplicate for seamless loop -->
+    <span class="marquee-item">Product Strategy <span>✦</span></span>
+    <span class="marquee-item">AI/ML Products <span>✦</span></span>
+    <span class="marquee-item">Zero-to-One Builds <span>✦</span></span>
+    <span class="marquee-item">Data-Driven PM <span>✦</span></span>
+    <span class="marquee-item">Cross-functional Leadership <span>✦</span></span>
+    <span class="marquee-item">UW–Madison MBA '26 <span>✦</span></span>
+    <span class="marquee-item">Agile &amp; Scrum <span>✦</span></span>
+    <span class="marquee-item">Go-to-Market Strategy <span>✦</span></span>
+    <span class="marquee-item">User Research <span>✦</span></span>
+    <span class="marquee-item">OKR Frameworks <span>✦</span></span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<div class="section-divider">
+<div class="section-wrap" id="about">
+  <div class="label-row reveal"><span class="s-label">About</span><span class="s-label-line"></span></div>
+  <h2 class="s-title reveal">Building products at the<br>intersection of <em>AI</em> and <span class="v">impact.</span></h2>
+  <div class="about-grid">
+    <div class="about-body reveal">
+      <p>I'm a product manager with <b>6+ years of experience</b> driving zero-to-one product development across real estate tech, NIL platforms, and enterprise B2B SaaS. I've delivered <b>$50M+ in business value</b> and led initiatives that generated <b>$48M in cost savings</b> through data-driven strategy and cross-functional execution.</p>
+      <p>Currently completing my <b>MBA at Wisconsin School of Business</b>, specializing in Technology Strategy & Product Management. My focus is on <b>AI/ML-powered products</b> — from LLMs and RAG pipelines to generative AI stacks that create real user value.</p>
+      <p>I believe great products come from deep user empathy, ruthless prioritization, and shipping fast to learn faster. I'm actively exploring <b>PM roles starting May 2026</b> at AI-first companies where I can own end-to-end product decisions.</p>
+      <div class="about-pillars">
+        <div class="pillar"><div class="pillar-icon">◉</div><div class="pillar-text"><h4>Start with the problem</h4><p>User research before user stories — always.</p></div></div>
+        <div class="pillar"><div class="pillar-icon">◈</div><div class="pillar-text"><h4>Let data drive decisions</h4><p>Dashboards, A/B tests, and clear metrics at every stage.</p></div></div>
+        <div class="pillar"><div class="pillar-icon">⚡</div><div class="pillar-text"><h4>Ship fast, learn faster</h4><p>MVPs beat perfection. Iterate on real user behavior.</p></div></div>
       </div>
     </div>
-  </section>
-
-  <!-- Skills Section -->
-  <section id="skills">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-tag">CAPABILITIES</span>
-        <h2 class="section-title">Product Management Toolkit</h2>
-        <p class="section-description">
-          Technical skills and methodologies I use to ship great products
-        </p>
-      </div>
-      
-      <div class="skills-categories">
-        <div class="skill-category" data-category="strategy">
-          <h3>Product Strategy</h3>
-          <div class="skill-items">
-            <span class="skill-item">Roadmap Planning</span>
-            <span class="skill-item">Prioritization Frameworks</span>
-            <span class="skill-item">Competitive Analysis</span>
-            <span class="skill-item">0→1 MVP Development</span>
-            <span class="skill-item">Go-to-Market Strategy</span>
-            <span class="skill-item">User Research</span>
-            <span class="skill-item">OKR Definition</span>
-            <span class="skill-item">Market Sizing</span>
-          </div>
-        </div>
-        
-        <div class="skill-category" data-category="execution">
-          <h3>Execution & Delivery</h3>
-          <div class="skill-items">
-            <span class="skill-item">Agile/Scrum</span>
-            <span class="skill-item">User Story Writing</span>
-            <span class="skill-item">Sprint Planning</span>
-            <span class="skill-item">JIRA</span>
-            <span class="skill-item">Confluence</span>
-            <span class="skill-item">Backlog Management</span>
-            <span class="skill-item">Cross-functional Leadership</span>
-            <span class="skill-item">Stakeholder Management</span>
-          </div>
-        </div>
-        
-        <div class="skill-category" data-category="data">
-          <h3>Data & Analytics</h3>
-          <div class="skill-items">
-            <span class="skill-item">SQL</span>
-            <span class="skill-item">Power BI</span>
-            <span class="skill-item">A/B Testing</span>
-            <span class="skill-item">KPI Tracking</span>
-            <span class="skill-item">Data Studio</span>
-            <span class="skill-item">R</span>
-            <span class="skill-item">Excel Advanced</span>
-            <span class="skill-item">Metrics-Driven Decisions</span>
-          </div>
-        </div>
-        
-        <div class="skill-category" data-category="tools">
-          <h3>Tools & Technical</h3>
-          <div class="skill-items">
-            <span class="skill-item">Figma</span>
-            <span class="skill-item">Airtable</span>
-            <span class="skill-item">Zapier</span>
-            <span class="skill-item">Salesforce</span>
-            <span class="skill-item">Asana</span>
-            <span class="skill-item">Lucidchart</span>
-            <span class="skill-item">HTML/CSS</span>
-            <span class="skill-item">GitHub</span>
-            <span class="skill-item">API Integration</span>
-          </div>
-        </div>
+    <div class="reveal d2">
+      <div class="about-stats">
+        <div class="stat-box"><span class="stat-val">6+</span><div class="stat-desc">Years in Product</div></div>
+        <div class="stat-box"><span class="stat-val">$50M+</span><div class="stat-desc">Value Created</div></div>
+        <div class="stat-box"><span class="stat-val violet">$48M</span><div class="stat-desc">Cost Savings Led</div></div>
+        <div class="stat-box"><span class="stat-val">3</span><div class="stat-desc">MVPs Launched 0→1</div></div>
+        <div class="stat-box"><span class="stat-val violet">70%</span><div class="stat-desc">Efficiency Gains</div></div>
+        <div class="stat-box"><span class="stat-val">12+</span><div class="stat-desc">Discovery Interviews</div></div>
       </div>
     </div>
-  </section>
+  </div>
+</div>
+</div>
 
-  <!-- Awards Section -->
-  <section id="awards">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-tag">RECOGNITION</span>
-        <h2 class="section-title">Awards & Impact</h2>
-        <p class="section-description">
-          Recognized for driving measurable business outcomes
-        </p>
-      </div>
-      
-      <div class="awards-showcase">
-        <div class="award-card-modern">
-          <div class="award-icon-modern">★</div>
-          <h3>Most Trusted Partner</h3>
-          <p>Honored for closing $10M+ in contracts and building exceptional client relationships at Flyhomes</p>
-        </div>
-        
-        <div class="award-card-modern">
-          <div class="award-icon-modern">◆</div>
-          <h3>Superstar of the Month</h3>
-          <p>Awarded for 30% productivity improvement and exceeding targets through process innovation</p>
-        </div>
-        
-        <div class="award-card-modern">
-          <div class="award-icon-modern">▲</div>
-          <h3>Product Impact Champion</h3>
-          <p>Recognized for MVP launch that boosted engagement and reduced manual work by 70%</p>
-        </div>
-      </div>
-      
-      <div class="section-header" style="margin-top: 80px;">
-        <span class="section-tag">CERTIFICATIONS</span>
-        <h2 class="section-title">Continuous Learning</h2>
-      </div>
-      
-      <div class="skills-categories">
-        <div class="skill-category">
-          <h3>Product & Business</h3>
-          <div class="skill-items">
-            <a href="https://www.linkedin.com/learning/certificates/09a40c572ed115277cb7759589f5a511c715e14866b1364ca31138c49f81b30e" target="_blank" class="skill-item">Product Management (LinkedIn Learning)</a>
-            <a href="https://www.udemy.com/certificate/UC-b1173594-700d-442f-a0c6-0208bcc2eacf/" target="_blank" class="skill-item">Product Management (Udemy)</a>
-            <span class="skill-item">Business Management (London Business School)</span>
-            <a href="https://www.linkedin.com/learning/certificates/d42b50e3f296dd20559c78e9c5d141aa841d1d88f41d31d50d2d4dcf96427785" target="_blank" class="skill-item">Generative AI for Product Managers</a>
-            <span class="skill-item">Six Sigma</span>
-          </div>
-        </div>
-        
-        <div class="skill-category">
-          <h3>Technical & Analytics</h3>
-          <div class="skill-items">
-            <a href="https://udemy-certificate.s3.amazonaws.com/image/UC-e1d0cada-6bfe-4abf-a3fb-9635d4085bc6.jpg" target="_blank" class="skill-item">SQL Certification (Udemy)</a>
-            <a href="https://www.udemy.com/certificate/UC-ec5926b4-c7d7-420f-92e6-49c07f705b34/" target="_blank" class="skill-item">Power BI (Udemy)</a>
-            <span class="skill-item">Microsoft Certified Dashboard Training</span>
-            <a href="https://www.linkedin.com/learning/certificates/26253a7a429260747c3222960f941254354825bcf67e47a7dd0bc896bcbeb741" target="_blank" class="skill-item">MS Excel Advanced (LinkedIn Learning)</a>
-            <span class="skill-item">Data Analysis</span>
-          </div>
-        </div>
+<!-- EXPERIENCE -->
+<div class="section-divider">
+<div class="section-wrap" id="experience">
+  <div class="label-row reveal"><span class="s-label">Experience</span><span class="s-label-line"></span></div>
+  <h2 class="s-title reveal">Where I've built<br>things that matter.</h2>
+  <div class="timeline">
+
+    <div class="t-item reveal">
+      <div class="t-dot"></div>
+      <div class="t-period">Jun 2025 – Present</div>
+      <div class="t-role">Product Manager</div>
+      <div class="t-co">SecondWind Pro — NIL Technology Platform</div>
+      <ul class="t-list">
+        <li>Led 0→1 development of an AI-powered platform connecting Division I athletes with NIL opportunities</li>
+        <li>Onboarded 25+ athletes in month one, enabling <b style="color:var(--white);font-weight:600">$500K+ in fundraising</b> within the first month</li>
+        <li>Conducted user interviews with 15+ athletes, donors, and collectives to validate product-market fit</li>
+        <li>Architected Airtable/Zapier automation reducing manual outreach work by 70%</li>
+        <li>Built cross-functional team of 8 (engineering, data, fundraising) with clear OKRs and weekly standups</li>
+      </ul>
+      <div class="t-tags">
+        <span class="t-tag">0→1 Product</span><span class="t-tag">Airtable</span><span class="t-tag">Zapier</span><span class="t-tag">OKRs</span><span class="t-tag">Agile</span><span class="t-tag">User Research</span>
       </div>
     </div>
-  </section>
 
-  <!-- Footer -->
-  <footer id="contact">
-    <div class="container">
-      <div class="footer-content">
-        <div class="footer-brand">
-          <h3>Monisha Sood</h3>
-          <p>Product Manager passionate about solving hard problems with elegant solutions. Currently pursuing my MBA at Wisconsin School of Business while building products that scale.</p>
-          <div class="social-links">
-            <a href="https://www.linkedin.com/in/monishasood07/" class="social-link" target="_blank" title="LinkedIn">
-              <svg class="linkedin-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-              </svg>
-            </a>
-            <a href="mailto:monisha.sood@wisc.edu" class="social-link" title="Email">✉</a>
-            <a href="Monisha_Sood_Resume.pdf" class="social-link" download title="Resume">▣</a>
-          </div>
-        </div>
-        
-        <div class="footer-section">
-          <h4>Navigation</h4>
-          <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="#case-studies">Case Studies</a></li>
-            <li><a href="#principles">Approach</a></li>
-            <li><a href="#skills">Skills</a></li>
-          </ul>
-        </div>
-        
-        <div class="footer-section">
-          <h4>Contact</h4>
-          <ul>
-            <li><a href="mailto:monisha.sood@wisc.edu">monisha.sood@wisc.edu</a></li>
-            <li><a href="tel:+16086587795">(608) 658-7795</a></li>
-            <li><a href="https://www.linkedin.com/in/monishasood07/" target="_blank">LinkedIn</a></li>
-          </ul>
-        </div>
-        
-        <div class="footer-section">
-          <h4>Education</h4>
-          <ul>
-            <li><a href="https://business.wisc.edu/" target="_blank">UW-Madison MBA '26</a></li>
-            <li>Tech Strategy & Product Management</li>
-          </ul>
-        </div>
-      </div>
-      
-      <div class="footer-bottom">
-        <p>© 2025 Monisha Sood. Built with intention for Product Managers who care about craft.</p>
+    <div class="t-item reveal d1">
+      <div class="t-dot"></div>
+      <div class="t-period">2024 – 2025 · MBA Capstone</div>
+      <div class="t-role">Product Strategy Lead</div>
+      <div class="t-co">Flexera — AI Win/Loss Analytics Dashboard</div>
+      <ul class="t-list">
+        <li>Conducted 12 customer discovery interviews with Flexera stakeholders to define product requirements</li>
+        <li>Prototyped AI-driven competitive intelligence dashboard in Figma; validated with end-users</li>
+        <li>Delivered sprint-by-sprint roadmap and SOW for the AI analytics feature set</li>
+        <li>Synthesized win/loss signals into an actionable insights framework adopted by the sales team</li>
+      </ul>
+      <div class="t-tags">
+        <span class="t-tag">AI Analytics</span><span class="t-tag">Figma</span><span class="t-tag">JIRA</span><span class="t-tag">B2B SaaS</span><span class="t-tag">Customer Discovery</span>
       </div>
     </div>
-  </footer>
 
-  <!-- Scroll to Top -->
-  <a href="#home" class="scroll-top" id="scrollTop">↑</a>
+    <div class="t-item reveal d2">
+      <div class="t-dot v"></div>
+      <div class="t-period v">Jun 2023 – Jun 2024</div>
+      <div class="t-role">Senior Product & Operations Analyst</div>
+      <div class="t-co">Flyhomes — Real Estate Technology</div>
+      <ul class="t-list">
+        <li>Redesigned sales compensation system; delivered <b style="color:var(--white);font-weight:600">$48M in cost savings</b> while maintaining 95% agent satisfaction</li>
+        <li>Led cross-functional migration of 100+ users with zero downtime on $600K in processed commissions</li>
+        <li>Built Airtable dashboards for real-time performance tracking across 200+ sales agents</li>
+        <li>Improved CSAT by 17% and team effectiveness by 28% through data-driven process redesign</li>
+      </ul>
+      <div class="t-tags">
+        <span class="t-tag">SQL</span><span class="t-tag">Data Analysis</span><span class="t-tag">Airtable</span><span class="t-tag">Change Management</span><span class="t-tag">Stakeholder Alignment</span>
+      </div>
+    </div>
 
-  <script>
-    // Scroll to top button
-    const scrollTop = document.getElementById('scrollTop');
-    
-    window.addEventListener('scroll', () => {
-      if (window.pageYOffset > 300) {
-        scrollTop.classList.add('visible');
-      } else {
-        scrollTop.classList.remove('visible');
-      }
-    });
-    
-    // Typing animation for hero text
-    const words = ['drive impact', 'solve problems', 'create value', 'scale systems'];
-    let wordIndex = 0;
-    let charIndex = 0;
-    let isDeleting = false;
-    const typingSpeed = 100;
-    const deletingSpeed = 50;
-    const pauseTime = 2000;
-    
-    function typeText() {
-      const gradientText = document.querySelector('.gradient-text');
-      if (!gradientText) return;
-      
-      const currentWord = words[wordIndex];
-      
-      if (isDeleting) {
-        gradientText.textContent = currentWord.substring(0, charIndex - 1);
-        charIndex--;
-      } else {
-        gradientText.textContent = currentWord.substring(0, charIndex + 1);
-        charIndex++;
-      }
-      
-      let timeout = isDeleting ? deletingSpeed : typingSpeed;
-      
-      if (!isDeleting && charIndex === currentWord.length) {
-        timeout = pauseTime;
-        isDeleting = true;
-      } else if (isDeleting && charIndex === 0) {
-        isDeleting = false;
-        wordIndex = (wordIndex + 1) % words.length;
-      }
-      
-      setTimeout(typeText, timeout);
+    <div class="t-item reveal d3">
+      <div class="t-dot v"></div>
+      <div class="t-period v">Apr 2022 – Jun 2023</div>
+      <div class="t-role">Product Operations Lead</div>
+      <div class="t-co">Flyhomes — Real Estate Technology</div>
+      <ul class="t-list">
+        <li>Led agile transformation from waterfall; improved team efficiency 68% and customer satisfaction 32%</li>
+        <li>Built SQL dashboards for real-time KPI tracking; reduced SLA misses by 8%</li>
+        <li>Created user story framework tied to customer pain points; reduced bugs 40% via cross-functional testing</li>
+      </ul>
+      <div class="t-tags">
+        <span class="t-tag">Agile/Scrum</span><span class="t-tag">JIRA</span><span class="t-tag">SQL</span><span class="t-tag">User Stories</span><span class="t-tag">KPI Tracking</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<!-- PROJECTS / CASE STUDIES -->
+<div class="section-divider">
+<div class="section-wrap" id="projects">
+  <div class="label-row reveal"><span class="s-label">Case Studies</span><span class="s-label-line"></span></div>
+  <h2 class="s-title reveal">Products built<br>from <em>zero.</em></h2>
+  <div class="projects-grid">
+
+    <div class="p-card featured reveal">
+      <div class="p-tag">Featured · Live</div>
+      <div class="p-name">NIL Valuation Platform</div>
+      <div class="p-desc">Built an AI-powered marketplace connecting Division I athletes with NIL opportunities. Led the full 0→1 journey from user research and OKR setting to MVP launch and fundraising enablement.</div>
+      <div class="p-impact">↑ $500K+ fundraising in month 1 · 25+ athletes onboarded · 70% manual work cut</div>
+      <div class="p-stack">
+        <span class="p-pill">0→1</span><span class="p-pill">AI Platform</span><span class="p-pill">Airtable</span><span class="p-pill">Zapier</span><span class="p-pill">OKRs</span>
+      </div>
+    </div>
+
+    <div class="p-card reveal d1">
+      <div class="p-tag v">MBA Capstone · B2B SaaS</div>
+      <div class="p-name">Flexera Win/Loss Dashboard</div>
+      <div class="p-desc">AI-driven competitive intelligence dashboard for Flexera's sales team. Surfaced win/loss signals from deal data and translated them into actionable product insights through 12 customer discovery interviews.</div>
+      <div class="p-impact">12 customer interviews · Figma prototype · Full SOW delivered</div>
+      <div class="p-stack">
+        <span class="p-pill">AI Analytics</span><span class="p-pill">Figma</span><span class="p-pill">JIRA</span><span class="p-pill">B2B SaaS</span>
+      </div>
+    </div>
+
+    <div class="p-card reveal d2">
+      <div class="p-tag">FreshPlate · Live</div>
+      <div class="p-name">AI Food Management App</div>
+      <div class="p-desc">Personal project — AI-powered food management platform that reduces household food waste through intelligent inventory tracking, expiry prediction, and personalized recipe recommendations.</div>
+      <div class="p-impact">↓ ~30% food waste · Hosted on GitHub Pages · Personal side project</div>
+      <div class="p-stack">
+        <span class="p-pill">AI/ML</span><span class="p-pill">React</span><span class="p-pill">GitHub Pages</span><span class="p-pill">Zero-to-One</span>
+      </div>
+    </div>
+
+    <div class="p-card reveal d1">
+      <div class="p-tag v">Process · Flyhomes</div>
+      <div class="p-name">$48M Compensation Redesign</div>
+      <div class="p-desc">Transformed a broken sales compensation system affecting 200+ agents. Led data analysis, stakeholder alignment, and cross-functional migration with zero downtime while unlocking massive cost savings.</div>
+      <div class="p-impact">$48M cost savings · 95% satisfaction · 17% CSAT improvement</div>
+      <div class="p-stack">
+        <span class="p-pill">SQL</span><span class="p-pill">Data Analysis</span><span class="p-pill">Change Mgmt</span>
+      </div>
+    </div>
+
+    <div class="p-card reveal d2">
+      <div class="p-tag">Agile Transformation</div>
+      <div class="p-name">Product Velocity Overhaul</div>
+      <div class="p-desc">Transformed product development from waterfall to agile at Flyhomes. Implemented sprint rituals, SQL KPI dashboards, and cross-functional testing protocols that dramatically improved team output.</div>
+      <div class="p-impact">68% efficiency gain · 32% CSAT increase · 8% SLA reduction</div>
+      <div class="p-stack">
+        <span class="p-pill">Agile/Scrum</span><span class="p-pill">JIRA</span><span class="p-pill">SQL</span><span class="p-pill">KPIs</span>
+      </div>
+    </div>
+
+    <div class="p-card reveal d3">
+      <div class="p-tag v">AI Research · Sierra</div>
+      <div class="p-name">Enterprise AI Strategy</div>
+      <div class="p-desc">MBA research project on go-to-market strategy and product positioning for Sierra, a VC-backed enterprise AI startup. Produced full competitive analysis, positioning framework, and GTM recommendations.</div>
+      <div class="p-impact">Full GTM strategy · Competitive positioning · Stakeholder deck</div>
+      <div class="p-stack">
+        <span class="p-pill">AI/LLMs</span><span class="p-pill">GTM</span><span class="p-pill">Strategy</span><span class="p-pill">Research</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<!-- SKILLS -->
+<div class="section-divider">
+<div class="section-wrap" id="skills">
+  <div class="label-row reveal"><span class="s-label">Skills</span><span class="s-label-line"></span></div>
+  <h2 class="s-title reveal">What I bring<br>to the <em>table.</em></h2>
+  <div class="skills-grid">
+    <div class="reveal">
+      <div class="sk-group-label">Core Competencies</div>
+      <div class="sk-bars" id="sk-bars">
+        <div class="sk-row"><div class="sk-row-top"><span>Product Strategy & Roadmapping</span><span class="sk-pct">95%</span></div><div class="sk-track"><div class="sk-fill" style="--w:95%"></div></div></div>
+        <div class="sk-row"><div class="sk-row-top"><span>Customer Discovery & Research</span><span class="sk-pct">92%</span></div><div class="sk-track"><div class="sk-fill" style="--w:92%"></div></div></div>
+        <div class="sk-row"><div class="sk-row-top"><span>Cross-functional Leadership</span><span class="sk-pct">90%</span></div><div class="sk-track"><div class="sk-fill" style="--w:90%"></div></div></div>
+        <div class="sk-row"><div class="sk-row-top"><span>AI/ML Product Management</span><span class="sk-pct">88%</span></div><div class="sk-track"><div class="sk-fill" style="--w:88%"></div></div></div>
+        <div class="sk-row"><div class="sk-row-top"><span>Data Analytics & Metrics</span><span class="sk-pct">85%</span></div><div class="sk-track"><div class="sk-fill" style="--w:85%"></div></div></div>
+        <div class="sk-row"><div class="sk-row-top"><span>Stakeholder Management</span><span class="sk-pct">90%</span></div><div class="sk-track"><div class="sk-fill" style="--w:90%"></div></div></div>
+      </div>
+    </div>
+    <div class="reveal d2">
+      <div class="sk-group-label">Execution & Delivery</div>
+      <div class="sk-bars">
+        <div class="sk-row"><div class="sk-row-top"><span>Agile / Scrum / Sprint Planning</span><span class="sk-pct">93%</span></div><div class="sk-track"><div class="sk-fill" style="--w:93%"></div></div></div>
+        <div class="sk-row"><div class="sk-row-top"><span>Go-to-Market Strategy</span><span class="sk-pct">87%</span></div><div class="sk-track"><div class="sk-fill" style="--w:87%"></div></div></div>
+        <div class="sk-row"><div class="sk-row-top"><span>SQL & Power BI</span><span class="sk-pct">82%</span></div><div class="sk-track"><div class="sk-fill" style="--w:82%"></div></div></div>
+        <div class="sk-row"><div class="sk-row-top"><span>A/B Testing & Experimentation</span><span class="sk-pct">80%</span></div><div class="sk-track"><div class="sk-fill" style="--w:80%"></div></div></div>
+        <div class="sk-row"><div class="sk-row-top"><span>PRD Writing & Roadmapping</span><span class="sk-pct">92%</span></div><div class="sk-track"><div class="sk-fill" style="--w:92%"></div></div></div>
+        <div class="sk-row"><div class="sk-row-top"><span>Figma & Prototyping</span><span class="sk-pct">78%</span></div><div class="sk-track"><div class="sk-fill" style="--w:78%"></div></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="tools-section reveal">
+    <div class="tools-label">Tools & Platforms</div>
+    <div class="tools-grid">
+      <div class="tool-box">Figma</div><div class="tool-box">JIRA</div><div class="tool-box">SQL</div><div class="tool-box">Power BI</div>
+      <div class="tool-box">Airtable</div><div class="tool-box">Zapier</div><div class="tool-box">Amplitude</div><div class="tool-box">Mixpanel</div>
+      <div class="tool-box">LLMs / RAG</div><div class="tool-box">GenAI Stack</div><div class="tool-box">Salesforce</div><div class="tool-box">Confluence</div>
+      <div class="tool-box">GitHub</div><div class="tool-box">Notion</div><div class="tool-box">Miro</div><div class="tool-box">Tableau</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- AWARDS -->
+<div class="section-divider">
+<div class="section-wrap" id="awards">
+  <div class="label-row reveal"><span class="s-label">Recognition</span><span class="s-label-line"></span></div>
+  <h2 class="s-title reveal">Awards &<br><em>impact.</em></h2>
+  <div class="awards-grid">
+    <div class="award-card reveal">
+      <div class="award-icon">★</div>
+      <div class="award-title">Most Trusted Partner</div>
+      <div class="award-desc">Honored for closing $10M+ in contracts and building exceptional client relationships at Flyhomes through transparent communication and delivery excellence.</div>
+    </div>
+    <div class="award-card reveal d1">
+      <div class="award-icon">◆</div>
+      <div class="award-title">Superstar of the Month</div>
+      <div class="award-desc">Awarded for a 30% productivity improvement and exceeding quarterly targets through process innovation and data-driven decision-making.</div>
+    </div>
+    <div class="award-card reveal d2">
+      <div class="award-icon">▲</div>
+      <div class="award-title">Product Impact Champion</div>
+      <div class="award-desc">Recognized for MVP launch that boosted platform engagement and reduced manual work by 70% through intelligent automation design.</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- CONTACT -->
+<div class="section-divider">
+<div class="section-wrap" id="contact">
+  <div class="contact-wrap reveal">
+    <div class="avail-badge" style="margin-bottom:2rem; display:inline-flex;">
+      <span class="avail-dot"></span>
+      Available May 2026
+    </div>
+    <div class="contact-big">Let's build<br><em>something great.</em></div>
+    <p class="contact-sub">I'm actively exploring PM roles — especially at AI-first companies solving problems that matter. Open to full-time opportunities starting May 2026. H1B sponsorship considered.</p>
+    <div class="contact-grid">
+      <a href="mailto:monisha.sood@wisc.edu" class="c-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg>
+        monisha.sood@wisc.edu
+      </a>
+      <a href="https://www.linkedin.com/in/monishasood07/" target="_blank" class="c-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="4"/><path d="M8 11v5M8 8v.01M12 16v-5m0 0v-1a2 2 0 014 0v1m0 5v-5"/></svg>
+        LinkedIn
+      </a>
+      <a href="https://monishasood.github.io/Product-Manager/Monisha_Sood_Resume.pdf" target="_blank" class="c-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>
+        Resume PDF
+      </a>
+      <a href="tel:+16086587795" class="c-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+        (608) 658-7795
+      </a>
+    </div>
+  </div>
+</div>
+</div>
+
+<footer>
+  <strong>Monisha Sood</strong>
+  <span>MBA Candidate · Wisconsin School of Business · May 2026</span>
+  <span>Built with intention · <a href="https://monishasood.github.io/Product-Manager/" target="_blank">monishasood.github.io</a></span>
+</footer>
+
+<script>
+// CURSOR
+const cur = document.getElementById('cursor');
+const ring = document.getElementById('cursor-ring');
+let mx=-100,my=-100,rx=-100,ry=-100;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+(function tick(){
+  requestAnimationFrame(tick);
+  rx+=(mx-rx)*0.14; ry+=(my-ry)*0.14;
+  cur.style.left=mx+'px'; cur.style.top=my+'px';
+  ring.style.left=rx+'px'; ring.style.top=ry+'px';
+})();
+
+// THREE.JS PARTICLES
+const canvas=document.getElementById('hero-canvas');
+const scene=new THREE.Scene();
+const cam=new THREE.PerspectiveCamera(55,window.innerWidth/window.innerHeight,.1,1000);
+cam.position.z=4.5;
+const rend=new THREE.WebGLRenderer({canvas,alpha:true,antialias:true});
+rend.setSize(window.innerWidth,window.innerHeight);
+rend.setPixelRatio(Math.min(devicePixelRatio,2));
+rend.setClearColor(0,0);
+
+function mkParticles(count,color,size,opacity){
+  const pos=new Float32Array(count*3);
+  for(let i=0;i<count;i++){
+    pos[i*3]=(Math.random()-.5)*16;
+    pos[i*3+1]=(Math.random()-.5)*12;
+    pos[i*3+2]=(Math.random()-.5)*8;
+  }
+  const g=new THREE.BufferGeometry();
+  g.setAttribute('position',new THREE.BufferAttribute(pos,3));
+  const m=new THREE.PointsMaterial({color,size,transparent:true,opacity,blending:THREE.AdditiveBlending,depthWrite:false,sizeAttenuation:true});
+  return new THREE.Points(g,m);
+}
+const p1=mkParticles(2400,0x67e8f9,.02,.5);
+const p2=mkParticles(900,0xc084fc,.017,.45);
+const p3=mkParticles(600,0xf472b6,.014,.3);
+const p4=mkParticles(400,0xfbbf24,.012,.25);
+const p5=mkParticles(800,0xffffff,.01,.35);
+scene.add(p1,p2,p3,p4,p5);
+
+let pmx=0,pmy=0;
+document.addEventListener('mousemove',e=>{
+  pmx=(e.clientX/window.innerWidth-.5)*.4;
+  pmy=-(e.clientY/window.innerHeight-.5)*.3;
+});
+let t=0;
+function animRend(){
+  requestAnimationFrame(animRend);
+  t+=.0007;
+  p1.rotation.y=t*.12+pmx*.25;
+  p1.rotation.x=t*.07+pmy*.18;
+  p2.rotation.y=-t*.1+pmx*.2;
+  p2.rotation.x=-t*.05+pmy*.14;
+  p3.rotation.y=t*.08+pmx*.1;
+  p3.rotation.x=t*.04;
+  p4.rotation.y=-t*.06; p4.rotation.z=t*.03;
+  p5.rotation.y=t*.05+pmx*.08; p5.rotation.x=-t*.03;
+  rend.render(scene,cam);
+}
+animRend();
+window.addEventListener('resize',()=>{
+  cam.aspect=window.innerWidth/window.innerHeight;
+  cam.updateProjectionMatrix();
+  rend.setSize(window.innerWidth,window.innerHeight);
+});
+
+// SCROLL REVEAL
+const revEls=document.querySelectorAll('.reveal');
+const ro=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in');});
+},{threshold:.1});
+revEls.forEach(el=>ro.observe(el));
+
+// SKILL BARS
+const skSection=document.getElementById('skills');
+const skObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      document.querySelectorAll('.sk-fill').forEach(f=>f.classList.add('on'));
     }
-    
-    // Start typing animation after page load
-    setTimeout(typeText, 1000);
-    
-    // Animate metrics on scroll
-    const observerOptions = {
-      threshold: 0.5,
-      rootMargin: '0px'
-    };
-    
-    const animateValue = (element, start, end, duration) => {
-      const range = end - start;
-      const increment = range / (duration / 16);
-      let current = start;
-      
-      const timer = setInterval(() => {
-        current += increment;
-        if (current >= end) {
-          element.textContent = formatNumber(end);
-          clearInterval(timer);
-        } else {
-          element.textContent = formatNumber(Math.floor(current));
-        }
-      }, 16);
-    };
-    
-    const formatNumber = (num) => {
-      if (num >= 1000000) {
-        return '$' + (num / 1000000).toFixed(0) + 'M+';
-      } else if (num >= 1000) {
-        return (num / 1000).toFixed(0) + 'K+';
-      }
-      return num + '+';
-    };
-    
-    const metricObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting && !entry.target.classList.contains('animated')) {
-          entry.target.classList.add('animated');
-          const value = entry.target.querySelector('.metric-value');
-          const text = value.textContent;
-          
-          if (text.includes('$')) {
-            animateValue(value, 0, 50000000, 2000);
-          } else if (text.includes('%')) {
-            const num = parseInt(text);
-            animateValue(value, 0, num, 1500);
-            setTimeout(() => {
-              value.textContent = num + '%';
-            }, 1500);
-          } else {
-            const num = parseInt(text);
-            let start = 0;
-            const timer = setInterval(() => {
-              start++;
-              value.textContent = start + (text.includes('+') ? '+' : '');
-              if (start >= num) clearInterval(timer);
-            }, 100);
-          }
-        }
-      });
-    }, observerOptions);
-    
-    document.querySelectorAll('.metric-card').forEach(card => {
-      metricObserver.observe(card);
-    });
-    
-    // Animate sections on scroll
-    const sectionObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.style.opacity = '1';
-          entry.target.style.transform = 'translateY(0)';
-        }
-      });
-    }, { threshold: 0.1 });
-    
-    document.querySelectorAll('.case-study, .principle-card, .skill-category, .award-card-modern').forEach(el => {
-      el.style.opacity = '0';
-      el.style.transform = 'translateY(30px)';
-      el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-      sectionObserver.observe(el);
-    });
-    
-    // Interactive skill items with progress bars
-    document.querySelectorAll('.skill-item').forEach(item => {
-      item.addEventListener('mouseenter', function() {
-        this.style.transform = 'scale(1.05) translateY(-2px)';
-      });
-      
-      item.addEventListener('mouseleave', function() {
-        this.style.transform = 'scale(1) translateY(0)';
-      });
-    });
-    
-    // Add particle effect to hero
-    function createParticle() {
-      const hero = document.querySelector('.hero');
-      const particle = document.createElement('div');
-      particle.className = 'particle';
-      particle.style.cssText = `
-        position: absolute;
-        width: 4px;
-        height: 4px;
-        background: var(--primary-light);
-        border-radius: 50%;
-        pointer-events: none;
-        opacity: 0;
-        animation: float-particle 4s ease-in-out forwards;
-      `;
-      
-      particle.style.left = Math.random() * 100 + '%';
-      particle.style.top = Math.random() * 100 + '%';
-      
-      hero.appendChild(particle);
-      
-      setTimeout(() => particle.remove(), 4000);
-    }
-    
-    // Create particles periodically
-    setInterval(createParticle, 800);
-    
-    // Add ripple effect on button clicks
-    document.querySelectorAll('.btn, .profile-link').forEach(button => {
-      button.addEventListener('click', function(e) {
-        const ripple = document.createElement('span');
-        const rect = this.getBoundingClientRect();
-        const size = Math.max(rect.width, rect.height);
-        const x = e.clientX - rect.left - size / 2;
-        const y = e.clientY - rect.top - size / 2;
-        
-        ripple.style.cssText = `
-          position: absolute;
-          width: ${size}px;
-          height: ${size}px;
-          left: ${x}px;
-          top: ${y}px;
-          background: rgba(255, 255, 255, 0.5);
-          border-radius: 50%;
-          transform: scale(0);
-          animation: ripple 0.6s ease-out;
-          pointer-events: none;
-        `;
-        
-        this.style.position = 'relative';
-        this.style.overflow = 'hidden';
-        this.appendChild(ripple);
-        
-        setTimeout(() => ripple.remove(), 600);
-      });
-    });
-    
-    // Smooth parallax effect for orbs
-    let mouseX = 0;
-    let mouseY = 0;
-    
-    document.addEventListener('mousemove', (e) => {
-      mouseX = e.clientX / window.innerWidth;
-      mouseY = e.clientY / window.innerHeight;
-    });
-    
-    function animateOrbs() {
-      const orb1 = document.querySelector('.orb1');
-      const orb2 = document.querySelector('.orb2');
-      
-      if (orb1) {
-        orb1.style.transform = `translate(${mouseX * 50}px, ${mouseY * 50}px)`;
-      }
-      if (orb2) {
-        orb2.style.transform = `translate(${-mouseX * 30}px, ${-mouseY * 30}px)`;
-      }
-      
-      requestAnimationFrame(animateOrbs);
-    }
-    
-    animateOrbs();
-    
-    // Add tooltip for certifications
-    document.querySelectorAll('a.skill-item').forEach(item => {
-      const tooltip = document.createElement('div');
-      tooltip.textContent = 'Click to verify';
-      tooltip.style.cssText = `
-        position: absolute;
-        bottom: 100%;
-        left: 50%;
-        transform: translateX(-50%) translateY(-8px);
-        background: var(--dark-surface);
-        color: white;
-        padding: 6px 12px;
-        border-radius: 6px;
-        font-size: 11px;
-        white-space: nowrap;
-        opacity: 0;
-        pointer-events: none;
-        transition: opacity 0.3s, transform 0.3s;
-        border: 1px solid var(--border);
-      `;
-      
-      item.style.position = 'relative';
-      item.appendChild(tooltip);
-      
-      item.addEventListener('mouseenter', () => {
-        tooltip.style.opacity = '1';
-        tooltip.style.transform = 'translateX(-50%) translateY(-12px)';
-      });
-      
-      item.addEventListener('mouseleave', () => {
-        tooltip.style.opacity = '0';
-        tooltip.style.transform = 'translateX(-50%) translateY(-8px)';
-      });
-    });
-    
-    // Add progress indicator to case studies
-    const progressBar = document.createElement('div');
-    progressBar.style.cssText = `
-      position: fixed;
-      top: 0;
-      left: 0;
-      height: 3px;
-      background: linear-gradient(90deg, var(--primary), var(--accent));
-      width: 0%;
-      z-index: 9999;
-      transition: width 0.1s;
-    `;
-    document.body.appendChild(progressBar);
-    
-    window.addEventListener('scroll', () => {
-      const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
-      progressBar.style.width = scrollPercent + '%';
-    });
-  </script>
+  });
+},{threshold:.2});
+if(skSection) skObs.observe(skSection);
+</script>
 </body>
 </html>
