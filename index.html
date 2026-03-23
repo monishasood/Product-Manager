@@ -48,29 +48,7 @@ body::before {
     radial-gradient(ellipse 90% 70% at 50% 50%, rgba(88,28,135,0.18) 0%, transparent 70%),
     #03020d;
 }
-/* Subtle star-noise texture */
-body::after {
-  content: '';
-  position: fixed; inset: 0; z-index: -1;
-  background-image:
-    radial-gradient(1px 1px at 10% 20%, rgba(255,255,255,0.7) 0%, transparent 100%),
-    radial-gradient(1px 1px at 30% 55%, rgba(255,255,255,0.5) 0%, transparent 100%),
-    radial-gradient(1.5px 1.5px at 55% 10%, rgba(255,255,255,0.6) 0%, transparent 100%),
-    radial-gradient(1px 1px at 70% 40%, rgba(255,255,255,0.4) 0%, transparent 100%),
-    radial-gradient(1px 1px at 88% 25%, rgba(255,255,255,0.65) 0%, transparent 100%),
-    radial-gradient(1px 1px at 20% 80%, rgba(255,255,255,0.5) 0%, transparent 100%),
-    radial-gradient(1.5px 1.5px at 45% 65%, rgba(255,255,255,0.55) 0%, transparent 100%),
-    radial-gradient(1px 1px at 92% 72%, rgba(255,255,255,0.4) 0%, transparent 100%),
-    radial-gradient(1px 1px at 5% 45%, rgba(200,180,255,0.5) 0%, transparent 100%),
-    radial-gradient(1px 1px at 63% 88%, rgba(180,240,255,0.45) 0%, transparent 100%);
-  pointer-events: none;
-  animation: starTwinkle 8s ease-in-out infinite alternate;
-}
-@keyframes starTwinkle {
-  0% { opacity: 0.6; }
-  50% { opacity: 1; }
-  100% { opacity: 0.7; }
-}
+/* star canvas handles this now */
 
 /* CURSOR */
 #cursor {
@@ -529,33 +507,98 @@ h2.s-title .v { background: linear-gradient(90deg, #c084fc, #f472b6); -webkit-ba
 .t-logo img { width: 28px; height: 28px; object-fit: contain; }
 .t-logo-mono { font-family: 'Nunito', sans-serif; font-size: 0.65rem; font-weight: 900; color: var(--cyan); text-align: center; line-height: 1.2; }
 
-/* VISUAL CAREER TIMELINE CHART */
-.career-chart-wrap { margin: 3.5rem 0 0; overflow-x: auto; }
-.career-chart { min-width: 580px; width: 100%; padding: 2.5rem 0 1rem; position: relative; }
-.cc-track { position: relative; height: 3px; background: rgba(255,255,255,0.06); margin: 0 2rem; border-radius: 2px; }
-.cc-fill { position: absolute; left: 0; top: 0; height: 100%; background: linear-gradient(90deg,#67e8f9,#c084fc,#f472b6); border-radius: 2px; width: 0; transition: width 2s ease; }
-.cc-fill.on { width: 100%; }
-.cc-nodes { display: flex; justify-content: space-between; padding: 0 2rem; margin-top: -12px; }
-.cc-node { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
-.cc-dot {
-  width: 24px; height: 24px; border-radius: 50%;
-  background: var(--bg); border: 2px solid var(--cyan);
-  box-shadow: 0 0 12px rgba(103,232,249,0.5);
-  display: flex; align-items: center; justify-content: center;
+/* VISUAL CAREER TIMELINE CHART — horizontal alternating */
+.career-chart-wrap { margin: 4rem 0 0; overflow-x: auto; padding-bottom: 1rem; }
+.career-chart {
+  min-width: 700px; width: 100%;
+  position: relative;
+  padding: 0;
+  height: 320px; /* top labels + track + bottom labels */
+  display: flex; align-items: center;
 }
-.cc-dot.v { border-color: var(--violet); box-shadow: 0 0 12px rgba(192,132,252,0.5); }
-.cc-dot.m { border-color: var(--magenta); box-shadow: 0 0 12px rgba(244,114,182,0.4); }
-.cc-dot-inner { width: 9px; height: 9px; border-radius: 50%; background: var(--cyan); }
-.cc-dot.v .cc-dot-inner { background: var(--violet); }
-.cc-dot.m .cc-dot-inner { background: var(--magenta); }
-.cc-logo-sm { width: 28px; height: 28px; border-radius: 5px; background: var(--card2); border: 1px solid var(--border2); display: flex; align-items: center; justify-content: center; margin: 0 auto 0.25rem; overflow: hidden; }
+
+/* the central horizontal track */
+.cc-track {
+  position: absolute; left: 40px; right: 40px;
+  top: 50%; transform: translateY(-50%);
+  height: 3px; background: rgba(255,255,255,0.07); border-radius: 2px; z-index: 0;
+}
+.cc-fill {
+  position: absolute; left: 0; top: 0; height: 100%;
+  background: linear-gradient(90deg,#67e8f9,#c084fc,#f472b6);
+  border-radius: 2px; width: 0; transition: width 2.2s ease;
+}
+.cc-fill.on { width: 100%; }
+
+/* nodes container — flex row, evenly spaced */
+.cc-nodes {
+  position: absolute; left: 40px; right: 40px; top: 0; bottom: 0;
+  display: flex; justify-content: space-between; align-items: center;
+}
+
+/* each node wrapper */
+.cc-node {
+  display: flex; flex-direction: column; align-items: center;
+  position: relative; z-index: 2;
+  width: 110px;
+}
+
+/* TOP label (odd nodes) */
+.cc-top-label {
+  position: absolute; bottom: calc(50% + 62px);
+  width: 105px; text-align: center;
+  display: flex; flex-direction: column; align-items: center; gap: 0.35rem;
+}
+/* BOTTOM label (even nodes) */
+.cc-bottom-label {
+  position: absolute; top: calc(50% + 62px);
+  width: 105px; text-align: center;
+  display: flex; flex-direction: column; align-items: center; gap: 0.35rem;
+}
+
+/* connector line from label to circle */
+.cc-top-label::after {
+  content: ''; display: block; width: 1px; height: 18px;
+  background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.2));
+  margin: 0 auto;
+}
+.cc-bottom-label::before {
+  content: ''; display: block; width: 1px; height: 18px;
+  background: linear-gradient(to top, transparent, rgba(255,255,255,0.2));
+  margin: 0 auto;
+}
+
+/* the circle node */
+.cc-circle {
+  width: 72px; height: 72px; border-radius: 50%;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 3px; position: relative; cursor: none;
+  transition: transform .25s, box-shadow .25s;
+}
+.cc-circle:hover { transform: scale(1.08); }
+.cc-circle.c1 { background: linear-gradient(135deg,#0d2d3a,#0a1a2e); border: 2px solid #67e8f9; box-shadow: 0 0 18px rgba(103,232,249,0.45), inset 0 0 12px rgba(103,232,249,0.08); }
+.cc-circle.c2 { background: linear-gradient(135deg,#1a0d2e,#100d28); border: 2px solid #c084fc; box-shadow: 0 0 18px rgba(192,132,252,0.4), inset 0 0 12px rgba(192,132,252,0.08); }
+.cc-circle.c3 { background: linear-gradient(135deg,#2a0d1a,#1a0920); border: 2px solid #f472b6; box-shadow: 0 0 18px rgba(244,114,182,0.38), inset 0 0 12px rgba(244,114,182,0.08); }
+
+.cc-circle img { width: 26px; height: 26px; object-fit: contain; filter: brightness(1.1); }
+.cc-circle-year {
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.6rem; font-weight: 800; letter-spacing: 0.06em;
+  text-align: center; line-height: 1.2;
+}
+.c1 .cc-circle-year { color: #67e8f9; }
+.c2 .cc-circle-year { color: #c084fc; }
+.c3 .cc-circle-year { color: #f472b6; }
+
+.cc-logo-sm { width: 28px; height: 28px; border-radius: 5px; background: rgba(255,255,255,0.06); border: 1px solid var(--border2); display: flex; align-items: center; justify-content: center; overflow: hidden; }
 .cc-logo-sm img { width: 18px; height: 18px; object-fit: contain; }
 .cc-logo-sm span { font-size: 0.48rem; font-weight: 900; color: var(--cyan); }
-.cc-year { font-size: 0.62rem; font-weight: 700; color: var(--cyan); letter-spacing: 0.08em; text-align: center; }
-.cc-node.vn .cc-year { color: var(--violet); }
-.cc-node.mn .cc-year { color: var(--magenta); }
-.cc-role { font-size: 0.65rem; font-weight: 500; color: rgba(240,238,255,0.7); line-height: 1.3; max-width: 85px; text-align: center; }
-.cc-co { font-size: 0.58rem; color: var(--muted); text-align: center; }
+
+.cc-role-label {
+  font-size: 0.65rem; font-weight: 600; color: rgba(240,238,255,0.85);
+  line-height: 1.25; text-align: center; max-width: 100px;
+}
+.cc-co-label { font-size: 0.58rem; color: var(--muted); text-align: center; line-height: 1.2; }
 
 /* RECOMMENDATIONS */
 .recs-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.25rem; row-gap: 1.25rem; }
@@ -576,6 +619,27 @@ h2.s-title .v { background: linear-gradient(90deg, #c084fc, #f472b6); -webkit-ba
 .rec-name { font-size:0.82rem; font-weight:600; }
 .rec-role { font-size:0.7rem; font-weight:400; color:var(--muted); margin-top:0.1rem; }
 .rec-note { font-size:0.62rem; color:var(--muted2); margin-top:1.25rem; font-style:italic; opacity:0.7; }
+
+/* SKILLS CHIPS */
+.sk-chips-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 2.5rem; margin-bottom: 3.5rem; }
+.sk-chip-group {}
+.sk-chips { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.85rem; }
+.sk-chip {
+  font-size: 0.78rem; font-weight: 400;
+  padding: 0.38rem 0.9rem;
+  background: rgba(103,232,249,0.05);
+  border: 1px solid rgba(103,232,249,0.18);
+  color: rgba(240,238,255,0.75);
+  border-radius: 20px;
+  transition: background .2s, border-color .2s, color .2s, transform .15s;
+  cursor: none;
+}
+.sk-chip:hover {
+  background: rgba(103,232,249,0.12);
+  border-color: rgba(103,232,249,0.5);
+  color: #67e8f9;
+  transform: translateY(-2px);
+}
 
 /* SKILLS */
 .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
@@ -739,6 +803,8 @@ footer strong { color: var(--cyan); font-weight: 600; }
 
 <div id="cursor"></div>
 <div id="cursor-ring"></div>
+<!-- interactive star field behind everything -->
+<canvas id="star-canvas" style="position:fixed;inset:0;z-index:-1;pointer-events:none;"></canvas>
 
 <!-- NAV -->
 <nav>
@@ -875,144 +941,193 @@ footer strong { color: var(--cyan); font-weight: 600; }
     <div class="t-item reveal">
       <div class="t-dot"></div>
       <div class="t-header">
-        <div class="t-logo">
-          <div class="t-logo-mono">SW<br>PRO</div>
-        </div>
+        <div class="t-logo"><div class="t-logo-mono">SW<br>PRO</div></div>
         <div class="t-header-text">
-          <div class="t-period">Jun 2025 – Present</div>
-          <div class="t-role">Product Manager</div>
-          <div class="t-co">SecondWind Pro — NIL Technology Platform</div>
+          <div class="t-period">Jun 2025 – Present · 10 mos</div>
+          <div class="t-role">Product Manager AI</div>
+          <div class="t-co">Second Wind Pro · Full-time · New York, United States</div>
         </div>
       </div>
       <ul class="t-list">
-        <li>Led 0→1 development of an AI-powered platform connecting Division I athletes with NIL opportunities</li>
-        <li>Onboarded 25+ athletes in month one, enabling <b style="color:var(--white);font-weight:600">$500K+ in fundraising</b> within the first month</li>
+        <li>Launched the NIL platform MVP from 0→1, onboarding 500+ verified D1 athlete profiles and driving 40% school adoption by owning the full product roadmap and leading a cross-functional team of 8</li>
         <li>Conducted user interviews with 15+ athletes, donors, and collectives to validate product-market fit</li>
         <li>Architected Airtable/Zapier automation reducing manual outreach work by 70%</li>
-        <li>Built cross-functional team of 8 (engineering, data, fundraising) with clear OKRs and weekly standups</li>
+        <li>Enabled $500K+ in fundraising within the first month of launch</li>
       </ul>
-      <div class="t-tags">
-        <span class="t-tag">0→1 Product</span><span class="t-tag">Airtable</span><span class="t-tag">Zapier</span><span class="t-tag">OKRs</span><span class="t-tag">Agile</span><span class="t-tag">User Research</span>
-      </div>
+      <div class="t-tags"><span class="t-tag">Product Management</span><span class="t-tag">0→1</span><span class="t-tag">OKRs</span><span class="t-tag">Agile</span></div>
     </div>
 
     <div class="t-item reveal d1">
       <div class="t-dot"></div>
       <div class="t-header">
-        <div class="t-logo">
-          <img src="https://logo.clearbit.com/flexera.com" alt="Flexera" onerror="this.style.display='none';this.parentNode.innerHTML='<div class=\'t-logo-mono\'>FLX</div>'">
-        </div>
+        <div class="t-logo"><img src="https://logo.clearbit.com/wisc.edu" alt="UW" onerror="this.style.display='none';this.parentNode.innerHTML='<div class=&quot;t-logo-mono&quot;>UW</div>'"></div>
         <div class="t-header-text">
-          <div class="t-period">2024 – 2025 · MBA Capstone</div>
-          <div class="t-role">Product Strategy Lead</div>
-          <div class="t-co">Flexera — AI Win/Loss Analytics Dashboard</div>
+          <div class="t-period">Aug 2024 – Present · 1 yr 8 mos</div>
+          <div class="t-role">Graduate Teaching Assistant – International Business</div>
+          <div class="t-co">University of Wisconsin–Madison · Part-time · On-site</div>
         </div>
       </div>
       <ul class="t-list">
-        <li>Conducted 12 customer discovery interviews with Flexera stakeholders to define product requirements</li>
-        <li>Prototyped AI-driven competitive intelligence dashboard in Figma; validated with end-users</li>
-        <li>Delivered sprint-by-sprint roadmap and SOW for the AI analytics feature set</li>
-        <li>Synthesized win/loss signals into an actionable insights framework adopted by the sales team</li>
+        <li>Support instruction on the rapid advancement of technology, privatization, deregulation, and globalization of culture as key forces shaping today's global business landscape</li>
+        <li>Facilitate discussions and grade coursework for MBA students across international business strategy modules</li>
       </ul>
-      <div class="t-tags">
-        <span class="t-tag">AI Analytics</span><span class="t-tag">Figma</span><span class="t-tag">JIRA</span><span class="t-tag">B2B SaaS</span><span class="t-tag">Customer Discovery</span>
+      <div class="t-tags"><span class="t-tag">Teaching</span><span class="t-tag">International Business</span><span class="t-tag">MBA</span></div>
+    </div>
+
+    <div class="t-item reveal d1">
+      <div class="t-dot"></div>
+      <div class="t-header">
+        <div class="t-logo"><img src="https://logo.clearbit.com/flexera.com" alt="Flexera" onerror="this.style.display='none';this.parentNode.innerHTML='<div class=&quot;t-logo-mono&quot;>FLX</div>'"></div>
+        <div class="t-header-text">
+          <div class="t-period">Aug 2025 – Dec 2025 · 5 mos</div>
+          <div class="t-role">Product Manager Capstone</div>
+          <div class="t-co">Flexera · Madison, Wisconsin, United States</div>
+        </div>
       </div>
+      <ul class="t-list">
+        <li>Led a 5-person cross-functional team on a capstone project with Flexera, a leading B2B enterprise SaaS company, to design an AI-driven Win/Loss analytics solution</li>
+        <li>Conducted 12 customer discovery interviews; prototyped AI dashboard in Figma and delivered full SOW</li>
+        <li>Synthesized win/loss signals into an actionable insights framework adopted by the Flexera sales team</li>
+      </ul>
+      <div class="t-tags"><span class="t-tag">AI Analytics</span><span class="t-tag">Figma</span><span class="t-tag">JIRA</span><span class="t-tag">B2B SaaS</span></div>
     </div>
 
     <div class="t-item reveal d2">
       <div class="t-dot v"></div>
       <div class="t-header">
-        <div class="t-logo">
-          <img src="https://logo.clearbit.com/flyhomes.com" alt="Flyhomes" onerror="this.style.display='none';this.parentNode.innerHTML='<div class=\'t-logo-mono\'>FLY</div>'">
-        </div>
+        <div class="t-logo"><img src="https://logo.clearbit.com/flyhomes.com" alt="Flyhomes" onerror="this.style.display='none';this.parentNode.innerHTML='<div class=&quot;t-logo-mono&quot;>FLY</div>'"></div>
         <div class="t-header-text">
-          <div class="t-period v">Jun 2023 – Jun 2024</div>
-          <div class="t-role">Senior Product & Operations Analyst</div>
-          <div class="t-co">Flyhomes — Real Estate Technology</div>
+          <div class="t-period v">Jun 2023 – Sep 2024 · 1 yr 4 mos</div>
+          <div class="t-role">Product Manager – Strategy</div>
+          <div class="t-co">Flyhomes · Full-time · Noida, Uttar Pradesh, India</div>
         </div>
       </div>
       <ul class="t-list">
-        <li>Redesigned sales compensation system; delivered <b style="color:var(--white);font-weight:600">$48M in cost savings</b> while maintaining 95% agent satisfaction</li>
+        <li>Managed bi-monthly variable compensation for 200+ US-based employees, overseeing ~$600K/month in payouts with a focus on accuracy and compliance</li>
+        <li>Redesigned sales compensation system delivering <b style="color:var(--white);font-weight:600">$48M in cost savings</b> while maintaining 95% agent satisfaction</li>
         <li>Led cross-functional migration of 100+ users with zero downtime on $600K in processed commissions</li>
-        <li>Built Airtable dashboards for real-time performance tracking across 200+ sales agents</li>
-        <li>Improved CSAT by 17% and team effectiveness by 28% through data-driven process redesign</li>
       </ul>
-      <div class="t-tags">
-        <span class="t-tag">SQL</span><span class="t-tag">Data Analysis</span><span class="t-tag">Airtable</span><span class="t-tag">Change Management</span><span class="t-tag">Stakeholder Alignment</span>
-      </div>
+      <div class="t-tags"><span class="t-tag">Growth Strategies</span><span class="t-tag">Process Automation</span><span class="t-tag">SQL</span><span class="t-tag">Stakeholder Alignment</span></div>
     </div>
 
     <div class="t-item reveal d3">
       <div class="t-dot v"></div>
       <div class="t-header">
-        <div class="t-logo">
-          <img src="https://logo.clearbit.com/flyhomes.com" alt="Flyhomes" onerror="this.style.display='none';this.parentNode.innerHTML='<div class=\'t-logo-mono\'>FLY</div>'">
-        </div>
+        <div class="t-logo"><img src="https://logo.clearbit.com/flyhomes.com" alt="Flyhomes" onerror="this.style.display='none';this.parentNode.innerHTML='<div class=&quot;t-logo-mono&quot;>FLY</div>'"></div>
         <div class="t-header-text">
-          <div class="t-period v">Apr 2022 – Jun 2023</div>
-          <div class="t-role">Product Operations Lead</div>
-          <div class="t-co">Flyhomes — Real Estate Technology</div>
+          <div class="t-period v">Apr 2022 – Jun 2023 · 1 yr 3 mos</div>
+          <div class="t-role">Associate Product Manager</div>
+          <div class="t-co">Flyhomes · Full-time · Noida, Uttar Pradesh, India</div>
         </div>
       </div>
       <ul class="t-list">
+        <li>Defined milestone criteria within the product roadmap to track team progress and accelerate delivery cycles</li>
         <li>Led agile transformation from waterfall; improved team efficiency 68% and customer satisfaction 32%</li>
         <li>Built SQL dashboards for real-time KPI tracking; reduced SLA misses by 8%</li>
-        <li>Created user story framework tied to customer pain points; reduced bugs 40% via cross-functional testing</li>
       </ul>
-      <div class="t-tags">
-        <span class="t-tag">Agile/Scrum</span><span class="t-tag">JIRA</span><span class="t-tag">SQL</span><span class="t-tag">User Stories</span><span class="t-tag">KPI Tracking</span>
+      <div class="t-tags"><span class="t-tag">Growth Strategies</span><span class="t-tag">SQL</span><span class="t-tag">Agile/Scrum</span><span class="t-tag">KPI Tracking</span></div>
+    </div>
+
+    <div class="t-item reveal d3">
+      <div class="t-dot v"></div>
+      <div class="t-header">
+        <div class="t-logo"><img src="https://logo.clearbit.com/flyhomes.com" alt="Flyhomes" onerror="this.style.display='none';this.parentNode.innerHTML='<div class=&quot;t-logo-mono&quot;>FLY</div>'"></div>
+        <div class="t-header-text">
+          <div class="t-period v">Jan 2021 – Mar 2022 · 1 yr 3 mos</div>
+          <div class="t-role">Senior Operations Associate</div>
+          <div class="t-co">Flyhomes · Full-time · Noida, Uttar Pradesh, India</div>
+        </div>
       </div>
+      <ul class="t-list">
+        <li>Produced high-quality documents, spreadsheets and presentations for internal and customer-facing needs using MS Office suite</li>
+        <li>Built strong client relationships by handling escalations with professionalism and speed</li>
+      </ul>
+      <div class="t-tags"><span class="t-tag">Growth Strategies</span><span class="t-tag">Problem Solving</span><span class="t-tag">Operations</span></div>
     </div>
 
   </div>
 
-  <!-- VISUAL CAREER TIMELINE CHART -->
+    <!-- VISUAL CAREER TIMELINE CHART -->
   <div class="career-chart-wrap reveal">
     <div class="career-chart" id="career-chart">
       <div class="cc-track"><div class="cc-fill" id="cc-fill"></div></div>
       <div class="cc-nodes">
-        <div class="cc-node vn">
-          <div class="cc-logo-sm"><img src="https://logo.clearbit.com/wisc.edu" alt="UW" onerror="this.parentNode.innerHTML='<span>UW</span>'"></div>
-          <div class="cc-dot v"><div class="cc-dot-inner"></div></div>
-          <div class="cc-year">2022</div>
-          <div class="cc-role">Operations Associate</div>
-          <div class="cc-co">Flyhomes</div>
-        </div>
-        <div class="cc-node vn">
-          <div class="cc-logo-sm"><img src="https://logo.clearbit.com/flyhomes.com" alt="Flyhomes" onerror="this.parentNode.innerHTML='<span>FLY</span>'"></div>
-          <div class="cc-dot v"><div class="cc-dot-inner"></div></div>
-          <div class="cc-year">2022–23</div>
-          <div class="cc-role">Product Ops Lead</div>
-          <div class="cc-co">Flyhomes</div>
-        </div>
-        <div class="cc-node vn">
-          <div class="cc-logo-sm"><img src="https://logo.clearbit.com/flyhomes.com" alt="Flyhomes" onerror="this.parentNode.innerHTML='<span>FLY</span>'"></div>
-          <div class="cc-dot v"><div class="cc-dot-inner"></div></div>
-          <div class="cc-year">2023–24</div>
-          <div class="cc-role">Sr. Product Analyst</div>
-          <div class="cc-co">Flyhomes</div>
-        </div>
+
+        <!-- 1 TOP: Sr Ops Associate -->
         <div class="cc-node">
-          <div class="cc-logo-sm"><img src="https://logo.clearbit.com/wisc.edu" alt="UW" onerror="this.parentNode.innerHTML='<span>UW</span>'"></div>
-          <div class="cc-dot"><div class="cc-dot-inner"></div></div>
-          <div class="cc-year">2024</div>
-          <div class="cc-role">MBA · UW–Madison</div>
-          <div class="cc-co">Tech Strategy</div>
+          <div class="cc-top-label">
+            <div class="cc-logo-sm"><img src="https://logo.clearbit.com/flyhomes.com" alt="Flyhomes" onerror="this.parentNode.innerHTML='<span>FLY</span>'"></div>
+            <div class="cc-role-label">Sr. Ops Associate</div>
+            <div class="cc-co-label">Flyhomes</div>
+          </div>
+          <div class="cc-circle c2">
+            <img src="https://logo.clearbit.com/flyhomes.com" alt="" onerror="this.style.display='none'">
+            <div class="cc-circle-year">Jan 2021</div>
+          </div>
         </div>
+
+        <!-- 2 BOTTOM: Assoc PM -->
         <div class="cc-node">
-          <div class="cc-logo-sm"><img src="https://logo.clearbit.com/flexera.com" alt="Flexera" onerror="this.parentNode.innerHTML='<span>FLX</span>'"></div>
-          <div class="cc-dot"><div class="cc-dot-inner"></div></div>
-          <div class="cc-year">2024–25</div>
-          <div class="cc-role">Product Strategy Lead</div>
-          <div class="cc-co">Flexera Capstone</div>
+          <div class="cc-circle c2">
+            <img src="https://logo.clearbit.com/flyhomes.com" alt="" onerror="this.style.display='none'">
+            <div class="cc-circle-year">Apr 2022</div>
+          </div>
+          <div class="cc-bottom-label">
+            <div class="cc-role-label">Associate PM</div>
+            <div class="cc-co-label">Flyhomes</div>
+          </div>
         </div>
-        <div class="cc-node mn">
-          <div class="cc-logo-sm"><span>SW</span></div>
-          <div class="cc-dot m"><div class="cc-dot-inner"></div></div>
-          <div class="cc-year">2025–Now</div>
-          <div class="cc-role">Product Manager</div>
-          <div class="cc-co">SecondWind Pro</div>
+
+        <!-- 3 TOP: PM Strategy -->
+        <div class="cc-node">
+          <div class="cc-top-label">
+            <div class="cc-logo-sm"><img src="https://logo.clearbit.com/flyhomes.com" alt="Flyhomes" onerror="this.parentNode.innerHTML='<span>FLY</span>'"></div>
+            <div class="cc-role-label">PM – Strategy</div>
+            <div class="cc-co-label">Flyhomes</div>
+          </div>
+          <div class="cc-circle c2">
+            <img src="https://logo.clearbit.com/flyhomes.com" alt="" onerror="this.style.display='none'">
+            <div class="cc-circle-year">Jun 2023</div>
+          </div>
         </div>
+
+        <!-- 4 BOTTOM: MBA + TA -->
+        <div class="cc-node">
+          <div class="cc-circle c1">
+            <img src="https://logo.clearbit.com/wisc.edu" alt="" onerror="this.style.display='none'">
+            <div class="cc-circle-year">Aug 2024</div>
+          </div>
+          <div class="cc-bottom-label">
+            <div class="cc-role-label">MBA + Teaching Asst</div>
+            <div class="cc-co-label">UW–Madison</div>
+          </div>
+        </div>
+
+        <!-- 5 TOP: Flexera Capstone -->
+        <div class="cc-node">
+          <div class="cc-top-label">
+            <div class="cc-logo-sm"><img src="https://logo.clearbit.com/flexera.com" alt="Flexera" onerror="this.parentNode.innerHTML='<span>FLX</span>'"></div>
+            <div class="cc-role-label">PM Capstone</div>
+            <div class="cc-co-label">Flexera</div>
+          </div>
+          <div class="cc-circle c1">
+            <img src="https://logo.clearbit.com/flexera.com" alt="" onerror="this.style.display='none'">
+            <div class="cc-circle-year">Aug 2025</div>
+          </div>
+        </div>
+
+        <!-- 6 BOTTOM: SecondWind -->
+        <div class="cc-node">
+          <div class="cc-circle c3">
+            <div style="font-family:'Nunito',sans-serif;font-size:0.7rem;font-weight:900;color:#f472b6;line-height:1.1;text-align:center;">SW<br>PRO</div>
+            <div class="cc-circle-year">Jun 2025</div>
+          </div>
+          <div class="cc-bottom-label">
+            <div class="cc-role-label">PM AI</div>
+            <div class="cc-co-label">SecondWind Pro</div>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
@@ -1155,34 +1270,65 @@ footer strong { color: var(--cyan); font-weight: 600; }
 <div class="section-wrap" id="skills">
   <div class="label-row reveal"><span class="s-label">Skills</span><span class="s-label-line"></span></div>
   <h2 class="s-title reveal">What I bring<br>to the <em>table.</em></h2>
-  <div class="skills-grid">
-    <div class="reveal">
-      <div class="sk-group-label">Core Competencies</div>
-      <div class="sk-bars" id="sk-bars">
-        <div class="sk-row"><div class="sk-row-top"><span>Product Strategy & Roadmapping</span><span class="sk-pct">95%</span></div><div class="sk-track"><div class="sk-fill" style="--w:95%"></div></div></div>
-        <div class="sk-row"><div class="sk-row-top"><span>Customer Discovery & Research</span><span class="sk-pct">92%</span></div><div class="sk-track"><div class="sk-fill" style="--w:92%"></div></div></div>
-        <div class="sk-row"><div class="sk-row-top"><span>Cross-functional Leadership</span><span class="sk-pct">90%</span></div><div class="sk-track"><div class="sk-fill" style="--w:90%"></div></div></div>
-        <div class="sk-row"><div class="sk-row-top"><span>AI/ML Product Management</span><span class="sk-pct">88%</span></div><div class="sk-track"><div class="sk-fill" style="--w:88%"></div></div></div>
-        <div class="sk-row"><div class="sk-row-top"><span>Data Analytics & Metrics</span><span class="sk-pct">85%</span></div><div class="sk-track"><div class="sk-fill" style="--w:85%"></div></div></div>
-        <div class="sk-row"><div class="sk-row-top"><span>Stakeholder Management</span><span class="sk-pct">90%</span></div><div class="sk-track"><div class="sk-fill" style="--w:90%"></div></div></div>
+
+  <div class="sk-chips-grid reveal">
+    <div class="sk-chip-group">
+      <div class="sk-group-label">Product Strategy</div>
+      <div class="sk-chips">
+        <span class="sk-chip">Product Roadmapping</span>
+        <span class="sk-chip">0→1 MVP Development</span>
+        <span class="sk-chip">Prioritization Frameworks</span>
+        <span class="sk-chip">Competitive Analysis</span>
+        <span class="sk-chip">Go-to-Market Strategy</span>
+        <span class="sk-chip">OKR Definition</span>
+        <span class="sk-chip">Market Sizing</span>
+        <span class="sk-chip">User Research</span>
       </div>
     </div>
-    <div class="reveal d2">
+    <div class="sk-chip-group">
       <div class="sk-group-label">Execution & Delivery</div>
-      <div class="sk-bars">
-        <div class="sk-row"><div class="sk-row-top"><span>Agile / Scrum / Sprint Planning</span><span class="sk-pct">93%</span></div><div class="sk-track"><div class="sk-fill" style="--w:93%"></div></div></div>
-        <div class="sk-row"><div class="sk-row-top"><span>Go-to-Market Strategy</span><span class="sk-pct">87%</span></div><div class="sk-track"><div class="sk-fill" style="--w:87%"></div></div></div>
-        <div class="sk-row"><div class="sk-row-top"><span>SQL & Power BI</span><span class="sk-pct">82%</span></div><div class="sk-track"><div class="sk-fill" style="--w:82%"></div></div></div>
-        <div class="sk-row"><div class="sk-row-top"><span>A/B Testing & Experimentation</span><span class="sk-pct">80%</span></div><div class="sk-track"><div class="sk-fill" style="--w:80%"></div></div></div>
-        <div class="sk-row"><div class="sk-row-top"><span>PRD Writing & Roadmapping</span><span class="sk-pct">92%</span></div><div class="sk-track"><div class="sk-fill" style="--w:92%"></div></div></div>
-        <div class="sk-row"><div class="sk-row-top"><span>Figma & Prototyping</span><span class="sk-pct">78%</span></div><div class="sk-track"><div class="sk-fill" style="--w:78%"></div></div></div>
+      <div class="sk-chips">
+        <span class="sk-chip">Agile / Scrum</span>
+        <span class="sk-chip">Sprint Planning</span>
+        <span class="sk-chip">User Story Writing</span>
+        <span class="sk-chip">Backlog Management</span>
+        <span class="sk-chip">Cross-functional Leadership</span>
+        <span class="sk-chip">Stakeholder Management</span>
+        <span class="sk-chip">PRD Writing</span>
+        <span class="sk-chip">JIRA / Confluence</span>
+      </div>
+    </div>
+    <div class="sk-chip-group">
+      <div class="sk-group-label">Data & Analytics</div>
+      <div class="sk-chips">
+        <span class="sk-chip">SQL</span>
+        <span class="sk-chip">Power BI</span>
+        <span class="sk-chip">A/B Testing</span>
+        <span class="sk-chip">KPI Tracking</span>
+        <span class="sk-chip">R</span>
+        <span class="sk-chip">Excel Advanced</span>
+        <span class="sk-chip">Metrics-Driven Decisions</span>
+        <span class="sk-chip">Data Studio</span>
+      </div>
+    </div>
+    <div class="sk-chip-group">
+      <div class="sk-group-label">AI & Technical</div>
+      <div class="sk-chips">
+        <span class="sk-chip">LLMs / RAG</span>
+        <span class="sk-chip">Generative AI Stack</span>
+        <span class="sk-chip">AI Product Management</span>
+        <span class="sk-chip">Figma</span>
+        <span class="sk-chip">Airtable</span>
+        <span class="sk-chip">Zapier</span>
+        <span class="sk-chip">Salesforce</span>
+        <span class="sk-chip">API Integration</span>
       </div>
     </div>
   </div>
+
   <div class="tools-section reveal">
     <div class="tools-label">Tools & Platforms</div>
     <div class="tools-grid">
-
       <div class="tool-logo-card">
         <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" alt="Figma">
         <span class="tool-logo-name">Figma</span>
@@ -1215,7 +1361,6 @@ footer strong { color: var(--cyan); font-weight: 600; }
         <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/slack/slack-original.svg" alt="Slack">
         <span class="tool-logo-name">Slack</span>
       </div>
-
       <div class="tool-logo-card">
         <div class="tool-mono" style="background:rgba(255,180,0,0.15);color:#ffb400;">AB</div>
         <span class="tool-logo-name">A/B Testing</span>
@@ -1248,7 +1393,6 @@ footer strong { color: var(--cyan); font-weight: 600; }
         <div class="tool-mono" style="background:rgba(103,232,249,0.12);color:#67e8f9;">AI</div>
         <span class="tool-logo-name">LLMs / RAG</span>
       </div>
-
     </div>
   </div>
 </div>
@@ -1469,7 +1613,111 @@ window.addEventListener('resize',()=>{
   rend.setSize(window.innerWidth,window.innerHeight);
 });
 
-// SCROLL REVEAL
+// ── INTERACTIVE STAR CANVAS ──────────────────────────────────────────────
+const sc = document.getElementById('star-canvas');
+const ctx = sc.getContext('2d');
+let W, H, stars=[], shooters=[];
+const STAR_COUNT = 220;
+
+function resize(){ W=sc.width=window.innerWidth; H=sc.height=window.innerHeight; }
+resize(); window.addEventListener('resize', resize);
+
+function randStar(){
+  const colors=['rgba(255,255,255,', 'rgba(180,230,255,', 'rgba(210,180,255,', 'rgba(255,200,240,'];
+  const c = colors[Math.floor(Math.random()*colors.length)];
+  return {
+    x: Math.random()*W, y: Math.random()*H,
+    r: Math.random()*1.4+0.3,
+    base: Math.random()*0.6+0.2,
+    opacity: Math.random()*0.6+0.2,
+    speed: Math.random()*0.4+0.1,
+    phase: Math.random()*Math.PI*2,
+    color: c,
+    mx:0, my:0  // mouse parallax offset
+  };
+}
+for(let i=0;i<STAR_COUNT;i++) stars.push(randStar());
+
+// shooting stars
+function spawnShooter(){
+  shooters.push({
+    x: Math.random()*W*0.7, y: Math.random()*H*0.4,
+    vx: 4+Math.random()*5, vy: 2+Math.random()*3,
+    len: 80+Math.random()*120,
+    life: 1, decay: 0.018+Math.random()*0.012
+  });
+}
+setInterval(()=>{ if(Math.random()<0.6) spawnShooter(); }, 2200);
+
+// mouse parallax
+let smx=W/2, smy=H/2;
+document.addEventListener('mousemove', e=>{ smx=e.clientX; smy=e.clientY; });
+
+// mouse repel
+const REPEL_R = 140;
+function repelStar(s){
+  const dx=s.x-smx, dy=s.y-smy;
+  const dist=Math.sqrt(dx*dx+dy*dy);
+  if(dist<REPEL_R && dist>0){
+    const force=(REPEL_R-dist)/REPEL_R;
+    s.mx += (dx/dist)*force*2;
+    s.my += (dy/dist)*force*2;
+  }
+  s.mx*=0.92; s.my*=0.92;
+}
+
+let st2=0;
+function drawStars(){
+  requestAnimationFrame(drawStars);
+  st2+=0.012;
+  ctx.clearRect(0,0,W,H);
+
+  // stars
+  for(const s of stars){
+    repelStar(s);
+    const px=(smx/W-0.5)*s.r*18;
+    const py=(smy/H-0.5)*s.r*18;
+    const flicker=s.base+Math.sin(st2*s.speed+s.phase)*0.25;
+    ctx.beginPath();
+    ctx.arc(s.x+s.mx-px, s.y+s.my-py, s.r, 0, Math.PI*2);
+    ctx.fillStyle=s.color+Math.min(1,flicker)+')';
+    ctx.fill();
+    // occasional soft glow on brighter stars
+    if(s.r>1.2){
+      ctx.beginPath();
+      ctx.arc(s.x+s.mx-px, s.y+s.my-py, s.r*3, 0, Math.PI*2);
+      ctx.fillStyle=s.color+(flicker*0.12)+')';
+      ctx.fill();
+    }
+  }
+
+  // shooting stars
+  for(let i=shooters.length-1;i>=0;i--){
+    const sh=shooters[i];
+    const grd=ctx.createLinearGradient(sh.x,sh.y,sh.x-sh.vx*sh.len/sh.vx,sh.y-sh.vy*sh.len/sh.vx);
+    grd.addColorStop(0,`rgba(255,255,255,${sh.life*0.9})`);
+    grd.addColorStop(0.3,`rgba(180,230,255,${sh.life*0.5})`);
+    grd.addColorStop(1,'rgba(103,232,249,0)');
+    ctx.beginPath();
+    ctx.moveTo(sh.x,sh.y);
+    ctx.lineTo(sh.x-sh.len,sh.y-sh.vy*(sh.len/sh.vx));
+    ctx.strokeStyle=grd;
+    ctx.lineWidth=1.5;
+    ctx.stroke();
+    sh.x+=sh.vx; sh.y+=sh.vy; sh.life-=sh.decay;
+    if(sh.life<=0) shooters.splice(i,1);
+  }
+
+  // subtle nebula pulse around mouse
+  const rg=ctx.createRadialGradient(smx,smy,0,smx,smy,200);
+  rg.addColorStop(0,`rgba(139,92,246,${0.04+Math.sin(st2*0.7)*0.015})`);
+  rg.addColorStop(1,'rgba(0,0,0,0)');
+  ctx.fillStyle=rg;
+  ctx.fillRect(0,0,W,H);
+}
+drawStars();
+
+
 const revEls=document.querySelectorAll('.reveal');
 const ro=new IntersectionObserver(entries=>{
   entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in');});
